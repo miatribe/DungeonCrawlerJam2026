@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cxneqptdw34ad"]
+
+[ext_resource type="Script" uid="uid://dkayearebcnle" path="res://addons/dungeoncraftereditor/scripts/map_renderer_subviewport.gd" id="1_uan1c"]
+[ext_resource type="Script" uid="uid://d2e4hw6nurwyp" path="res://addons/dungeoncraftereditor/scripts/map_renderer.gd" id="2_kcex3"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" unique_id=1515025103]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 0
+stretch = true
+script = ExtResource("1_uan1c")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1628123088]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 4
+
+[node name="Map" type="Node2D" parent="SubViewport" unique_id=41714969]
+script = ExtResource("2_kcex3")

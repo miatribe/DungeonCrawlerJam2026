@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://3hqdxjm15s8q"]
+
+[ext_resource type="Script" uid="uid://dwsbvc766gs17" path="res://scripts/player.gd" id="1_p0vlq"]
+
+[node name="Player" type="Node3D" unique_id=608341986]
+script = ExtResource("1_p0vlq")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1750751389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+fov = 65.0

@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://di4x2f1wcdf20"]
+
+[ext_resource type="Script" uid="uid://drb6neotlbo4a" path="res://addons/dungeoncraftereditor/scripts/proc_gen_panel.gd" id="1_sxth3"]
+[ext_resource type="PackedScene" uid="uid://cxneqptdw34ad" path="res://addons/dungeoncraftereditor/scenes/map_renderer.tscn" id="2_sxth3"]
+
+[node name="ProcGenContrianer" type="HBoxContainer" unique_id=2090982991]
+script = ExtResource("1_sxth3")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1123473239]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Controls" type="VBoxContainer" parent="MarginContainer" unique_id=515379533]
+layout_mode = 2
+
+[node name="SeedHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=712586422]
+layout_mode = 2
+
+[node name="SeedLabel" type="Label" parent="MarginContainer/Controls/SeedHBox" unique_id=1035014907]
+layout_mode = 2
+text = "Seed"
+
+[node name="SeedSpin" type="SpinBox" parent="MarginContainer/Controls/SeedHBox" unique_id=17437756]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2147483647.0
+value = 1337.0
+
+[node name="WidthHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1332618200]
+layout_mode = 2
+
+[node name="WidthLabel" type="Label" parent="MarginContainer/Controls/WidthHBox" unique_id=550812652]
+layout_mode = 2
+text = "Width"
+
+[node name="WidthSpin" type="SpinBox" parent="MarginContainer/Controls/WidthHBox" unique_id=1018120759]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 200.0
+value = 30.0
+
+[node name="HeightHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1249323412]
+layout_mode = 2
+
+[node name="HeightLabel" type="Label" parent="MarginContainer/Controls/HeightHBox" unique_id=1838000910]
+layout_mode = 2
+text = "Height"
+
+[node name="HeightSpin" type="SpinBox" parent="MarginContainer/Controls/HeightHBox" unique_id=1295368513]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 200.0
+value = 30.0
+
+[node name="MaxDepthHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1433866762]
+layout_mode = 2
+
+[node name="MaxDepthLabel" type="Label" parent="MarginContainer/Controls/MaxDepthHBox" unique_id=831495776]
+layout_mode = 2
+text = "Max Depth"
+
+[node name="MaxDepthSpin" type="SpinBox" parent="MarginContainer/Controls/MaxDepthHBox" unique_id=1450503823]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 32.0
+value = 16.0
+
+[node name="MinRoomHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1559013463]
+layout_mode = 2
+
+[node name="MinRoomLabel" type="Label" parent="MarginContainer/Controls/MinRoomHBox" unique_id=1173247974]
+layout_mode = 2
+text = "Min Room"
+
+[node name="MinRoomSpin" type="SpinBox" parent="MarginContainer/Controls/MinRoomHBox" unique_id=2083480726]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 20.0
+value = 3.0
+
+[node name="MaxRoomHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1416197900]
+layout_mode = 2
+
+[node name="MaxRoomLabel" type="Label" parent="MarginContainer/Controls/MaxRoomHBox" unique_id=2075147583]
+layout_mode = 2
+text = "Max Room"
+
+[node name="MaxRoomSpin" type="SpinBox" parent="MarginContainer/Controls/MaxRoomHBox" unique_id=87814528]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 30.0
+value = 8.0
+
+[node name="PaddingHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=132884783]
+layout_mode = 2
+
+[node name="PaddingLabel" type="Label" parent="MarginContainer/Controls/PaddingHBox" unique_id=1957610375]
+layout_mode = 2
+text = "Padding"
+
+[node name="PaddingSpin" type="SpinBox" parent="MarginContainer/Controls/PaddingHBox" unique_id=993485214]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 6.0
+value = 1.0
+
+[node name="MaxRoomTileSetsHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1865313831]
+layout_mode = 2
+
+[node name="MaxRoomTileSetsLabel" type="Label" parent="MarginContainer/Controls/MaxRoomTileSetsHBox" unique_id=2000852708]
+layout_mode = 2
+text = "Room Tile Sets"
+
+[node name="MaxRoomTileSetsSpin" type="SpinBox" parent="MarginContainer/Controls/MaxRoomTileSetsHBox" unique_id=1045909870]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
+
+[node name="MaxHallwayTileSetsHBox" type="HBoxContainer" parent="MarginContainer/Controls" unique_id=1430618821]
+layout_mode = 2
+
+[node name="MaxHallwayTileSetsLabel" type="Label" parent="MarginContainer/Controls/MaxHallwayTileSetsHBox" unique_id=1292124126]
+layout_mode = 2
+text = "Hallway Tile Sets"
+
+[node name="MaxHallwayTileSetsSpin" type="SpinBox" parent="MarginContainer/Controls/MaxHallwayTileSetsHBox" unique_id=1575995540]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
+
+[node name="SaveButton" type="Button" parent="MarginContainer/Controls" unique_id=706883327]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="FileDialog" type="FileDialog" parent="MarginContainer/Controls" unique_id=1694839836]
+oversampling_override = 1.0
+initial_position = 2
+root_subfolder = "res://"
+filters = PackedStringArray("*.tres")
+
+[node name="Map" parent="." unique_id=1515025103 instance=ExtResource("2_sxth3")]
+unique_name_in_owner = true
+layout_mode = 2

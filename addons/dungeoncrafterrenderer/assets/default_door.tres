@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Door" format=3 uid="uid://bjjq82lepckyx"]
+
+[ext_resource type="Texture2D" uid="uid://cmolwx0jjsfdv" path="res://addons/dungeoncrafterrenderer/assets/Door.png" id="1_6xav1"]
+[ext_resource type="Script" uid="uid://b4f3pcmh05nja" path="res://addons/dungeoncraftercore/scripts/door.gd" id="1_eosmg"]
+[ext_resource type="Texture2D" uid="uid://88h2ii1t7mia" path="res://addons/dungeoncrafterrenderer/assets/DoorLocked.png" id="2_7nb67"]
+
+[resource]
+script = ExtResource("1_eosmg")
+base_texture = ExtResource("1_6xav1")
+closed_texture = ExtResource("2_7nb67")
+metadata/_custom_type_script = "uid://b4f3pcmh05nja"

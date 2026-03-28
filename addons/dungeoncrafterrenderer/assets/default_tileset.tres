@@ -1,0 +1,97 @@
+[gd_resource type="Resource" script_class="GraphTileset" format=3 uid="uid://xs68vyu5le6e"]
+
+[ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="1_nc0v3"]
+[ext_resource type="Texture2D" uid="uid://ctxuvtdc3uyiw" path="res://addons/dungeoncrafterrenderer/assets/Ceiling.png" id="2_1oncf"]
+[ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="2_nc0v3"]
+[ext_resource type="Texture2D" uid="uid://x5icj0sqrvy" path="res://addons/dungeoncrafterrenderer/assets/Ceiling2.png" id="3_h5v1y"]
+[ext_resource type="Texture2D" uid="uid://biugwkgyg7ny1" path="res://addons/dungeoncrafterrenderer/assets/East.png" id="3_v1aog"]
+[ext_resource type="Texture2D" uid="uid://iitd43wxhxgw" path="res://addons/dungeoncrafterrenderer/assets/Floor.png" id="4_58xac"]
+[ext_resource type="Texture2D" uid="uid://tbu1b8hp5whj" path="res://addons/dungeoncrafterrenderer/assets/East2.png" id="5_da4aa"]
+[ext_resource type="Texture2D" uid="uid://bf07t3vo41vrl" path="res://addons/dungeoncrafterrenderer/assets/North.png" id="5_jpoie"]
+[ext_resource type="Texture2D" uid="uid://vg8jdl1vgw4v" path="res://addons/dungeoncrafterrenderer/assets/Floor2.png" id="7_2w4rv"]
+[ext_resource type="Texture2D" uid="uid://dcfkciyhufkiw" path="res://addons/dungeoncrafterrenderer/assets/South.png" id="7_8ylw5"]
+[ext_resource type="Texture2D" uid="uid://cfljsio4px8bx" path="res://addons/dungeoncrafterrenderer/assets/West.png" id="8_elcvr"]
+[ext_resource type="Texture2D" uid="uid://yd6k15fyyd2e" path="res://addons/dungeoncrafterrenderer/assets/North2.png" id="9_jmoyn"]
+[ext_resource type="Texture2D" uid="uid://b5jqgxn2pj578" path="res://addons/dungeoncrafterrenderer/assets/South2.png" id="12_v846w"]
+[ext_resource type="Texture2D" uid="uid://dei53hajajdxy" path="res://addons/dungeoncrafterrenderer/assets/West2.png" id="14_n1m4d"]
+
+[sub_resource type="Resource" id="Resource_h5v1y"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("2_1oncf")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_0a4nd"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("3_h5v1y")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_da4aa"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("3_v1aog")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_gcodk"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("5_da4aa")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_2w4rv"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("4_58xac")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_gpijf"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("7_2w4rv")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_jmoyn"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("5_jpoie")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_l7vmj"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("9_jmoyn")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_v846w"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("7_8ylw5")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_h1f35"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("12_v846w")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_n1m4d"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("8_elcvr")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_1ul6n"]
+script = ExtResource("1_nc0v3")
+texture = ExtResource("14_n1m4d")
+chance_percent = 50.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[resource]
+script = ExtResource("2_nc0v3")
+north_textures = Array[ExtResource("1_nc0v3")]([SubResource("Resource_jmoyn"), SubResource("Resource_l7vmj")])
+east_textures = Array[ExtResource("1_nc0v3")]([SubResource("Resource_da4aa"), SubResource("Resource_gcodk")])
+south_textures = Array[ExtResource("1_nc0v3")]([SubResource("Resource_v846w"), SubResource("Resource_h1f35")])
+west_textures = Array[ExtResource("1_nc0v3")]([SubResource("Resource_n1m4d"), SubResource("Resource_1ul6n")])
+ceiling_textures = Array[ExtResource("1_nc0v3")]([SubResource("Resource_h5v1y"), SubResource("Resource_0a4nd")])
+floor_textures = Array[ExtResource("1_nc0v3")]([SubResource("Resource_2w4rv"), SubResource("Resource_gpijf")])

@@ -1,0 +1,341 @@
+[gd_scene format=3 uid="uid://h0ky6evdtc0j"]
+
+[ext_resource type="PackedScene" uid="uid://cxneqptdw34ad" path="res://addons/dungeoncraftereditor/scenes/map_renderer.tscn" id="1_67hb2"]
+[ext_resource type="Script" uid="uid://deovk7o6h3p5c" path="res://addons/dungeoncraftereditor/scripts/map_editor.gd" id="1_e4pnq"]
+[ext_resource type="Script" uid="uid://mstdcucoxb2g" path="res://addons/dungeoncraftereditor/scripts/map_editor_ui.gd" id="2_qw4ec"]
+
+[node name="MapEditor" type="HBoxContainer" unique_id=49613035]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_e4pnq")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=150465436]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Controls" type="VBoxContainer" parent="MarginContainer" unique_id=752924390]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+script = ExtResource("2_qw4ec")
+
+[node name="SaveButton" type="Button" parent="MarginContainer/Controls" unique_id=95866332]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="MarginContainer/Controls" unique_id=1663596006]
+layout_mode = 2
+text = "Load"
+
+[node name="EditModeLabel" type="Label" parent="MarginContainer/Controls" unique_id=417225900]
+layout_mode = 2
+text = "Edit Mode"
+
+[node name="EditModeOption" type="OptionButton" parent="MarginContainer/Controls" unique_id=118756229]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Add Vertex"
+popup/item_0/id = 0
+popup/item_1/text = "Add Edge"
+popup/item_1/id = 1
+popup/item_2/text = "Select Vertex"
+popup/item_2/id = 2
+popup/item_3/text = "Select Edge"
+popup/item_3/id = 3
+
+[node name="ModeSettingsContainer" type="VBoxContainer" parent="MarginContainer/Controls" unique_id=1898811162]
+layout_mode = 2
+
+[node name="AddVertexSettings" type="VBoxContainer" parent="MarginContainer/Controls/ModeSettingsContainer" unique_id=87327850]
+layout_mode = 2
+
+[node name="AddVertexTypeLabel" type="Label" parent="MarginContainer/Controls/ModeSettingsContainer/AddVertexSettings" unique_id=1447495133]
+layout_mode = 2
+text = "Vertex Type"
+
+[node name="AddVertexTypeOption" type="OptionButton" parent="MarginContainer/Controls/ModeSettingsContainer/AddVertexSettings" unique_id=999542828]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Room"
+popup/item_0/id = 0
+popup/item_1/text = "Hallway"
+popup/item_1/id = 1
+
+[node name="TileSetIdLabel" type="Label" parent="MarginContainer/Controls/ModeSettingsContainer/AddVertexSettings" unique_id=82773544]
+layout_mode = 2
+text = "Tile Set ID"
+
+[node name="TileSetIdSpin" type="SpinBox" parent="MarginContainer/Controls/ModeSettingsContainer/AddVertexSettings" unique_id=98965152]
+layout_mode = 2
+rounded = true
+
+[node name="AutoConnectEdgesCheckBox" type="CheckBox" parent="MarginContainer/Controls/ModeSettingsContainer/AddVertexSettings" unique_id=1474468622]
+layout_mode = 2
+button_pressed = true
+text = "Auto Connect Edges"
+
+[node name="AddEdgeSettings" type="VBoxContainer" parent="MarginContainer/Controls/ModeSettingsContainer" unique_id=1704100623]
+visible = false
+layout_mode = 2
+
+[node name="AddEdgeTypeLabel" type="Label" parent="MarginContainer/Controls/ModeSettingsContainer/AddEdgeSettings" unique_id=1943138990]
+layout_mode = 2
+text = "Edge Type"
+
+[node name="AddEdgeTypeOption" type="OptionButton" parent="MarginContainer/Controls/ModeSettingsContainer/AddEdgeSettings" unique_id=833453132]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Corridor"
+popup/item_0/id = 0
+popup/item_1/text = "Door"
+popup/item_1/id = 1
+
+[node name="AddEdgeDoorStateLabel" type="Label" parent="MarginContainer/Controls/ModeSettingsContainer/AddEdgeSettings"]
+visible = false
+layout_mode = 2
+text = "Door State"
+
+[node name="AddEdgeDoorStateOption" type="OptionButton" parent="MarginContainer/Controls/ModeSettingsContainer/AddEdgeSettings"]
+visible = false
+layout_mode = 2
+
+[node name="AddEdgeDoorIdLabel" type="Label" parent="MarginContainer/Controls/ModeSettingsContainer/AddEdgeSettings"]
+layout_mode = 2
+text = "Door ID"
+
+[node name="AddEdgeDoorIdSpin" type="SpinBox" parent="MarginContainer/Controls/ModeSettingsContainer/AddEdgeSettings"]
+layout_mode = 2
+rounded = true
+
+[node name="FileDialogOpen" type="FileDialog" parent="MarginContainer/Controls" unique_id=2031797606]
+title = "Open a File"
+initial_position = 1
+file_mode = 0
+root_subfolder = "res://"
+filters = PackedStringArray("*.tres")
+
+[node name="FileDialogSave" type="FileDialog" parent="MarginContainer/Controls" unique_id=1513365309]
+initial_position = 1
+root_subfolder = "res://"
+filters = PackedStringArray("*.tres")
+
+[node name="Map" parent="." unique_id=634681526 instance=ExtResource("1_67hb2")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RightMarginContainer" type="ScrollContainer" parent="." unique_id=1761176513]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+
+[node name="SelectedDetailsContainer" type="VBoxContainer" parent="RightMarginContainer" unique_id=892023335]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+layout_mode = 2
+
+[node name="NoSelectionLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer" unique_id=1123459012]
+layout_mode = 2
+text = "No selection\n\nSelect a vertex or edge to edit details."
+
+[node name="SelectVertexSettings" type="VBoxContainer" parent="RightMarginContainer/SelectedDetailsContainer" unique_id=659685587]
+visible = false
+layout_mode = 2
+
+[node name="SelectedVertexIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=143402119]
+layout_mode = 2
+text = "Selected Vertex ID"
+
+[node name="SelectedVertexIdValueLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1910382043]
+layout_mode = 2
+text = "-"
+
+[node name="SelectedVertexTypeLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=208906967]
+layout_mode = 2
+text = "Selected Vertex Type"
+
+[node name="SelectedVertexTypeOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1177179001]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Room"
+popup/item_0/id = 0
+popup/item_1/text = "Hallway"
+popup/item_1/id = 1
+
+[node name="SelectedVertexTileSetIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=852729932]
+layout_mode = 2
+text = "Selected Vertex Tile Set ID"
+
+[node name="SelectedVertexTileSetIdSpin" type="SpinBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1416961404]
+layout_mode = 2
+rounded = true
+
+[node name="SelectedVertexSurfaceOverridesLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=873335444]
+layout_mode = 2
+text = "Surface Overrides"
+
+[node name="SelectedVertexSurfaceOverridesContainer" type="VBoxContainer" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=923457611]
+layout_mode = 2
+
+[node name="AddVertexLogicButton" type="Button" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1150308398]
+layout_mode = 2
+text = "Add Vertex Logic"
+
+[node name="RemoveVertexLogicButton" type="Button" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1477295031]
+layout_mode = 2
+text = "Remove Selected Logic"
+
+[node name="SelectedVertexLogicEntryLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1164859475]
+layout_mode = 2
+text = "Logic Entry"
+
+[node name="SelectedVertexLogicEntryOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=206537248]
+layout_mode = 2
+
+[node name="SelectedVertexLogicIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1568923004]
+layout_mode = 2
+text = "Logic ID"
+
+[node name="SelectedVertexLogicIdEdit" type="LineEdit" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1069124832]
+layout_mode = 2
+
+[node name="SelectedVertexLogicTriggerLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=2117468418]
+layout_mode = 2
+text = "Trigger"
+
+[node name="SelectedVertexLogicTriggerOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1252002300]
+layout_mode = 2
+
+[node name="SelectedVertexLogicOneShotCheckBox" type="CheckBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1978280969]
+layout_mode = 2
+text = "One Shot"
+
+[node name="SelectedVertexLogicActionTypeLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1120636901]
+layout_mode = 2
+text = "Action Type"
+
+[node name="SelectedVertexLogicActionTypeOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1987148436]
+layout_mode = 2
+
+[node name="SelectedVertexLogicEdgeIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1598384136]
+layout_mode = 2
+text = "Edge ID"
+
+[node name="SelectedVertexLogicEdgeIdSpin" type="SpinBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=451235683]
+layout_mode = 2
+rounded = true
+
+[node name="SelectedVertexLogicEdgeTypeLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1131378304]
+layout_mode = 2
+text = "Edge Type"
+
+[node name="SelectedVertexLogicEdgeTypeOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=2069786338]
+layout_mode = 2
+
+[node name="SelectedVertexLogicDoorStateLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings"]
+visible = false
+layout_mode = 2
+text = "Door State"
+
+[node name="SelectedVertexLogicDoorStateOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings"]
+visible = false
+layout_mode = 2
+
+[node name="SelectedVertexLogicFlagIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1717310321]
+layout_mode = 2
+text = "Flag ID"
+
+[node name="SelectedVertexLogicFlagIdEdit" type="LineEdit" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=427218749]
+layout_mode = 2
+
+[node name="SelectedVertexLogicFlagValueCheckBox" type="CheckBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectVertexSettings" unique_id=1877333236]
+layout_mode = 2
+text = "Flag Value"
+
+[node name="SelectEdgeSettings" type="VBoxContainer" parent="RightMarginContainer/SelectedDetailsContainer" unique_id=1960688309]
+visible = false
+layout_mode = 2
+
+[node name="SelectedEdgeIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1510478080]
+layout_mode = 2
+text = "Selected Edge ID"
+
+[node name="SelectedEdgeIdValueLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=778652446]
+layout_mode = 2
+text = "-"
+
+[node name="SelectedEdgeTypeLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1648100065]
+layout_mode = 2
+text = "Selected Edge Type"
+
+[node name="SelectedEdgeTypeOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1520781436]
+layout_mode = 2
+
+[node name="SelectedEdgeDoorStateLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings"]
+visible = false
+layout_mode = 2
+text = "Door State"
+
+[node name="SelectedEdgeDoorStateOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings"]
+visible = false
+layout_mode = 2
+
+[node name="SelectedEdgeBaseTextureIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=149220701]
+layout_mode = 2
+text = "Door ID"
+
+[node name="SelectedEdgeBaseTextureIdSpin" type="SpinBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=2058673912]
+layout_mode = 2
+rounded = true
+
+[node name="SelectedEdgeClosedTextureIdLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1924789065]
+layout_mode = 2
+text = "Door Closed Texture ID (-1 = Base)"
+
+[node name="SelectedEdgeClosedTextureIdSpin" type="SpinBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=564189330]
+layout_mode = 2
+min_value = -1.0
+rounded = true
+value = -1.0
+
+[node name="SelectedEdgeAnimationTypeLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1014267333]
+layout_mode = 2
+text = "Door Open Animation"
+
+[node name="SelectedEdgeAnimationTypeOption" type="OptionButton" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1027393099]
+layout_mode = 2
+
+[node name="SelectedEdgeAnimationDurationLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=779521368]
+layout_mode = 2
+text = "Animation Duration (s)"
+
+[node name="SelectedEdgeAnimationDurationSpin" type="SpinBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=323090810]
+layout_mode = 2
+min_value = 0.01
+step = 0.01
+value = 0.35
+
+[node name="SelectedEdgeAnimationTravelLabel" type="Label" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=391052194]
+layout_mode = 2
+text = "Animation Travel"
+
+[node name="SelectedEdgeAnimationTravelSpin" type="SpinBox" parent="RightMarginContainer/SelectedDetailsContainer/SelectEdgeSettings" unique_id=1003591611]
+layout_mode = 2
+step = 0.1
+value = 1.0

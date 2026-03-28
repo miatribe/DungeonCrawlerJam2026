@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bd3n3heqh4kcs"]
+
+[ext_resource type="Script" uid="uid://b47em3wbcse4b" path="res://addons/dungeoncrafterrenderer/scripts/graph_renderer.gd" id="1_uxnbi"]
+[ext_resource type="Resource" uid="uid://dtyb20tktiue2" path="res://graphs/HomeBaseMap.tres" id="2_ah0wp"]
+[ext_resource type="PackedScene" uid="uid://3hqdxjm15s8q" path="res://scenes/Player.tscn" id="3_so7uu"]
+
+[node name="GraphRenderer" type="Node3D" unique_id=395339508]
+script = ExtResource("1_uxnbi")
+graph = ExtResource("2_ah0wp")
+metadata/_custom_type_script = "uid://b47em3wbcse4b"
+
+[node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer") instance=ExtResource("3_so7uu")]
+graph_renderer = NodePath("..")
+start_vertex_id = 0

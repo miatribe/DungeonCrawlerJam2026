@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Door" format=3 uid="uid://b6q88v22fowuj"]
+
+[ext_resource type="Texture2D" uid="uid://mnwl8pvje48j" path="res://addons/dungeoncrafterrenderer/assets/Portcullis.png" id="1_3uiqc"]
+[ext_resource type="Script" uid="uid://b4f3pcmh05nja" path="res://addons/dungeoncraftercore/scripts/door.gd" id="1_gmn6x"]
+
+[resource]
+script = ExtResource("1_gmn6x")
+base_texture = ExtResource("1_3uiqc")
+open_animation = 2
+open_animation_travel = -0.9
+metadata/_custom_type_script = "uid://b4f3pcmh05nja"
