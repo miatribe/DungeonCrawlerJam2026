@@ -5,6 +5,7 @@ const GROUP_NAME := "text_log"
 
 @export_range(10, 5000, 1) var max_lines: int = 300
 @export var show_timestamps: bool = false
+@export var text_color: Color = Color(0.32549, 1.0, 0.415686, 1.0)
 
 var _lines: PackedStringArray = []
 @onready var _scroll: ScrollContainer = %Scroll
@@ -13,6 +14,8 @@ var _lines: PackedStringArray = []
 
 func _ready() -> void:
 	add_to_group(GROUP_NAME)
+	if _label != null:
+		_label.add_theme_color_override("default_color", text_color)
 
 
 func add_message(message: String) -> void:
@@ -53,9 +56,12 @@ func _refresh_text() -> void:
 func _scroll_to_bottom() -> void:
 	if _scroll == null:
 		return
+	if get_tree() != null:
+		await get_tree().process_frame
 	var v_scroll := _scroll.get_v_scroll_bar()
 	if v_scroll == null:
 		return
+	_scroll.scroll_vertical = int(v_scroll.max_value)
 	v_scroll.value = v_scroll.max_value
 
 
