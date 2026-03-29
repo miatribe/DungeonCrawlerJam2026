@@ -23,21 +23,24 @@ ratio = 1.77778
 stretch_mode = 1
 
 [node name="DesignRoot" type="Control" parent="AspectRatioContainer" unique_id=1782394411]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer/DesignRoot" unique_id=1821302160]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0109375
-anchor_top = 0.0212963
-anchor_right = 0.7171875
-anchor_bottom = 0.712963
-offset_left = 53.00006
-offset_top = 49.999355
-offset_right = -59.0
-offset_bottom = -56.999634
+anchor_left = 0.0385
+anchor_top = 0.0675
+anchor_right = 0.6865
+anchor_bottom = 0.6600
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="AspectRatioContainer/DesignRoot/SubViewportContainer" unique_id=786226875]
@@ -50,10 +53,15 @@ alternating_floor_darken = 0.67
 
 [node name="TextLog" parent="AspectRatioContainer/DesignRoot" unique_id=685976710 instance=ExtResource("1_xihgh")]
 layout_mode = 1
-offset_left = 64.00122
-offset_top = 842.0
-offset_right = 1319.0012
-offset_bottom = 1024.14
+anchors_preset = -1
+anchor_left = 0.0333
+anchor_top = 0.7800
+anchor_right = 0.6870
+anchor_bottom = 0.9480
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1
