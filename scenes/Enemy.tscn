@@ -8,6 +8,7 @@ script = ExtResource("1_55jtl")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1511408234]
 unique_name_in_owner = true
+offset = Vector2(0, -100)
 pixel_size = 0.002
 billboard = 1
 double_sided = false
