@@ -12,6 +12,7 @@ var enemy_manager: EnemyManager
 var current_vertex_id: int = -1
 var spawn_vertex_id: int = -1
 var current_health: int = 1
+var combat_stats: CombatStats = CombatStats.new()
 var distance_to_target := -1
 var is_aggressed: bool = false
 var tween: Tween
@@ -23,6 +24,7 @@ func _ready() -> void:
 	if enemy_resource == null:
 		push_warning("Enemy resource is not assigned.")
 		return
+	combat_stats.set_values(enemy_resource.attack, enemy_resource.defense, enemy_resource.hit, enemy_resource.dodge)
 	current_health = maxi(1, enemy_resource.health)
 	sprite_3d.texture = enemy_resource.sprite
 	enemy_manager = get_parent() as EnemyManager
@@ -98,37 +100,13 @@ func get_random_connected_vertex_id() -> int:
 func attack() -> void:
 	if enemy_manager == null or enemy_manager.player == null:
 		return
-	var result := CombatResolver.resolve_attack(self , enemy_manager.player)
+	var result := CombatResolver.resolve_attack(combat_stats, enemy_manager.player.combat_stats)
 	if not result.hit:
 		print("Enemy misses player from vertex %d" % current_vertex_id)
 		return
 	enemy_manager.player.apply_damage(result.damage)
 	var crit_text := " (CRIT)" if result.crit else ""
 	print("Enemy hits player for %d%s" % [result.damage, crit_text])
-
-
-func get_attack() -> int:
-	if enemy_resource == null:
-		return 0
-	return enemy_resource.attack
-
-
-func get_defense() -> int:
-	if enemy_resource == null:
-		return 0
-	return enemy_resource.defense
-
-
-func get_hit() -> int:
-	if enemy_resource == null:
-		return 0
-	return enemy_resource.hit
-
-
-func get_dodge() -> int:
-	if enemy_resource == null:
-		return 0
-	return enemy_resource.dodge
 
 
 func apply_damage(amount: int) -> void:

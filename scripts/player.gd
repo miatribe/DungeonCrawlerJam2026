@@ -17,6 +17,7 @@ var _run_state: DungeonRunState = DungeonRunState.new()
 var _logic_resolver: VertexLogicResolver = VertexLogicResolver.new()
 var _cell_size: float = 2.0
 var current_health: int = 20
+var combat_stats: CombatStats = CombatStats.new()
 
 
 func _ready() -> void:
@@ -26,6 +27,7 @@ func _ready() -> void:
 	if start_vertex_id == -1:
 		push_warning("Start vertex ID not set for Player.")
 		return
+	combat_stats.set_values(attack, defense, hit, dodge)
 	current_health = maxi(1, max_health)
 	_set_facing_direction(start_facing_direction)
 	_navigator.set_graph(graph_renderer.graph)
@@ -170,7 +172,7 @@ func _attack_enemy_at_vertex(vertex_id: int) -> bool:
 	var enemy := enemy_manager.get_enemy_at_vertex(vertex_id)
 	if enemy == null:
 		return false
-	var result := CombatResolver.resolve_attack(self, enemy)
+	var result := CombatResolver.resolve_attack(combat_stats, enemy.combat_stats)
 	if not result.hit:
 		print("Player misses enemy on vertex %d" % vertex_id)
 		return true
@@ -178,22 +180,6 @@ func _attack_enemy_at_vertex(vertex_id: int) -> bool:
 	var crit_text := " (CRIT)" if result.crit else ""
 	print("Player hits enemy for %d%s on vertex %d" % [result.damage, crit_text, vertex_id])
 	return true
-
-
-func get_attack() -> int:
-	return attack
-
-
-func get_defense() -> int:
-	return defense
-
-
-func get_hit() -> int:
-	return hit
-
-
-func get_dodge() -> int:
-	return dodge
 
 
 func apply_damage(amount: int) -> void:

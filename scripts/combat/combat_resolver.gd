@@ -8,9 +8,9 @@ const BASE_CRIT_CHANCE := 5
 const MAX_CRIT_CHANCE := 50
 const CRIT_MULTIPLIER := 1.5
 
-static func resolve_attack(attacker: Object, defender: Object, rng: RandomNumberGenerator = null) -> CombatResult:
+static func resolve_attack(attacker_stats: CombatStats, defender_stats: CombatStats, rng: RandomNumberGenerator = null) -> CombatResult:
 	var result := CombatResult.new()
-	if attacker == null or defender == null:
+	if attacker_stats == null or defender_stats == null:
 		return result
 
 	var local_rng := rng
@@ -18,10 +18,10 @@ static func resolve_attack(attacker: Object, defender: Object, rng: RandomNumber
 		local_rng = RandomNumberGenerator.new()
 		local_rng.randomize()
 
-	var attacker_attack := _read_stat(attacker, "get_attack", "attack")
-	var attacker_hit := _read_stat(attacker, "get_hit", "hit")
-	var defender_defense := _read_stat(defender, "get_defense", "defense")
-	var defender_dodge := _read_stat(defender, "get_dodge", "dodge")
+	var attacker_attack := maxi(0, attacker_stats.attack)
+	var attacker_hit := maxi(0, attacker_stats.hit)
+	var defender_defense := maxi(0, defender_stats.defense)
+	var defender_dodge := maxi(0, defender_stats.dodge)
 
 	result.hit_chance = clampi(BASE_HIT_CHANCE + attacker_hit - defender_dodge, MIN_HIT_CHANCE, MAX_HIT_CHANCE)
 	result.hit_roll = local_rng.randi_range(1, 100)
@@ -40,11 +40,3 @@ static func resolve_attack(attacker: Object, defender: Object, rng: RandomNumber
 		result.damage = maxi(1, int(ceil(result.damage * CRIT_MULTIPLIER)))
 
 	return result
-
-
-static func _read_stat(unit: Object, method_name: StringName, property_name: StringName) -> int:
-	if unit == null:
-		return 0
-	if unit.has_method(method_name):
-		return maxi(0, int(unit.call(method_name)))
-	return maxi(0, int(unit.get(property_name)))
