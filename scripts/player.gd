@@ -3,6 +3,7 @@ class_name Player
 
 @export var graph_renderer: GraphRenderer
 @export var turn_manager: TurnManager
+@export var enemy_manager: EnemyManager
 @export var start_vertex_id: int = -1
 @export var start_facing_direction: Direction.Cardinal = Direction.Cardinal.NORTH
 
@@ -48,16 +49,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 
 		if key_event.keycode == KEY_W:
-			if _navigator.move(_get_forward_direction()):
+			if _try_move(_get_forward_direction()):
 				_consume_player_turn()
 		if key_event.keycode == KEY_D:
-			if _navigator.move(_get_right_direction()):
+			if _try_move(_get_right_direction()):
 				_consume_player_turn()
 		if key_event.keycode == KEY_S:
-			if _navigator.move(Direction.get_opposite(_get_forward_direction())):
+			if _try_move(Direction.get_opposite(_get_forward_direction())):
 				_consume_player_turn()
 		if key_event.keycode == KEY_A:
-			if _navigator.move(_get_left_direction()):
+			if _try_move(_get_left_direction()):
 				_consume_player_turn()
 		if key_event.keycode == KEY_R:
 			if _interact_current_vertex():
@@ -160,3 +161,53 @@ func _can_take_turn_action() -> bool:
 func _consume_player_turn() -> void:
 	if turn_manager == null: return
 	if turn_manager.is_player_turn: turn_manager.player_took_turn()
+
+
+func _try_move(direction: Direction.Cardinal) -> bool:
+	var target_vertex_id := _peek_target_vertex_id(direction)
+	if target_vertex_id != -1 and enemy_manager != null and enemy_manager.is_vertex_occupied_by_enemy(target_vertex_id):
+		return _attack_enemy_at_vertex(target_vertex_id)
+
+	if not _can_move_to_direction(direction):
+		push_warning("Movement blocked: vertex_occupied")
+		return false
+	return _navigator.move(direction)
+
+
+func _can_move_to_direction(direction: Direction.Cardinal) -> bool:
+	if enemy_manager == null:
+		return true
+	var target_vertex_id := _peek_target_vertex_id(direction)
+	if target_vertex_id == -1:
+		return true
+	return not enemy_manager.is_vertex_blocked_for_player(target_vertex_id)
+
+
+func _peek_target_vertex_id(direction: Direction.Cardinal) -> int:
+	if _navigator.graph == null:
+		return -1
+	var current_vertex: Vertex = _navigator.graph.vertices.get(_navigator.current_vertex_id)
+	if current_vertex == null:
+		return -1
+	if not current_vertex.edges.has(direction):
+		return -1
+	var edge: Edge = current_vertex.edges[direction]
+	if edge == null:
+		return -1
+	if not edge.is_passable():
+		return -1
+	if edge.vertex_a_id == _navigator.current_vertex_id:
+		return edge.vertex_b_id
+	if edge.vertex_b_id == _navigator.current_vertex_id:
+		return edge.vertex_a_id
+	return -1
+
+
+func _attack_enemy_at_vertex(vertex_id: int) -> bool:
+	if enemy_manager == null:
+		return false
+	var enemy := enemy_manager.get_enemy_at_vertex(vertex_id)
+	if enemy == null:
+		return false
+	print("Player attacks enemy on vertex %d" % vertex_id)
+	return true

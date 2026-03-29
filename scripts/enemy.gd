@@ -72,6 +72,11 @@ func move_to_vertex(new_vertex_id: int) -> void:
 		return
 	if not enemy_manager.graph.vertices.has(new_vertex_id):
 		return
+	if enemy_manager.is_vertex_occupied_by_player(new_vertex_id):
+		attack()
+		return
+	if enemy_manager.is_vertex_blocked_for_enemy(new_vertex_id, self ):
+		return
 	if tween != null && tween.is_running(): tween.custom_step(move_tween_time)
 	tween = create_tween()
 	tween.tween_property(self , "global_position", enemy_manager.get_vertex_world_position(new_vertex_id, global_position.y), move_tween_time).set_ease(Tween.EASE_IN)
@@ -83,7 +88,7 @@ func get_random_connected_vertex_id() -> int:
 		return -1
 	var possible_vertex_ids: Array[int] = [current_vertex_id]
 	for neighbor_id in enemy_manager.get_neighbor_vertex_ids(current_vertex_id):
-		if neighbor_id != enemy_manager.get_player_vertex_id():
+		if not enemy_manager.is_vertex_blocked_for_enemy(neighbor_id, self ):
 			possible_vertex_ids.append(neighbor_id)
 	return possible_vertex_ids.pick_random()
 
@@ -98,7 +103,7 @@ func attack() -> void:
 	# 	player.display_incoming_attack(str(int(damage)), crit)
 	# else:
 	# 	player.display_incoming_attack("Miss", false)
-	pass
+	print("Enemy attacks player from vertex %d" % current_vertex_id)
 
 
 func die() -> void:

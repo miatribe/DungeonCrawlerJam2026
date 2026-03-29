@@ -59,6 +59,36 @@ func get_vertex_world_position(vertex_id: int, current_y: float) -> Vector3:
 	return Vector3(vertex.position.x * cell_size, current_y, vertex.position.y * cell_size)
 
 
+func is_vertex_occupied_by_player(vertex_id: int) -> bool:
+	var player_vertex_id := get_player_vertex_id()
+	return player_vertex_id != -1 and player_vertex_id == vertex_id
+
+
+func is_vertex_occupied_by_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
+	return _is_vertex_occupied_by_enemy(vertex_id, ignored_enemy)
+
+
+func get_enemy_at_vertex(vertex_id: int, ignored_enemy: Enemy = null) -> Enemy:
+	for enemy in enemies:
+		if not is_instance_valid(enemy):
+			continue
+		if ignored_enemy != null and enemy == ignored_enemy:
+			continue
+		if enemy.current_vertex_id == vertex_id:
+			return enemy
+	return null
+
+
+func is_vertex_blocked_for_player(vertex_id: int) -> bool:
+	return is_vertex_occupied_by_enemy(vertex_id)
+
+
+func is_vertex_blocked_for_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
+	if is_vertex_occupied_by_player(vertex_id):
+		return true
+	return is_vertex_occupied_by_enemy(vertex_id, ignored_enemy)
+
+
 func run_all_enemy_turns() -> void:
 	# Keep turn order stable based on this node's child order.
 	_refresh_enemy_list()
@@ -177,9 +207,11 @@ func _can_spawn_at_vertex(vertex_id: int) -> bool:
 	return distance_to_player >= min_spawn_distance_from_player
 
 
-func _is_vertex_occupied_by_enemy(vertex_id: int) -> bool:
+func _is_vertex_occupied_by_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
 	for enemy in enemies:
 		if not is_instance_valid(enemy):
+			continue
+		if ignored_enemy != null and enemy == ignored_enemy:
 			continue
 		if enemy.current_vertex_id == vertex_id:
 			return true
