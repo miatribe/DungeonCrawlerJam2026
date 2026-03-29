@@ -1,46 +1,18 @@
 extends Control
 class_name TextLog
 
+const GROUP_NAME := "text_log"
+
 @export_range(10, 5000, 1) var max_lines: int = 300
 @export var show_timestamps: bool = false
 
 var _lines: PackedStringArray = []
-var _panel: PanelContainer
-var _scroll: ScrollContainer
-var _label: RichTextLabel
+@onready var _scroll: ScrollContainer = %Scroll
+@onready var _label: RichTextLabel = %MessageLabel
 
 
 func _ready() -> void:
-	_build_ui()
-
-
-func _build_ui() -> void:
-	_panel = PanelContainer.new()
-	_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(_panel)
-
-	var margin := MarginContainer.new()
-	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
-	margin.add_theme_constant_override("margin_left", 8)
-	margin.add_theme_constant_override("margin_top", 8)
-	margin.add_theme_constant_override("margin_right", 8)
-	margin.add_theme_constant_override("margin_bottom", 8)
-	_panel.add_child(margin)
-
-	_scroll = ScrollContainer.new()
-	_scroll.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	margin.add_child(_scroll)
-
-	_label = RichTextLabel.new()
-	_label.bbcode_enabled = false
-	_label.scroll_active = false
-	_label.fit_content = true
-	_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_scroll.add_child(_label)
+	add_to_group(GROUP_NAME)
 
 
 func add_message(message: String) -> void:

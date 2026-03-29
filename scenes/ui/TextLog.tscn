@@ -1,12 +1,37 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://csnks0v3ohdgy"]
 
-[ext_resource type="Script" path="res://scripts/ui/text_log.gd" id="1_2j1to"]
+[ext_resource type="Script" uid="uid://d0s02crqmiglk" path="res://scripts/ui/text_log.gd" id="1_2j1to"]
 
-[node name="TextLog" type="Control"]
+[node name="TextLog" type="Control" unique_id=2057531073]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 520.0
+offset_bottom = 240.0
+script = ExtResource("1_2j1to")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=2019618841]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2j1to")
+
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=39258831]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin" unique_id=1942970828]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MessageLabel" type="RichTextLabel" parent="Panel/Margin/Scroll" unique_id=6132786]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+fit_content = true
+scroll_active = false

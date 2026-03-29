@@ -1,6 +1,8 @@
 extends Node3D
 class_name Player
 
+const TEXT_LOG_GROUP := "text_log"
+
 @export var graph_renderer: GraphRenderer
 @export var turn_manager: TurnManager
 @export var enemy_manager: EnemyManager
@@ -18,6 +20,7 @@ var _logic_resolver: VertexLogicResolver = VertexLogicResolver.new()
 var _cell_size: float = 2.0
 var current_health: int = 20
 var combat_stats: CombatStats = CombatStats.new()
+var _text_log: TextLog
 
 
 func _ready() -> void:
@@ -27,6 +30,8 @@ func _ready() -> void:
 	if start_vertex_id == -1:
 		push_warning("Start vertex ID not set for Player.")
 		return
+	_text_log = _find_text_log()
+	_log_message("Combat log connected.")
 	combat_stats.set_values(attack, defense, hit, dodge)
 	current_health = maxi(1, max_health)
 	_set_facing_direction(start_facing_direction)
@@ -174,11 +179,15 @@ func _attack_enemy_at_vertex(vertex_id: int) -> bool:
 		return false
 	var result := CombatResolver.resolve_attack(combat_stats, enemy.combat_stats)
 	if not result.hit:
-		print("Player misses enemy on vertex %d" % vertex_id)
+		var miss_message := "Player misses enemy on vertex %d" % vertex_id
+		print(miss_message)
+		_log_message(miss_message)
 		return true
 	enemy.apply_damage(result.damage)
 	var crit_text := " (CRIT)" if result.crit else ""
-	print("Player hits enemy for %d%s on vertex %d" % [result.damage, crit_text, vertex_id])
+	var hit_message := "Player hits enemy for %d%s on vertex %d" % [result.damage, crit_text, vertex_id]
+	print(hit_message)
+	_log_message(hit_message)
 	return true
 
 
@@ -186,5 +195,21 @@ func apply_damage(amount: int) -> void:
 	if amount <= 0:
 		return
 	current_health = maxi(0, current_health - amount)
+	_log_message("Player takes %d damage. HP: %d/%d" % [amount, current_health, max_health])
 	if current_health == 0:
 		print("Player has been defeated.")
+		_log_message("Player has been defeated.")
+
+
+func _log_message(message: String) -> void:
+	if _text_log == null:
+		_text_log = _find_text_log()
+	if _text_log == null:
+		return
+	_text_log.add_message(message)
+
+
+func _find_text_log() -> TextLog:
+	if get_tree() == null:
+		return null
+	return get_tree().get_first_node_in_group(TEXT_LOG_GROUP) as TextLog
