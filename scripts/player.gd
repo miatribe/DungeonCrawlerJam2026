@@ -20,8 +20,6 @@ func _ready() -> void:
 	if start_vertex_id == -1:
 		push_warning("Start vertex ID not set for Player.")
 		return
-	# if turn_manager != null:
-	# 	turn_manager.AITurnOver.connect(turn_complete)
 	_set_facing_direction(start_facing_direction)
 	_navigator.set_graph(graph_renderer.graph)
 	_cell_size = graph_renderer.cell_size
@@ -31,38 +29,33 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		var key_event := event as InputEventKey
-		if not key_event.pressed or key_event.echo: return
+	if not (event is InputEventKey): return
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo: return
 
-		# Rotating is always allowed and does not consume a turn.
-		if key_event.keycode == KEY_E:
-			rotate_y(deg_to_rad(-90))
-			rotation_degrees.y = roundf(rotation_degrees.y) # done to remove small floating point errors
-			return
-		if key_event.keycode == KEY_Q:
-			rotate_y(deg_to_rad(90))
-			rotation_degrees.y = roundf(rotation_degrees.y)
-			return
+	# Rotating is always allowed and does not consume a turn.
+	if key_event.keycode == KEY_E:
+		rotate_y(deg_to_rad(-90))
+		rotation_degrees.y = roundf(rotation_degrees.y)
+		return
+	if key_event.keycode == KEY_Q:
+		rotate_y(deg_to_rad(90))
+		rotation_degrees.y = roundf(rotation_degrees.y)
+		return
 
-		if not _can_take_turn_action():
-			return
+	if not _can_take_turn_action():
+		return
 
-		if key_event.keycode == KEY_W:
-			if _try_move(_get_forward_direction()):
-				_consume_player_turn()
-		if key_event.keycode == KEY_D:
-			if _try_move(_get_right_direction()):
-				_consume_player_turn()
-		if key_event.keycode == KEY_S:
-			if _try_move(Direction.get_opposite(_get_forward_direction())):
-				_consume_player_turn()
-		if key_event.keycode == KEY_A:
-			if _try_move(_get_left_direction()):
-				_consume_player_turn()
-		if key_event.keycode == KEY_R:
-			if _interact_current_vertex():
-				_consume_player_turn()
+	var forward := _get_forward_direction()
+	var move_direction := _get_move_direction(key_event.keycode, forward)
+	if move_direction != Direction.Cardinal.NONE:
+		if _try_move(move_direction):
+			_consume_player_turn()
+		return
+
+	if key_event.keycode == KEY_R:
+		if _interact_current_vertex():
+			_consume_player_turn()
 
 
 func _on_vertex_entered(vertex_id: int, _previous_vertex_id: int, _via_direction: Direction.Cardinal) -> void:
@@ -91,58 +84,29 @@ func _interact_current_vertex() -> bool:
 func _get_forward_direction() -> Direction.Cardinal:
 	var snapped_rotation := int(wrapi(roundi(rotation_degrees.y), 0, 360))
 	match snapped_rotation:
-		0:
-			return Direction.Cardinal.NORTH
-		90:
-			return Direction.Cardinal.WEST
-		180:
-			return Direction.Cardinal.SOUTH
-		270:
-			return Direction.Cardinal.EAST
-		_:
-			return Direction.Cardinal.NONE
+		0: return Direction.Cardinal.NORTH
+		90: return Direction.Cardinal.WEST
+		180: return Direction.Cardinal.SOUTH
+		270: return Direction.Cardinal.EAST
+		_: return Direction.Cardinal.NONE
 
 
-func _get_right_direction() -> Direction.Cardinal:
-	match _get_forward_direction():
-		Direction.Cardinal.NORTH:
-			return Direction.Cardinal.EAST
-		Direction.Cardinal.EAST:
-			return Direction.Cardinal.SOUTH
-		Direction.Cardinal.SOUTH:
-			return Direction.Cardinal.WEST
-		Direction.Cardinal.WEST:
-			return Direction.Cardinal.NORTH
-		_:
-			return Direction.Cardinal.NONE
-
-
-func _get_left_direction() -> Direction.Cardinal:
-	match _get_forward_direction():
-		Direction.Cardinal.NORTH:
-			return Direction.Cardinal.WEST
-		Direction.Cardinal.WEST:
-			return Direction.Cardinal.SOUTH
-		Direction.Cardinal.SOUTH:
-			return Direction.Cardinal.EAST
-		Direction.Cardinal.EAST:
-			return Direction.Cardinal.NORTH
-		_:
-			return Direction.Cardinal.NONE
+func _get_move_direction(keycode: int, forward: Direction.Cardinal) -> Direction.Cardinal:
+	match keycode:
+		KEY_W: return forward
+		KEY_S: return Direction.get_opposite(forward)
+		KEY_D: return Direction.get_rotated_direction(forward, 90)
+		KEY_A: return Direction.get_rotated_direction(forward, -90)
+		_: return Direction.Cardinal.NONE
 
 
 func _set_facing_direction(direction: Direction.Cardinal) -> void:
 	match direction:
-		Direction.Cardinal.NORTH:
-			rotation_degrees.y = 0.0
-		Direction.Cardinal.EAST:
-			rotation_degrees.y = 270.0
-		Direction.Cardinal.SOUTH:
-			rotation_degrees.y = 180.0
-		Direction.Cardinal.WEST:
-			rotation_degrees.y = 90.0
-		_:
-			rotation_degrees.y = 0.0
+		Direction.Cardinal.NORTH: rotation_degrees.y = 0.0
+		Direction.Cardinal.EAST: rotation_degrees.y = 270.0
+		Direction.Cardinal.SOUTH: rotation_degrees.y = 180.0
+		Direction.Cardinal.WEST: rotation_degrees.y = 90.0
+		_: rotation_degrees.y = 0.0
 
 
 func get_current_vertex_id() -> int:
@@ -165,22 +129,12 @@ func _consume_player_turn() -> void:
 
 func _try_move(direction: Direction.Cardinal) -> bool:
 	var target_vertex_id := _peek_target_vertex_id(direction)
-	if target_vertex_id != -1 and enemy_manager != null and enemy_manager.is_vertex_occupied_by_enemy(target_vertex_id):
-		return _attack_enemy_at_vertex(target_vertex_id)
-
-	if not _can_move_to_direction(direction):
-		push_warning("Movement blocked: vertex_occupied")
-		return false
+	if target_vertex_id != -1 and enemy_manager != null:
+		if enemy_manager.is_vertex_occupied_by_enemy(target_vertex_id):
+			return _attack_enemy_at_vertex(target_vertex_id)
+		if enemy_manager.is_vertex_blocked_for_player(target_vertex_id):
+			return false
 	return _navigator.move(direction)
-
-
-func _can_move_to_direction(direction: Direction.Cardinal) -> bool:
-	if enemy_manager == null:
-		return true
-	var target_vertex_id := _peek_target_vertex_id(direction)
-	if target_vertex_id == -1:
-		return true
-	return not enemy_manager.is_vertex_blocked_for_player(target_vertex_id)
 
 
 func _peek_target_vertex_id(direction: Direction.Cardinal) -> int:

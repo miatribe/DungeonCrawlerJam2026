@@ -1,7 +1,7 @@
 extends Resource
 class_name Direction
 
-enum Cardinal {NORTH, SOUTH, EAST, WEST, NONE = -1}
+enum Cardinal {NORTH, SOUTH, EAST, WEST, NONE = -1} # TODO fix this in the future so we do not need _CLOCKWISE
 enum Surface {NORTH, EAST, SOUTH, WEST, CEILING, FLOOR}
 
 const DIRECTION_TO_OFFSET = {
@@ -17,8 +17,14 @@ const OFFSET_TO_DIRECTION := {
 	Vector2i(1, 0): Cardinal.EAST
 }
 
-#possible bug with the rotation here, might be backwards, need testing change - to  + if incorrect
-static func get_rotated_direction(dir: Cardinal, rot: int) -> Cardinal: return wrap(dir - rot / 90, 0, 4)
+# Cardinal values in clockwise order for rotation math (enum order is non-clockwise).
+const _CLOCKWISE := [Cardinal.NORTH, Cardinal.EAST, Cardinal.SOUTH, Cardinal.WEST]
+
+## Rotates [param dir] clockwise by [param rot] degrees (must be a multiple of 90).
+static func get_rotated_direction(dir: Cardinal, rot: int) -> Cardinal:
+	var idx := _CLOCKWISE.find(dir)
+	if idx == -1: return Cardinal.NONE
+	return _CLOCKWISE[wrapi(idx + rot / 90, 0, 4)]
 
 
 static func get_opposite(dir: Cardinal) -> Cardinal:
