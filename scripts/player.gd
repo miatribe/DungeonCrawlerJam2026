@@ -2,6 +2,7 @@ extends Node3D
 class_name Player
 
 @export var graph_renderer: GraphRenderer
+@export var turn_manager: TurnManager
 @export var start_vertex_id: int = -1
 @export var start_facing_direction: Direction.Cardinal = Direction.Cardinal.NORTH
 
@@ -18,6 +19,8 @@ func _ready() -> void:
 	if start_vertex_id == -1:
 		push_warning("Start vertex ID not set for Player.")
 		return
+	# if turn_manager != null:
+	# 	turn_manager.AITurnOver.connect(turn_complete)
 	_set_facing_direction(start_facing_direction)
 	_navigator.set_graph(graph_renderer.graph)
 	_cell_size = graph_renderer.cell_size
@@ -30,22 +33,35 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		var key_event := event as InputEventKey
 		if not key_event.pressed or key_event.echo: return
-		if key_event.keycode == KEY_W:
-			_navigator.move(_get_forward_direction())
-		if key_event.keycode == KEY_D:
-			_navigator.move(_get_right_direction())
-		if key_event.keycode == KEY_S:
-			_navigator.move(Direction.get_opposite(_get_forward_direction()))
-		if key_event.keycode == KEY_A:
-			_navigator.move(_get_left_direction())
+
+		# Rotating is always allowed and does not consume a turn.
 		if key_event.keycode == KEY_E:
 			rotate_y(deg_to_rad(-90))
 			rotation_degrees.y = roundf(rotation_degrees.y) # done to remove small floating point errors
+			return
 		if key_event.keycode == KEY_Q:
 			rotate_y(deg_to_rad(90))
 			rotation_degrees.y = roundf(rotation_degrees.y)
+			return
+
+		if not _can_take_turn_action():
+			return
+
+		if key_event.keycode == KEY_W:
+			if _navigator.move(_get_forward_direction()):
+				_consume_player_turn()
+		if key_event.keycode == KEY_D:
+			if _navigator.move(_get_right_direction()):
+				_consume_player_turn()
+		if key_event.keycode == KEY_S:
+			if _navigator.move(Direction.get_opposite(_get_forward_direction())):
+				_consume_player_turn()
+		if key_event.keycode == KEY_A:
+			if _navigator.move(_get_left_direction()):
+				_consume_player_turn()
 		if key_event.keycode == KEY_R:
-			_interact_current_vertex()
+			if _interact_current_vertex():
+				_consume_player_turn()
 
 
 func _on_vertex_entered(vertex_id: int, _previous_vertex_id: int, _via_direction: Direction.Cardinal) -> void:
@@ -62,12 +78,13 @@ func _on_movement_blocked(_from_vertex_id: int, _direction: Direction.Cardinal, 
 	push_warning("Movement blocked: %s" % String(reason))
 
 
-func _interact_current_vertex() -> void:
+func _interact_current_vertex() -> bool:
 	if _navigator.graph == null:
-		return
+		return false
 	if _navigator.current_vertex_id < 0:
-		return
+		return false
 	_logic_resolver.apply_on_interact(_navigator.graph, _run_state, _navigator.current_vertex_id, _get_forward_direction())
+	return true
 
 
 func _get_forward_direction() -> Direction.Cardinal:
@@ -133,3 +150,13 @@ func get_current_vertex_id() -> int:
 
 func get_navigation_graph() -> Graph:
 	return _navigator.graph
+
+
+func _can_take_turn_action() -> bool:
+	if turn_manager == null: return true
+	return turn_manager.is_player_turn
+
+
+func _consume_player_turn() -> void:
+	if turn_manager == null: return
+	if turn_manager.is_player_turn: turn_manager.player_took_turn()
