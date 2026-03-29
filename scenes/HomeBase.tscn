@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ck5vlwmn85tju" path="res://scenes/Enemy.tscn" id="5_jqnxg"]
 [ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="6_wfhjp"]
 [ext_resource type="Resource" uid="uid://baicsfjhvniqd" path="res://assets/enemies/test.tres" id="7_ie2me"]
+[ext_resource type="Script" uid="uid://dbdi6adikf8ik" path="res://scripts/turn_manager.gd" id="8_ie2me"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_so7uu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,16 +30,22 @@ metadata/_custom_type_script = "uid://b47em3wbcse4b"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=898481221]
 environment = SubResource("Environment_hm6wk")
 
-[node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer") instance=ExtResource("3_so7uu")]
+[node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer", "turn_manager") instance=ExtResource("3_so7uu")]
 graph_renderer = NodePath("..")
+turn_manager = NodePath("../TurnManager")
 start_vertex_id = 0
 start_facing_direction = 1
 
-[node name="EnemyManager" type="Node3D" parent="." unique_id=240141659 node_paths=PackedStringArray("graph_renderer", "player")]
+[node name="EnemyManager" type="Node3D" parent="." unique_id=240141659 node_paths=PackedStringArray("graph_renderer", "player", "turn_manager")]
 script = ExtResource("4_hm6wk")
 graph_renderer = NodePath("..")
 player = NodePath("../Player")
+turn_manager = NodePath("../TurnManager")
 enemy_scene = ExtResource("5_jqnxg")
 enemy_resources = Array[ExtResource("6_wfhjp")]([ExtResource("7_ie2me")])
 target_spawn_vertex_id = 57
 metadata/_custom_type_script = "uid://chxxomku6c3gl"
+
+[node name="TurnManager" type="Node" parent="." unique_id=79038389]
+script = ExtResource("8_ie2me")
+metadata/_custom_type_script = "uid://dbdi6adikf8ik"

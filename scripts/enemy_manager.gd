@@ -4,6 +4,7 @@ class_name EnemyManager
 
 @export var graph_renderer: GraphRenderer
 @export var player: Player
+@export var turn_manager: TurnManager
 @export var enemy_scene: PackedScene
 @export var enemy_resources: Array[EnemyResource] = []
 @export_range(0, 512, 1) var max_enemies: int = 4
@@ -27,6 +28,8 @@ func _ready() -> void:
 	_refresh_enemy_list()
 	child_entered_tree.connect(_on_child_entered_tree)
 	child_exiting_tree.connect(_on_child_exiting_tree)
+	if turn_manager != null and not turn_manager.PlayerTurnOver.is_connected(_on_player_turn_over):
+		turn_manager.PlayerTurnOver.connect(_on_player_turn_over)
 
 
 func has_required_references() -> bool:
@@ -199,3 +202,9 @@ func _on_child_entered_tree(_node: Node) -> void:
 
 func _on_child_exiting_tree(_node: Node) -> void:
 	_refresh_enemy_list()
+
+
+func _on_player_turn_over() -> void:
+	take_turn()
+	if turn_manager != null:
+		turn_manager.ai_took_turn()
