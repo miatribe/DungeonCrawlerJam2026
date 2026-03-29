@@ -1,0 +1,1453 @@
+[gd_resource type="Resource" script_class="Graph" format=3 uid="uid://cda8kmsuyksgw"]
+
+[ext_resource type="Script" uid="uid://b4f3pcmh05nja" path="res://addons/dungeoncraftercore/scripts/door.gd" id="1_07mg3"]
+[ext_resource type="Script" uid="uid://cyx3f02t5ortb" path="res://addons/dungeoncraftercore/scripts/edge.gd" id="2_6yipm"]
+[ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="3_yi07g"]
+[ext_resource type="Script" uid="uid://dw8nn12j0ahe2" path="res://addons/dungeoncraftercore/scripts/graph.gd" id="4_8gf1p"]
+[ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="5_0elrw"]
+[ext_resource type="Resource" uid="uid://bckyix6yyn5hj" path="res://assets/tilesets/default.tres" id="6_6yipm"]
+[ext_resource type="Script" uid="uid://ck857vy6ugchx" path="res://addons/dungeoncraftercore/scripts/vertex_logic_list.gd" id="6_f52af"]
+[ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="7_cuu0d"]
+
+[sub_resource type="Resource" id="Resource_5dfwq"]
+script = ExtResource("2_6yipm")
+vertex_a_id = 1
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_y4esy"]
+script = ExtResource("2_6yipm")
+id = 1
+vertex_a_id = 3
+vertex_b_id = 1
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_r3ij3"]
+script = ExtResource("2_6yipm")
+id = 2
+vertex_a_id = 3
+vertex_b_id = 2
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_u507e"]
+script = ExtResource("2_6yipm")
+id = 3
+vertex_a_id = 4
+vertex_b_id = 3
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_710u7"]
+script = ExtResource("2_6yipm")
+id = 4
+vertex_a_id = 5
+vertex_b_id = 4
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_8vgqe"]
+script = ExtResource("2_6yipm")
+id = 5
+vertex_a_id = 6
+vertex_b_id = 3
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_sw84m"]
+script = ExtResource("2_6yipm")
+id = 6
+vertex_a_id = 6
+vertex_b_id = 5
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_weeju"]
+script = ExtResource("2_6yipm")
+id = 7
+vertex_a_id = 7
+vertex_b_id = 2
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_6wlqg"]
+script = ExtResource("2_6yipm")
+id = 8
+vertex_a_id = 7
+vertex_b_id = 6
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_048ns"]
+script = ExtResource("2_6yipm")
+id = 9
+vertex_a_id = 8
+vertex_b_id = 7
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_gorrc"]
+script = ExtResource("2_6yipm")
+id = 10
+vertex_a_id = 9
+vertex_b_id = 6
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_mml0y"]
+script = ExtResource("2_6yipm")
+id = 11
+vertex_a_id = 9
+vertex_b_id = 8
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_dfgsg"]
+script = ExtResource("2_6yipm")
+id = 12
+vertex_a_id = 10
+vertex_b_id = 5
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_fpwr4"]
+script = ExtResource("2_6yipm")
+id = 13
+vertex_a_id = 10
+vertex_b_id = 9
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_4sq5k"]
+script = ExtResource("2_6yipm")
+id = 14
+vertex_a_id = 11
+vertex_b_id = 9
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_jxbfs"]
+script = ExtResource("2_6yipm")
+id = 15
+vertex_a_id = 12
+vertex_b_id = 11
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_oi0hx"]
+script = ExtResource("2_6yipm")
+id = 16
+vertex_a_id = 13
+vertex_b_id = 12
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_l575p"]
+script = ExtResource("2_6yipm")
+id = 17
+vertex_a_id = 14
+vertex_b_id = 13
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_ruuqc"]
+script = ExtResource("2_6yipm")
+id = 18
+vertex_a_id = 15
+vertex_b_id = 14
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_h7v3d"]
+script = ExtResource("2_6yipm")
+id = 19
+vertex_a_id = 16
+vertex_b_id = 15
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_7ecff"]
+script = ExtResource("2_6yipm")
+id = 20
+vertex_a_id = 17
+vertex_b_id = 16
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_epn6u"]
+script = ExtResource("2_6yipm")
+id = 21
+vertex_a_id = 18
+vertex_b_id = 13
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_3vs5y"]
+script = ExtResource("2_6yipm")
+id = 22
+vertex_a_id = 19
+vertex_b_id = 18
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_fpmvl"]
+script = ExtResource("2_6yipm")
+id = 23
+vertex_a_id = 20
+vertex_b_id = 19
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_8fqbl"]
+script = ExtResource("2_6yipm")
+id = 24
+vertex_a_id = 21
+vertex_b_id = 20
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_0bcbe"]
+script = ExtResource("2_6yipm")
+id = 25
+vertex_a_id = 22
+vertex_b_id = 21
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_oieey"]
+script = ExtResource("2_6yipm")
+id = 26
+vertex_a_id = 24
+vertex_b_id = 22
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_vgf53"]
+script = ExtResource("2_6yipm")
+id = 27
+vertex_a_id = 24
+vertex_b_id = 23
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_by3s8"]
+script = ExtResource("2_6yipm")
+id = 28
+vertex_a_id = 26
+vertex_b_id = 25
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_0uens"]
+script = ExtResource("2_6yipm")
+id = 29
+vertex_a_id = 26
+vertex_b_id = 23
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_3a4j8"]
+script = ExtResource("2_6yipm")
+id = 30
+vertex_a_id = 27
+vertex_b_id = 26
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_k6oll"]
+script = ExtResource("2_6yipm")
+id = 31
+vertex_a_id = 28
+vertex_b_id = 27
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_x28ye"]
+script = ExtResource("2_6yipm")
+id = 32
+vertex_a_id = 28
+vertex_b_id = 25
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_ltda7"]
+script = ExtResource("2_6yipm")
+id = 33
+vertex_a_id = 29
+vertex_b_id = 28
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_uf22x"]
+script = ExtResource("2_6yipm")
+id = 34
+vertex_a_id = 30
+vertex_b_id = 29
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_6sk3p"]
+script = ExtResource("2_6yipm")
+id = 35
+vertex_a_id = 31
+vertex_b_id = 30
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_poqav"]
+script = ExtResource("2_6yipm")
+id = 36
+vertex_a_id = 32
+vertex_b_id = 31
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_csd1g"]
+script = ExtResource("2_6yipm")
+id = 37
+vertex_a_id = 33
+vertex_b_id = 32
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_ps7i6"]
+script = ExtResource("2_6yipm")
+id = 38
+vertex_a_id = 34
+vertex_b_id = 33
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_gxyf5"]
+script = ExtResource("2_6yipm")
+id = 39
+vertex_a_id = 35
+vertex_b_id = 21
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_88tmw"]
+script = ExtResource("2_6yipm")
+id = 40
+vertex_a_id = 35
+vertex_b_id = 34
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_1hyi8"]
+script = ExtResource("2_6yipm")
+id = 41
+vertex_a_id = 36
+vertex_b_id = 33
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_vdf5a"]
+script = ExtResource("2_6yipm")
+id = 42
+vertex_a_id = 36
+vertex_b_id = 35
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_8l5bb"]
+script = ExtResource("2_6yipm")
+id = 43
+vertex_a_id = 37
+vertex_b_id = 36
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_b2n1c"]
+script = ExtResource("2_6yipm")
+id = 44
+vertex_a_id = 37
+vertex_b_id = 21
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_sa3fj"]
+script = ExtResource("2_6yipm")
+id = 45
+vertex_a_id = 38
+vertex_b_id = 23
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_1vtx6"]
+script = ExtResource("2_6yipm")
+id = 46
+vertex_a_id = 38
+vertex_b_id = 37
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_owjo8"]
+script = ExtResource("2_6yipm")
+id = 47
+vertex_a_id = 38
+vertex_b_id = 22
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_d1tmk"]
+script = ExtResource("2_6yipm")
+id = 48
+vertex_a_id = 38
+vertex_b_id = 25
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_528yi"]
+script = ExtResource("2_6yipm")
+id = 49
+vertex_a_id = 39
+vertex_b_id = 32
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_xusmi"]
+script = ExtResource("2_6yipm")
+id = 50
+vertex_a_id = 39
+vertex_b_id = 36
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_w0n34"]
+script = ExtResource("2_6yipm")
+id = 51
+vertex_a_id = 39
+vertex_b_id = 30
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_b3tw6"]
+script = ExtResource("2_6yipm")
+id = 52
+vertex_a_id = 40
+vertex_b_id = 25
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_v1tqb"]
+script = ExtResource("2_6yipm")
+id = 53
+vertex_a_id = 40
+vertex_b_id = 39
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_c7f6p"]
+script = ExtResource("2_6yipm")
+id = 54
+vertex_a_id = 40
+vertex_b_id = 37
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_o312k"]
+script = ExtResource("2_6yipm")
+id = 55
+vertex_a_id = 40
+vertex_b_id = 29
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_ij2d4"]
+script = ExtResource("2_6yipm")
+id = 56
+vertex_a_id = 41
+vertex_b_id = 17
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_72c8u"]
+script = ExtResource("2_6yipm")
+id = 57
+vertex_a_id = 42
+vertex_b_id = 41
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_86o5d"]
+script = ExtResource("2_6yipm")
+id = 58
+vertex_a_id = 43
+vertex_b_id = 42
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_3r46r"]
+script = ExtResource("2_6yipm")
+id = 59
+vertex_a_id = 44
+vertex_b_id = 43
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_25n27"]
+script = ExtResource("2_6yipm")
+id = 60
+vertex_a_id = 45
+vertex_b_id = 44
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_xar6r"]
+script = ExtResource("2_6yipm")
+id = 61
+vertex_a_id = 46
+vertex_b_id = 45
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_r5qcu"]
+script = ExtResource("2_6yipm")
+id = 62
+vertex_a_id = 47
+vertex_b_id = 46
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_13btp"]
+script = ExtResource("2_6yipm")
+id = 63
+vertex_a_id = 48
+vertex_b_id = 47
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_cnbn6"]
+script = ExtResource("2_6yipm")
+id = 64
+vertex_a_id = 49
+vertex_b_id = 48
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_iqa7u"]
+script = ExtResource("2_6yipm")
+id = 65
+vertex_a_id = 50
+vertex_b_id = 49
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_7uqln"]
+script = ExtResource("2_6yipm")
+id = 66
+vertex_a_id = 51
+vertex_b_id = 50
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_36225"]
+script = ExtResource("2_6yipm")
+id = 67
+vertex_a_id = 52
+vertex_b_id = 51
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_uhq80"]
+script = ExtResource("2_6yipm")
+id = 68
+vertex_a_id = 53
+vertex_b_id = 17
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_a5213"]
+script = ExtResource("2_6yipm")
+id = 69
+vertex_a_id = 53
+vertex_b_id = 52
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_lpgq1"]
+script = ExtResource("2_6yipm")
+id = 70
+vertex_a_id = 54
+vertex_b_id = 51
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_hg7e6"]
+script = ExtResource("2_6yipm")
+id = 71
+vertex_a_id = 54
+vertex_b_id = 53
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_cemuo"]
+script = ExtResource("2_6yipm")
+id = 72
+vertex_a_id = 55
+vertex_b_id = 50
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_vsf75"]
+script = ExtResource("2_6yipm")
+id = 73
+vertex_a_id = 55
+vertex_b_id = 48
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_kf2ln"]
+script = ExtResource("2_6yipm")
+id = 74
+vertex_a_id = 55
+vertex_b_id = 54
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_aqd2w"]
+script = ExtResource("2_6yipm")
+id = 75
+vertex_a_id = 56
+vertex_b_id = 55
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_cn2d0"]
+script = ExtResource("2_6yipm")
+id = 76
+vertex_a_id = 56
+vertex_b_id = 47
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_q1ac8"]
+script = ExtResource("2_6yipm")
+id = 77
+vertex_a_id = 57
+vertex_b_id = 44
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_k6au2"]
+script = ExtResource("2_6yipm")
+id = 78
+vertex_a_id = 57
+vertex_b_id = 56
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_cqnr8"]
+script = ExtResource("2_6yipm")
+id = 79
+vertex_a_id = 57
+vertex_b_id = 46
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_meuif"]
+script = ExtResource("2_6yipm")
+id = 80
+vertex_a_id = 58
+vertex_b_id = 43
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_p53sb"]
+script = ExtResource("2_6yipm")
+id = 81
+vertex_a_id = 58
+vertex_b_id = 57
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_onfki"]
+script = ExtResource("2_6yipm")
+id = 82
+vertex_a_id = 58
+vertex_b_id = 41
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_0pp4x"]
+script = ExtResource("2_6yipm")
+id = 83
+vertex_a_id = 59
+vertex_b_id = 58
+direction_from_a = 0
+direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_r42c8"]
+script = ExtResource("2_6yipm")
+id = 84
+vertex_a_id = 59
+vertex_b_id = 54
+direction_from_a = 1
+direction_from_b = 0
+
+[sub_resource type="Resource" id="Resource_bqf36"]
+script = ExtResource("2_6yipm")
+id = 85
+vertex_a_id = 59
+vertex_b_id = 56
+direction_from_a = 3
+direction_from_b = 2
+
+[sub_resource type="Resource" id="Resource_tifwj"]
+script = ExtResource("2_6yipm")
+id = 86
+vertex_a_id = 59
+vertex_b_id = 17
+direction_from_a = 2
+direction_from_b = 3
+
+[sub_resource type="Resource" id="Resource_wk3yv"]
+script = ExtResource("7_cuu0d")
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_5dfwq")
+})
+
+[sub_resource type="Resource" id="Resource_h4gdd"]
+script = ExtResource("7_cuu0d")
+id = 1
+position = Vector2i(0, 1)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_5dfwq"),
+1: SubResource("Resource_y4esy")
+})
+
+[sub_resource type="Resource" id="Resource_51hlq"]
+script = ExtResource("7_cuu0d")
+id = 2
+position = Vector2i(-1, 2)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_weeju"),
+2: SubResource("Resource_r3ij3")
+})
+
+[sub_resource type="Resource" id="Resource_im3sh"]
+script = ExtResource("7_cuu0d")
+id = 3
+position = Vector2i(0, 2)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_y4esy"),
+1: SubResource("Resource_8vgqe"),
+2: SubResource("Resource_u507e"),
+3: SubResource("Resource_r3ij3")
+})
+
+[sub_resource type="Resource" id="Resource_lsun8"]
+script = ExtResource("7_cuu0d")
+id = 4
+position = Vector2i(1, 2)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_710u7"),
+3: SubResource("Resource_u507e")
+})
+
+[sub_resource type="Resource" id="Resource_klc2h"]
+script = ExtResource("7_cuu0d")
+id = 5
+position = Vector2i(1, 3)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_710u7"),
+1: SubResource("Resource_dfgsg"),
+3: SubResource("Resource_sw84m")
+})
+
+[sub_resource type="Resource" id="Resource_qmu1e"]
+script = ExtResource("7_cuu0d")
+id = 6
+position = Vector2i(0, 3)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_8vgqe"),
+1: SubResource("Resource_gorrc"),
+2: SubResource("Resource_sw84m"),
+3: SubResource("Resource_6wlqg")
+})
+
+[sub_resource type="Resource" id="Resource_ydujb"]
+script = ExtResource("7_cuu0d")
+id = 7
+position = Vector2i(-1, 3)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_weeju"),
+1: SubResource("Resource_048ns"),
+2: SubResource("Resource_6wlqg")
+})
+
+[sub_resource type="Resource" id="Resource_r3eke"]
+script = ExtResource("7_cuu0d")
+id = 8
+position = Vector2i(-1, 4)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_048ns"),
+2: SubResource("Resource_mml0y")
+})
+
+[sub_resource type="Resource" id="Resource_rup5j"]
+script = ExtResource("7_cuu0d")
+id = 9
+position = Vector2i(0, 4)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_gorrc"),
+1: SubResource("Resource_4sq5k"),
+2: SubResource("Resource_fpwr4"),
+3: SubResource("Resource_mml0y")
+})
+
+[sub_resource type="Resource" id="Resource_b76aq"]
+script = ExtResource("7_cuu0d")
+id = 10
+position = Vector2i(1, 4)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_dfgsg"),
+3: SubResource("Resource_fpwr4")
+})
+
+[sub_resource type="Resource" id="Resource_js7l7"]
+script = ExtResource("7_cuu0d")
+id = 11
+position = Vector2i(0, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_4sq5k"),
+1: SubResource("Resource_jxbfs")
+})
+
+[sub_resource type="Resource" id="Resource_ina85"]
+script = ExtResource("7_cuu0d")
+id = 12
+position = Vector2i(0, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_jxbfs"),
+1: SubResource("Resource_oi0hx")
+})
+
+[sub_resource type="Resource" id="Resource_o4mwe"]
+script = ExtResource("7_cuu0d")
+id = 13
+position = Vector2i(0, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_oi0hx"),
+2: SubResource("Resource_epn6u"),
+3: SubResource("Resource_l575p")
+})
+
+[sub_resource type="Resource" id="Resource_0j8ny"]
+script = ExtResource("7_cuu0d")
+id = 14
+position = Vector2i(-1, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+2: SubResource("Resource_l575p"),
+3: SubResource("Resource_ruuqc")
+})
+
+[sub_resource type="Resource" id="Resource_drj3o"]
+script = ExtResource("7_cuu0d")
+id = 15
+position = Vector2i(-2, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+2: SubResource("Resource_ruuqc"),
+3: SubResource("Resource_h7v3d")
+})
+
+[sub_resource type="Resource" id="Resource_2kyqt"]
+script = ExtResource("7_cuu0d")
+id = 16
+position = Vector2i(-3, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+2: SubResource("Resource_h7v3d"),
+3: SubResource("Resource_7ecff")
+})
+
+[sub_resource type="Resource" id="Resource_3w73t"]
+script = ExtResource("7_cuu0d")
+id = 17
+position = Vector2i(-4, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_ij2d4"),
+1: SubResource("Resource_uhq80"),
+2: SubResource("Resource_7ecff"),
+3: SubResource("Resource_tifwj")
+})
+
+[sub_resource type="Resource" id="Resource_c7b8i"]
+script = ExtResource("7_cuu0d")
+id = 18
+position = Vector2i(1, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+2: SubResource("Resource_3vs5y"),
+3: SubResource("Resource_epn6u")
+})
+
+[sub_resource type="Resource" id="Resource_551k7"]
+script = ExtResource("7_cuu0d")
+id = 19
+position = Vector2i(2, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+2: SubResource("Resource_fpmvl"),
+3: SubResource("Resource_3vs5y")
+})
+
+[sub_resource type="Resource" id="Resource_5nvoa"]
+script = ExtResource("7_cuu0d")
+id = 20
+position = Vector2i(3, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+2: SubResource("Resource_8fqbl"),
+3: SubResource("Resource_fpmvl")
+})
+
+[sub_resource type="Resource" id="Resource_cs7bc"]
+script = ExtResource("7_cuu0d")
+id = 21
+position = Vector2i(4, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_0bcbe"),
+1: SubResource("Resource_gxyf5"),
+2: SubResource("Resource_b2n1c"),
+3: SubResource("Resource_8fqbl")
+})
+
+[sub_resource type="Resource" id="Resource_0ut1p"]
+script = ExtResource("7_cuu0d")
+id = 22
+position = Vector2i(4, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_oieey"),
+1: SubResource("Resource_0bcbe"),
+2: SubResource("Resource_owjo8")
+})
+
+[sub_resource type="Resource" id="Resource_ombkb"]
+script = ExtResource("7_cuu0d")
+id = 23
+position = Vector2i(5, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_sa3fj"),
+2: SubResource("Resource_0uens"),
+3: SubResource("Resource_vgf53")
+})
+
+[sub_resource type="Resource" id="Resource_ugjn2"]
+script = ExtResource("7_cuu0d")
+id = 24
+position = Vector2i(4, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_oieey"),
+2: SubResource("Resource_vgf53")
+})
+
+[sub_resource type="Resource" id="Resource_msxin"]
+script = ExtResource("7_cuu0d")
+id = 25
+position = Vector2i(6, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_by3s8"),
+1: SubResource("Resource_b3tw6"),
+2: SubResource("Resource_x28ye"),
+3: SubResource("Resource_d1tmk")
+})
+
+[sub_resource type="Resource" id="Resource_83o4y"]
+script = ExtResource("7_cuu0d")
+id = 26
+position = Vector2i(6, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_by3s8"),
+2: SubResource("Resource_3a4j8"),
+3: SubResource("Resource_0uens")
+})
+
+[sub_resource type="Resource" id="Resource_r04ef"]
+script = ExtResource("7_cuu0d")
+id = 27
+position = Vector2i(7, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_k6oll"),
+3: SubResource("Resource_3a4j8")
+})
+
+[sub_resource type="Resource" id="Resource_v1ndv"]
+script = ExtResource("7_cuu0d")
+id = 28
+position = Vector2i(7, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_k6oll"),
+1: SubResource("Resource_ltda7"),
+3: SubResource("Resource_x28ye")
+})
+
+[sub_resource type="Resource" id="Resource_w51qq"]
+script = ExtResource("7_cuu0d")
+id = 29
+position = Vector2i(7, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_ltda7"),
+1: SubResource("Resource_uf22x"),
+3: SubResource("Resource_o312k")
+})
+
+[sub_resource type="Resource" id="Resource_sib27"]
+script = ExtResource("7_cuu0d")
+id = 30
+position = Vector2i(7, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_uf22x"),
+1: SubResource("Resource_6sk3p"),
+3: SubResource("Resource_w0n34")
+})
+
+[sub_resource type="Resource" id="Resource_r0poo"]
+script = ExtResource("7_cuu0d")
+id = 31
+position = Vector2i(7, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_6sk3p"),
+3: SubResource("Resource_poqav")
+})
+
+[sub_resource type="Resource" id="Resource_wj5h7"]
+script = ExtResource("7_cuu0d")
+id = 32
+position = Vector2i(6, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_528yi"),
+2: SubResource("Resource_poqav"),
+3: SubResource("Resource_csd1g")
+})
+
+[sub_resource type="Resource" id="Resource_4jge1"]
+script = ExtResource("7_cuu0d")
+id = 33
+position = Vector2i(5, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_1hyi8"),
+2: SubResource("Resource_csd1g"),
+3: SubResource("Resource_ps7i6")
+})
+
+[sub_resource type="Resource" id="Resource_hyaih"]
+script = ExtResource("7_cuu0d")
+id = 34
+position = Vector2i(4, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_88tmw"),
+2: SubResource("Resource_ps7i6")
+})
+
+[sub_resource type="Resource" id="Resource_26t03"]
+script = ExtResource("7_cuu0d")
+id = 35
+position = Vector2i(4, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_gxyf5"),
+1: SubResource("Resource_88tmw"),
+2: SubResource("Resource_vdf5a")
+})
+
+[sub_resource type="Resource" id="Resource_rwim8"]
+script = ExtResource("7_cuu0d")
+id = 36
+position = Vector2i(5, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_8l5bb"),
+1: SubResource("Resource_1hyi8"),
+2: SubResource("Resource_xusmi"),
+3: SubResource("Resource_vdf5a")
+})
+
+[sub_resource type="Resource" id="Resource_aulro"]
+script = ExtResource("7_cuu0d")
+id = 37
+position = Vector2i(5, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_1vtx6"),
+1: SubResource("Resource_8l5bb"),
+2: SubResource("Resource_c7f6p"),
+3: SubResource("Resource_b2n1c")
+})
+
+[sub_resource type="Resource" id="Resource_0cxxl"]
+script = ExtResource("7_cuu0d")
+id = 38
+position = Vector2i(5, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_sa3fj"),
+1: SubResource("Resource_1vtx6"),
+2: SubResource("Resource_d1tmk"),
+3: SubResource("Resource_owjo8")
+})
+
+[sub_resource type="Resource" id="Resource_75yjr"]
+script = ExtResource("7_cuu0d")
+id = 39
+position = Vector2i(6, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_v1tqb"),
+1: SubResource("Resource_528yi"),
+2: SubResource("Resource_w0n34"),
+3: SubResource("Resource_xusmi")
+})
+
+[sub_resource type="Resource" id="Resource_rcj1o"]
+script = ExtResource("7_cuu0d")
+id = 40
+position = Vector2i(6, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_b3tw6"),
+1: SubResource("Resource_v1tqb"),
+2: SubResource("Resource_o312k"),
+3: SubResource("Resource_c7f6p")
+})
+
+[sub_resource type="Resource" id="Resource_3mm2d"]
+script = ExtResource("7_cuu0d")
+id = 41
+position = Vector2i(-4, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_72c8u"),
+1: SubResource("Resource_ij2d4"),
+3: SubResource("Resource_onfki")
+})
+
+[sub_resource type="Resource" id="Resource_h6611"]
+script = ExtResource("7_cuu0d")
+id = 42
+position = Vector2i(-4, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_72c8u"),
+3: SubResource("Resource_86o5d")
+})
+
+[sub_resource type="Resource" id="Resource_i06b1"]
+script = ExtResource("7_cuu0d")
+id = 43
+position = Vector2i(-5, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_meuif"),
+2: SubResource("Resource_86o5d"),
+3: SubResource("Resource_3r46r")
+})
+
+[sub_resource type="Resource" id="Resource_jgilu"]
+script = ExtResource("7_cuu0d")
+id = 44
+position = Vector2i(-6, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_q1ac8"),
+2: SubResource("Resource_3r46r"),
+3: SubResource("Resource_25n27")
+})
+
+[sub_resource type="Resource" id="Resource_sl4c4"]
+script = ExtResource("7_cuu0d")
+id = 45
+position = Vector2i(-7, 5)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+1: SubResource("Resource_xar6r"),
+2: SubResource("Resource_25n27")
+})
+
+[sub_resource type="Resource" id="Resource_pv3fq"]
+script = ExtResource("7_cuu0d")
+id = 46
+position = Vector2i(-7, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_xar6r"),
+1: SubResource("Resource_r5qcu"),
+2: SubResource("Resource_cqnr8")
+})
+
+[sub_resource type="Resource" id="Resource_a50tx"]
+script = ExtResource("7_cuu0d")
+id = 47
+position = Vector2i(-7, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_r5qcu"),
+1: SubResource("Resource_13btp"),
+2: SubResource("Resource_cn2d0")
+})
+
+[sub_resource type="Resource" id="Resource_fimbf"]
+script = ExtResource("7_cuu0d")
+id = 48
+position = Vector2i(-7, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_13btp"),
+1: SubResource("Resource_cnbn6"),
+2: SubResource("Resource_vsf75")
+})
+
+[sub_resource type="Resource" id="Resource_tws2r"]
+script = ExtResource("7_cuu0d")
+id = 49
+position = Vector2i(-7, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_cnbn6"),
+2: SubResource("Resource_iqa7u")
+})
+
+[sub_resource type="Resource" id="Resource_uj4v7"]
+script = ExtResource("7_cuu0d")
+id = 50
+position = Vector2i(-6, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_cemuo"),
+2: SubResource("Resource_7uqln"),
+3: SubResource("Resource_iqa7u")
+})
+
+[sub_resource type="Resource" id="Resource_0lais"]
+script = ExtResource("7_cuu0d")
+id = 51
+position = Vector2i(-5, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_lpgq1"),
+2: SubResource("Resource_36225"),
+3: SubResource("Resource_7uqln")
+})
+
+[sub_resource type="Resource" id="Resource_dhbal"]
+script = ExtResource("7_cuu0d")
+id = 52
+position = Vector2i(-4, 9)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_a5213"),
+3: SubResource("Resource_36225")
+})
+
+[sub_resource type="Resource" id="Resource_woc1f"]
+script = ExtResource("7_cuu0d")
+id = 53
+position = Vector2i(-4, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_uhq80"),
+1: SubResource("Resource_a5213"),
+3: SubResource("Resource_hg7e6")
+})
+
+[sub_resource type="Resource" id="Resource_7wrga"]
+script = ExtResource("7_cuu0d")
+id = 54
+position = Vector2i(-5, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_r42c8"),
+1: SubResource("Resource_lpgq1"),
+2: SubResource("Resource_hg7e6"),
+3: SubResource("Resource_kf2ln")
+})
+
+[sub_resource type="Resource" id="Resource_55syw"]
+script = ExtResource("7_cuu0d")
+id = 55
+position = Vector2i(-6, 8)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_aqd2w"),
+1: SubResource("Resource_cemuo"),
+2: SubResource("Resource_kf2ln"),
+3: SubResource("Resource_vsf75")
+})
+
+[sub_resource type="Resource" id="Resource_lcbuw"]
+script = ExtResource("7_cuu0d")
+id = 56
+position = Vector2i(-6, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_k6au2"),
+1: SubResource("Resource_aqd2w"),
+2: SubResource("Resource_bqf36"),
+3: SubResource("Resource_cn2d0")
+})
+
+[sub_resource type="Resource" id="Resource_uprns"]
+script = ExtResource("7_cuu0d")
+id = 57
+position = Vector2i(-6, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_q1ac8"),
+1: SubResource("Resource_k6au2"),
+2: SubResource("Resource_p53sb"),
+3: SubResource("Resource_cqnr8")
+})
+
+[sub_resource type="Resource" id="Resource_ihk15"]
+script = ExtResource("7_cuu0d")
+id = 58
+position = Vector2i(-5, 6)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_meuif"),
+1: SubResource("Resource_0pp4x"),
+2: SubResource("Resource_onfki"),
+3: SubResource("Resource_p53sb")
+})
+
+[sub_resource type="Resource" id="Resource_c7cgd"]
+script = ExtResource("7_cuu0d")
+id = 59
+position = Vector2i(-5, 7)
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_0pp4x"),
+1: SubResource("Resource_r42c8"),
+2: SubResource("Resource_tifwj"),
+3: SubResource("Resource_bqf36")
+})
+
+[resource]
+script = ExtResource("4_8gf1p")
+_next_vertex_id = 60
+_next_edge_id = 87
+vertices = Dictionary[int, ExtResource("7_cuu0d")]({
+0: SubResource("Resource_wk3yv"),
+1: SubResource("Resource_h4gdd"),
+2: SubResource("Resource_51hlq"),
+3: SubResource("Resource_im3sh"),
+4: SubResource("Resource_lsun8"),
+5: SubResource("Resource_klc2h"),
+6: SubResource("Resource_qmu1e"),
+7: SubResource("Resource_ydujb"),
+8: SubResource("Resource_r3eke"),
+9: SubResource("Resource_rup5j"),
+10: SubResource("Resource_b76aq"),
+11: SubResource("Resource_js7l7"),
+12: SubResource("Resource_ina85"),
+13: SubResource("Resource_o4mwe"),
+14: SubResource("Resource_0j8ny"),
+15: SubResource("Resource_drj3o"),
+16: SubResource("Resource_2kyqt"),
+17: SubResource("Resource_3w73t"),
+18: SubResource("Resource_c7b8i"),
+19: SubResource("Resource_551k7"),
+20: SubResource("Resource_5nvoa"),
+21: SubResource("Resource_cs7bc"),
+22: SubResource("Resource_0ut1p"),
+23: SubResource("Resource_ombkb"),
+24: SubResource("Resource_ugjn2"),
+25: SubResource("Resource_msxin"),
+26: SubResource("Resource_83o4y"),
+27: SubResource("Resource_r04ef"),
+28: SubResource("Resource_v1ndv"),
+29: SubResource("Resource_w51qq"),
+30: SubResource("Resource_sib27"),
+31: SubResource("Resource_r0poo"),
+32: SubResource("Resource_wj5h7"),
+33: SubResource("Resource_4jge1"),
+34: SubResource("Resource_hyaih"),
+35: SubResource("Resource_26t03"),
+36: SubResource("Resource_rwim8"),
+37: SubResource("Resource_aulro"),
+38: SubResource("Resource_0cxxl"),
+39: SubResource("Resource_75yjr"),
+40: SubResource("Resource_rcj1o"),
+41: SubResource("Resource_3mm2d"),
+42: SubResource("Resource_h6611"),
+43: SubResource("Resource_i06b1"),
+44: SubResource("Resource_jgilu"),
+45: SubResource("Resource_sl4c4"),
+46: SubResource("Resource_pv3fq"),
+47: SubResource("Resource_a50tx"),
+48: SubResource("Resource_fimbf"),
+49: SubResource("Resource_tws2r"),
+50: SubResource("Resource_uj4v7"),
+51: SubResource("Resource_0lais"),
+52: SubResource("Resource_dhbal"),
+53: SubResource("Resource_woc1f"),
+54: SubResource("Resource_7wrga"),
+55: SubResource("Resource_55syw"),
+56: SubResource("Resource_lcbuw"),
+57: SubResource("Resource_uprns"),
+58: SubResource("Resource_ihk15"),
+59: SubResource("Resource_c7cgd")
+})
+edges = Dictionary[int, ExtResource("2_6yipm")]({
+0: SubResource("Resource_5dfwq"),
+1: SubResource("Resource_y4esy"),
+2: SubResource("Resource_r3ij3"),
+3: SubResource("Resource_u507e"),
+4: SubResource("Resource_710u7"),
+5: SubResource("Resource_8vgqe"),
+6: SubResource("Resource_sw84m"),
+7: SubResource("Resource_weeju"),
+8: SubResource("Resource_6wlqg"),
+9: SubResource("Resource_048ns"),
+10: SubResource("Resource_gorrc"),
+11: SubResource("Resource_mml0y"),
+12: SubResource("Resource_dfgsg"),
+13: SubResource("Resource_fpwr4"),
+14: SubResource("Resource_4sq5k"),
+15: SubResource("Resource_jxbfs"),
+16: SubResource("Resource_oi0hx"),
+17: SubResource("Resource_l575p"),
+18: SubResource("Resource_ruuqc"),
+19: SubResource("Resource_h7v3d"),
+20: SubResource("Resource_7ecff"),
+21: SubResource("Resource_epn6u"),
+22: SubResource("Resource_3vs5y"),
+23: SubResource("Resource_fpmvl"),
+24: SubResource("Resource_8fqbl"),
+25: SubResource("Resource_0bcbe"),
+26: SubResource("Resource_oieey"),
+27: SubResource("Resource_vgf53"),
+28: SubResource("Resource_by3s8"),
+29: SubResource("Resource_0uens"),
+30: SubResource("Resource_3a4j8"),
+31: SubResource("Resource_k6oll"),
+32: SubResource("Resource_x28ye"),
+33: SubResource("Resource_ltda7"),
+34: SubResource("Resource_uf22x"),
+35: SubResource("Resource_6sk3p"),
+36: SubResource("Resource_poqav"),
+37: SubResource("Resource_csd1g"),
+38: SubResource("Resource_ps7i6"),
+39: SubResource("Resource_gxyf5"),
+40: SubResource("Resource_88tmw"),
+41: SubResource("Resource_1hyi8"),
+42: SubResource("Resource_vdf5a"),
+43: SubResource("Resource_8l5bb"),
+44: SubResource("Resource_b2n1c"),
+45: SubResource("Resource_sa3fj"),
+46: SubResource("Resource_1vtx6"),
+47: SubResource("Resource_owjo8"),
+48: SubResource("Resource_d1tmk"),
+49: SubResource("Resource_528yi"),
+50: SubResource("Resource_xusmi"),
+51: SubResource("Resource_w0n34"),
+52: SubResource("Resource_b3tw6"),
+53: SubResource("Resource_v1tqb"),
+54: SubResource("Resource_c7f6p"),
+55: SubResource("Resource_o312k"),
+56: SubResource("Resource_ij2d4"),
+57: SubResource("Resource_72c8u"),
+58: SubResource("Resource_86o5d"),
+59: SubResource("Resource_3r46r"),
+60: SubResource("Resource_25n27"),
+61: SubResource("Resource_xar6r"),
+62: SubResource("Resource_r5qcu"),
+63: SubResource("Resource_13btp"),
+64: SubResource("Resource_cnbn6"),
+65: SubResource("Resource_iqa7u"),
+66: SubResource("Resource_7uqln"),
+67: SubResource("Resource_36225"),
+68: SubResource("Resource_uhq80"),
+69: SubResource("Resource_a5213"),
+70: SubResource("Resource_lpgq1"),
+71: SubResource("Resource_hg7e6"),
+72: SubResource("Resource_cemuo"),
+73: SubResource("Resource_vsf75"),
+74: SubResource("Resource_kf2ln"),
+75: SubResource("Resource_aqd2w"),
+76: SubResource("Resource_cn2d0"),
+77: SubResource("Resource_q1ac8"),
+78: SubResource("Resource_k6au2"),
+79: SubResource("Resource_cqnr8"),
+80: SubResource("Resource_meuif"),
+81: SubResource("Resource_p53sb"),
+82: SubResource("Resource_onfki"),
+83: SubResource("Resource_0pp4x"),
+84: SubResource("Resource_r42c8"),
+85: SubResource("Resource_bqf36"),
+86: SubResource("Resource_tifwj")
+})
+tilesets = Array[ExtResource("5_0elrw")]([ExtResource("6_6yipm")])

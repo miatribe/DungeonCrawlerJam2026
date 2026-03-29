@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://bd3n3heqh4kcs"]
 
 [ext_resource type="Script" uid="uid://b47em3wbcse4b" path="res://addons/dungeoncrafterrenderer/scripts/graph_renderer.gd" id="1_uxnbi"]
-[ext_resource type="Resource" uid="uid://dtyb20tktiue2" path="res://assets/graphs/HomeBaseMap.tres" id="2_ah0wp"]
+[ext_resource type="Resource" uid="uid://cda8kmsuyksgw" path="res://assets/graphs/TestGraph.tres" id="2_so7uu"]
 [ext_resource type="PackedScene" uid="uid://3hqdxjm15s8q" path="res://scenes/Player.tscn" id="3_so7uu"]
+[ext_resource type="Script" uid="uid://chxxomku6c3gl" path="res://scripts/enemy_manager.gd" id="4_hm6wk"]
+[ext_resource type="PackedScene" uid="uid://ck5vlwmn85tju" path="res://scenes/Enemy.tscn" id="5_jqnxg"]
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="6_wfhjp"]
+[ext_resource type="Resource" uid="uid://baicsfjhvniqd" path="res://assets/enemies/test.tres" id="7_ie2me"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_so7uu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -19,7 +23,7 @@ tonemap_mode = 2
 
 [node name="GraphRenderer" type="Node3D" unique_id=395339508]
 script = ExtResource("1_uxnbi")
-graph = ExtResource("2_ah0wp")
+graph = ExtResource("2_so7uu")
 metadata/_custom_type_script = "uid://b47em3wbcse4b"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=898481221]
@@ -28,3 +32,13 @@ environment = SubResource("Environment_hm6wk")
 [node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer") instance=ExtResource("3_so7uu")]
 graph_renderer = NodePath("..")
 start_vertex_id = 0
+start_facing_direction = 1
+
+[node name="EnemyManager" type="Node3D" parent="." unique_id=240141659 node_paths=PackedStringArray("graph_renderer", "player")]
+script = ExtResource("4_hm6wk")
+graph_renderer = NodePath("..")
+player = NodePath("../Player")
+enemy_scene = ExtResource("5_jqnxg")
+enemy_resources = Array[ExtResource("6_wfhjp")]([ExtResource("7_ie2me")])
+target_spawn_vertex_id = 57
+metadata/_custom_type_script = "uid://chxxomku6c3gl"
