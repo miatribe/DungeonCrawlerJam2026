@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bniv7litd2kfr"
-path="res://.godot/imported/ui_basic_sample.png-879d7661253a8d8485afe1862ac42ae6.ctex"
+uid="uid://c2ysl6ra674g5"
+path.s3tc="res://.godot/imported/robot_boss_1.png-3f4659ecb0cb8027dfe01cb6478d8708.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://assets/images/ui_basic_sample.png"
-dest_files=["res://.godot/imported/ui_basic_sample.png-879d7661253a8d8485afe1862ac42ae6.ctex"]
+source_file="res://assets/images/robot_boss_1.png"
+dest_files=["res://.godot/imported/robot_boss_1.png-3f4659ecb0cb8027dfe01cb6478d8708.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -23,7 +24,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +38,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

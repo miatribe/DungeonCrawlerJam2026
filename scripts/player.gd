@@ -1,4 +1,5 @@
 extends Node3D
+class_name Player
 
 @export var graph_renderer: GraphRenderer
 @export var start_vertex_id: int = -1
@@ -124,3 +125,11 @@ func _set_facing_direction(direction: Direction.Cardinal) -> void:
 			rotation_degrees.y = 90.0
 		_:
 			rotation_degrees.y = 0.0
+
+
+func get_current_vertex_id() -> int:
+	return _navigator.current_vertex_id
+
+
+func get_navigation_graph() -> Graph:
+	return _navigator.graph

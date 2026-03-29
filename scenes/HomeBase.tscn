@@ -1,13 +1,29 @@
 [gd_scene format=3 uid="uid://bd3n3heqh4kcs"]
 
 [ext_resource type="Script" uid="uid://b47em3wbcse4b" path="res://addons/dungeoncrafterrenderer/scripts/graph_renderer.gd" id="1_uxnbi"]
-[ext_resource type="Resource" uid="uid://dtyb20tktiue2" path="res://graphs/HomeBaseMap.tres" id="2_ah0wp"]
+[ext_resource type="Resource" uid="uid://dtyb20tktiue2" path="res://assets/graphs/HomeBaseMap.tres" id="2_ah0wp"]
 [ext_resource type="PackedScene" uid="uid://3hqdxjm15s8q" path="res://scenes/Player.tscn" id="3_so7uu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_so7uu"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_w1a86"]
+sky_material = SubResource("ProceduralSkyMaterial_so7uu")
+
+[sub_resource type="Environment" id="Environment_hm6wk"]
+background_mode = 1
+background_color = Color(0.7490196, 0.7490196, 0.7490196, 1)
+sky = SubResource("Sky_w1a86")
+tonemap_mode = 2
 
 [node name="GraphRenderer" type="Node3D" unique_id=395339508]
 script = ExtResource("1_uxnbi")
 graph = ExtResource("2_ah0wp")
 metadata/_custom_type_script = "uid://b47em3wbcse4b"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=898481221]
+environment = SubResource("Environment_hm6wk")
 
 [node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer") instance=ExtResource("3_so7uu")]
 graph_renderer = NodePath("..")

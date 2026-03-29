@@ -13,7 +13,7 @@ config_version=5
 config/name="DungeonCrawlerJam2026"
 run/main_scene="uid://w1ygq5vs881p"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://g8k3246ovlel"
 
 [display]
 
@@ -31,3 +31,4 @@ enabled=PackedStringArray("res://addons/dungeoncraftercore/plugin.cfg", "res://a
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/default_filters/texture_mipmap_bias=-2.0

@@ -1,21 +1,22 @@
 [gd_resource type="Resource" script_class="Graph" format=3 uid="uid://dtyb20tktiue2"]
 
-[ext_resource type="Script" uid="uid://b4f3pcmh05nja" path="res://addons/dungeoncraftercore/scripts/door.gd" id="1_fvv6u"]
-[ext_resource type="Script" uid="uid://cyx3f02t5ortb" path="res://addons/dungeoncraftercore/scripts/edge.gd" id="2_vsejs"]
-[ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="3_pqjdq"]
-[ext_resource type="Script" uid="uid://dw8nn12j0ahe2" path="res://addons/dungeoncraftercore/scripts/graph.gd" id="4_0cfjh"]
-[ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="5_u5g7e"]
-[ext_resource type="Script" uid="uid://ck857vy6ugchx" path="res://addons/dungeoncraftercore/scripts/vertex_logic_list.gd" id="6_grbgw"]
-[ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="7_7prm2"]
+[ext_resource type="Script" uid="uid://b4f3pcmh05nja" path="res://addons/dungeoncraftercore/scripts/door.gd" id="1_4mscd"]
+[ext_resource type="Script" uid="uid://cyx3f02t5ortb" path="res://addons/dungeoncraftercore/scripts/edge.gd" id="2_xngqq"]
+[ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="3_dbx8w"]
+[ext_resource type="Script" uid="uid://dw8nn12j0ahe2" path="res://addons/dungeoncraftercore/scripts/graph.gd" id="4_ofl54"]
+[ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="5_m2n8i"]
+[ext_resource type="Resource" uid="uid://bckyix6yyn5hj" path="res://assets/tilesets/default.tres" id="6_26alp"]
+[ext_resource type="Script" uid="uid://ck857vy6ugchx" path="res://addons/dungeoncraftercore/scripts/vertex_logic_list.gd" id="7_rs16f"]
+[ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="8_1lnfu"]
 
 [sub_resource type="Resource" id="Resource_gn0wu"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 vertex_a_id = 1
 direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_prsoy"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 1
 vertex_a_id = 2
 vertex_b_id = 1
@@ -23,7 +24,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_5fshr"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 2
 vertex_a_id = 3
 vertex_b_id = 2
@@ -31,7 +32,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_tqwbt"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 3
 vertex_a_id = 4
 vertex_b_id = 2
@@ -39,7 +40,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_pc3d5"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 4
 vertex_a_id = 7
 vertex_b_id = 6
@@ -47,7 +48,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_71w4o"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 5
 vertex_a_id = 8
 vertex_b_id = 7
@@ -55,7 +56,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_7vk5l"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 6
 vertex_a_id = 9
 vertex_b_id = 8
@@ -63,7 +64,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_iqslv"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 7
 vertex_a_id = 11
 vertex_b_id = 10
@@ -71,7 +72,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_dh26b"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 8
 vertex_a_id = 13
 vertex_b_id = 12
@@ -79,7 +80,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_h8d6n"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 9
 vertex_a_id = 14
 vertex_b_id = 12
@@ -87,7 +88,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_f7nba"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 10
 vertex_a_id = 14
 vertex_b_id = 11
@@ -95,7 +96,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_42l88"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 11
 vertex_a_id = 15
 vertex_b_id = 11
@@ -103,7 +104,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_8ex04"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 12
 vertex_a_id = 15
 vertex_b_id = 12
@@ -111,7 +112,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_tx5pi"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 13
 vertex_a_id = 16
 vertex_b_id = 10
@@ -119,7 +120,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_3y3kj"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 14
 vertex_a_id = 16
 vertex_b_id = 15
@@ -127,7 +128,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_2e6qh"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 15
 vertex_a_id = 16
 vertex_b_id = 9
@@ -135,7 +136,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_wph62"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 16
 vertex_a_id = 17
 vertex_b_id = 16
@@ -143,7 +144,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_7tboy"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 17
 vertex_a_id = 17
 vertex_b_id = 8
@@ -151,7 +152,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_rn06p"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 18
 vertex_a_id = 18
 vertex_b_id = 15
@@ -159,7 +160,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_twlib"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 19
 vertex_a_id = 18
 vertex_b_id = 17
@@ -167,7 +168,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_mweao"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 20
 vertex_a_id = 19
 vertex_b_id = 12
@@ -175,7 +176,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_la8fq"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 21
 vertex_a_id = 19
 vertex_b_id = 18
@@ -183,7 +184,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_07c7b"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 22
 vertex_a_id = 20
 vertex_b_id = 13
@@ -191,7 +192,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_updyu"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 23
 vertex_a_id = 20
 vertex_b_id = 19
@@ -199,7 +200,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_5s5nb"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 24
 vertex_a_id = 21
 vertex_b_id = 5
@@ -207,7 +208,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_as33d"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 25
 vertex_a_id = 21
 vertex_b_id = 20
@@ -215,7 +216,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_uff0s"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 26
 vertex_a_id = 22
 vertex_b_id = 19
@@ -223,7 +224,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_svrp2"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 27
 vertex_a_id = 22
 vertex_b_id = 21
@@ -231,7 +232,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_7b5n5"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 28
 vertex_a_id = 23
 vertex_b_id = 3
@@ -239,7 +240,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_1nuvu"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 29
 vertex_a_id = 23
 vertex_b_id = 22
@@ -247,7 +248,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_ae58w"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 30
 vertex_a_id = 23
 vertex_b_id = 5
@@ -255,7 +256,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_d8pbt"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 31
 vertex_a_id = 24
 vertex_b_id = 2
@@ -263,7 +264,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_58d7n"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 32
 vertex_a_id = 24
 vertex_b_id = 23
@@ -271,7 +272,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_qvmrq"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 33
 vertex_a_id = 25
 vertex_b_id = 24
@@ -279,7 +280,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_gug47"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 34
 vertex_a_id = 25
 vertex_b_id = 18
@@ -287,7 +288,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_2rruo"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 35
 vertex_a_id = 25
 vertex_b_id = 22
@@ -295,7 +296,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_i0ig6"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 36
 vertex_a_id = 26
 vertex_b_id = 17
@@ -303,7 +304,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_cgemd"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 37
 vertex_a_id = 26
 vertex_b_id = 25
@@ -311,7 +312,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_y8umg"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 38
 vertex_a_id = 26
 vertex_b_id = 7
@@ -319,7 +320,7 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_662u6"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 39
 vertex_a_id = 27
 vertex_b_id = 4
@@ -327,7 +328,7 @@ direction_from_a = 0
 direction_from_b = 1
 
 [sub_resource type="Resource" id="Resource_f77p5"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 40
 vertex_a_id = 27
 vertex_b_id = 26
@@ -335,7 +336,7 @@ direction_from_a = 1
 direction_from_b = 0
 
 [sub_resource type="Resource" id="Resource_mifqy"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 41
 vertex_a_id = 27
 vertex_b_id = 24
@@ -343,7 +344,7 @@ direction_from_a = 3
 direction_from_b = 2
 
 [sub_resource type="Resource" id="Resource_j6kjx"]
-script = ExtResource("2_vsejs")
+script = ExtResource("2_xngqq")
 id = 42
 vertex_a_id = 27
 vertex_b_id = 6
@@ -351,26 +352,26 @@ direction_from_a = 2
 direction_from_b = 3
 
 [sub_resource type="Resource" id="Resource_k2q74"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 position = Vector2i(18, 12)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_gn0wu")
 })
 
 [sub_resource type="Resource" id="Resource_c2rr1"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 1
 position = Vector2i(18, 13)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_gn0wu"),
 1: SubResource("Resource_prsoy")
 })
 
 [sub_resource type="Resource" id="Resource_5e2t7"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 2
 position = Vector2i(18, 14)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_prsoy"),
 1: SubResource("Resource_d8pbt"),
 2: SubResource("Resource_tqwbt"),
@@ -378,94 +379,94 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_wkp46"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 3
 position = Vector2i(17, 14)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_7b5n5"),
 2: SubResource("Resource_5fshr")
 })
 
 [sub_resource type="Resource" id="Resource_fiaag"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 4
 position = Vector2i(19, 14)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_662u6"),
 3: SubResource("Resource_tqwbt")
 })
 
 [sub_resource type="Resource" id="Resource_oo52h"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 5
 position = Vector2i(16, 15)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_5s5nb"),
 2: SubResource("Resource_ae58w")
 })
 
 [sub_resource type="Resource" id="Resource_d28b7"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 6
 position = Vector2i(20, 15)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_pc3d5"),
 3: SubResource("Resource_j6kjx")
 })
 
 [sub_resource type="Resource" id="Resource_g3g83"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 7
 position = Vector2i(20, 16)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_pc3d5"),
 1: SubResource("Resource_71w4o"),
 3: SubResource("Resource_y8umg")
 })
 
 [sub_resource type="Resource" id="Resource_ta0fb"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 8
 position = Vector2i(20, 17)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_71w4o"),
 1: SubResource("Resource_7vk5l"),
 3: SubResource("Resource_7tboy")
 })
 
 [sub_resource type="Resource" id="Resource_xwfq5"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 9
 position = Vector2i(20, 18)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_7vk5l"),
 3: SubResource("Resource_2e6qh")
 })
 
 [sub_resource type="Resource" id="Resource_dheq6"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 10
 position = Vector2i(19, 19)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_tx5pi"),
 3: SubResource("Resource_iqslv")
 })
 
 [sub_resource type="Resource" id="Resource_lynhs"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 11
 position = Vector2i(18, 19)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_42l88"),
 2: SubResource("Resource_iqslv"),
 3: SubResource("Resource_f7nba")
 })
 
 [sub_resource type="Resource" id="Resource_vj1m1"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 12
 position = Vector2i(17, 18)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_mweao"),
 1: SubResource("Resource_h8d6n"),
 2: SubResource("Resource_8ex04"),
@@ -473,28 +474,28 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_qpm3d"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 13
 position = Vector2i(16, 18)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_07c7b"),
 2: SubResource("Resource_dh26b")
 })
 
 [sub_resource type="Resource" id="Resource_lt2ii"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 14
 position = Vector2i(17, 19)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_h8d6n"),
 2: SubResource("Resource_f7nba")
 })
 
 [sub_resource type="Resource" id="Resource_g6ykd"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 15
 position = Vector2i(18, 18)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_rn06p"),
 1: SubResource("Resource_42l88"),
 2: SubResource("Resource_3y3kj"),
@@ -502,10 +503,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_33imc"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 16
 position = Vector2i(19, 18)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_wph62"),
 1: SubResource("Resource_tx5pi"),
 2: SubResource("Resource_2e6qh"),
@@ -513,10 +514,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_4swrl"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 17
 position = Vector2i(19, 17)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_i0ig6"),
 1: SubResource("Resource_wph62"),
 2: SubResource("Resource_7tboy"),
@@ -524,10 +525,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_t83sf"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 18
 position = Vector2i(18, 17)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_gug47"),
 1: SubResource("Resource_rn06p"),
 2: SubResource("Resource_twlib"),
@@ -535,10 +536,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_v73a3"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 19
 position = Vector2i(17, 17)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_uff0s"),
 1: SubResource("Resource_mweao"),
 2: SubResource("Resource_la8fq"),
@@ -546,30 +547,30 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_06yla"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 20
 position = Vector2i(16, 17)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_as33d"),
 1: SubResource("Resource_07c7b"),
 2: SubResource("Resource_updyu")
 })
 
 [sub_resource type="Resource" id="Resource_ngxhl"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 21
 position = Vector2i(16, 16)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_5s5nb"),
 1: SubResource("Resource_as33d"),
 2: SubResource("Resource_svrp2")
 })
 
 [sub_resource type="Resource" id="Resource_hgo4j"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 22
 position = Vector2i(17, 16)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_1nuvu"),
 1: SubResource("Resource_uff0s"),
 2: SubResource("Resource_2rruo"),
@@ -577,10 +578,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_0dy33"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 23
 position = Vector2i(17, 15)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_7b5n5"),
 1: SubResource("Resource_1nuvu"),
 2: SubResource("Resource_58d7n"),
@@ -588,10 +589,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_w52ip"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 24
 position = Vector2i(18, 15)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_d8pbt"),
 1: SubResource("Resource_qvmrq"),
 2: SubResource("Resource_mifqy"),
@@ -599,10 +600,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_nn4el"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 25
 position = Vector2i(18, 16)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_qvmrq"),
 1: SubResource("Resource_gug47"),
 2: SubResource("Resource_cgemd"),
@@ -610,10 +611,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_5thsv"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 26
 position = Vector2i(19, 16)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_f77p5"),
 1: SubResource("Resource_i0ig6"),
 2: SubResource("Resource_y8umg"),
@@ -621,10 +622,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [sub_resource type="Resource" id="Resource_82sgl"]
-script = ExtResource("7_7prm2")
+script = ExtResource("8_1lnfu")
 id = 27
 position = Vector2i(19, 15)
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_662u6"),
 1: SubResource("Resource_f77p5"),
 2: SubResource("Resource_j6kjx"),
@@ -632,10 +633,10 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 })
 
 [resource]
-script = ExtResource("4_0cfjh")
+script = ExtResource("4_ofl54")
 _next_vertex_id = 28
 _next_edge_id = 43
-vertices = Dictionary[int, ExtResource("7_7prm2")]({
+vertices = Dictionary[int, ExtResource("8_1lnfu")]({
 0: SubResource("Resource_k2q74"),
 1: SubResource("Resource_c2rr1"),
 2: SubResource("Resource_5e2t7"),
@@ -665,7 +666,7 @@ vertices = Dictionary[int, ExtResource("7_7prm2")]({
 26: SubResource("Resource_5thsv"),
 27: SubResource("Resource_82sgl")
 })
-edges = Dictionary[int, ExtResource("2_vsejs")]({
+edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_gn0wu"),
 1: SubResource("Resource_prsoy"),
 2: SubResource("Resource_5fshr"),
@@ -710,3 +711,4 @@ edges = Dictionary[int, ExtResource("2_vsejs")]({
 41: SubResource("Resource_mifqy"),
 42: SubResource("Resource_j6kjx")
 })
+tilesets = Array[ExtResource("5_m2n8i")]([ExtResource("6_26alp")])

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ck5vlwmn85tju"]
+
+[ext_resource type="Texture2D" uid="uid://c2ysl6ra674g5" path="res://assets/images/robot_boss_1.png" id="1_3gvst"]
+[ext_resource type="Script" uid="uid://bahctoky3ay6r" path="res://scripts/enemy.gd" id="1_55jtl"]
+
+[node name="Enemy" type="Node3D" unique_id=800808861]
+script = ExtResource("1_55jtl")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1511408234]
+unique_name_in_owner = true
+texture = ExtResource("1_3gvst")
