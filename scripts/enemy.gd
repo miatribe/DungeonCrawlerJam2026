@@ -11,6 +11,7 @@ signal enemy_died()
 var enemy_manager: EnemyManager
 var current_vertex_id: int = -1
 var spawn_vertex_id: int = -1
+var current_health: int = 1
 var distance_to_target := -1
 var is_aggressed: bool = false
 var tween: Tween
@@ -22,6 +23,7 @@ func _ready() -> void:
 	if enemy_resource == null:
 		push_warning("Enemy resource is not assigned.")
 		return
+	current_health = maxi(1, enemy_resource.health)
 	sprite_3d.texture = enemy_resource.sprite
 	enemy_manager = get_parent() as EnemyManager
 	if enemy_manager == null:
@@ -94,16 +96,47 @@ func get_random_connected_vertex_id() -> int:
 
 
 func attack() -> void:
-	# var hit = Combat.hit_roll(stats, PlayerStats.stats)
-	# if hit:
-	# 	var damage = Combat.damage_roll(stats, PlayerStats.stats)
-	# 	var crit = Combat.crit_roll(stats, PlayerStats.stats)
-	# 	if crit: damage *= 1.5
-	# 	PlayerStats.stats.current_health -= damage
-	# 	player.display_incoming_attack(str(int(damage)), crit)
-	# else:
-	# 	player.display_incoming_attack("Miss", false)
-	print("Enemy attacks player from vertex %d" % current_vertex_id)
+	if enemy_manager == null or enemy_manager.player == null:
+		return
+	var result := CombatResolver.resolve_attack(self , enemy_manager.player)
+	if not result.hit:
+		print("Enemy misses player from vertex %d" % current_vertex_id)
+		return
+	enemy_manager.player.apply_damage(result.damage)
+	var crit_text := " (CRIT)" if result.crit else ""
+	print("Enemy hits player for %d%s" % [result.damage, crit_text])
+
+
+func get_attack() -> int:
+	if enemy_resource == null:
+		return 0
+	return enemy_resource.attack
+
+
+func get_defense() -> int:
+	if enemy_resource == null:
+		return 0
+	return enemy_resource.defense
+
+
+func get_hit() -> int:
+	if enemy_resource == null:
+		return 0
+	return enemy_resource.hit
+
+
+func get_dodge() -> int:
+	if enemy_resource == null:
+		return 0
+	return enemy_resource.dodge
+
+
+func apply_damage(amount: int) -> void:
+	if amount <= 0:
+		return
+	current_health = maxi(0, current_health - amount)
+	if current_health == 0:
+		die()
 
 
 func die() -> void:

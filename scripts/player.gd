@@ -6,11 +6,17 @@ class_name Player
 @export var enemy_manager: EnemyManager
 @export var start_vertex_id: int = -1
 @export var start_facing_direction: Direction.Cardinal = Direction.Cardinal.NORTH
+@export var attack: int = 4
+@export var defense: int = 1
+@export var hit: int = 5
+@export var dodge: int = 3
+@export var max_health: int = 20
 
 var _navigator: GraphNavigator = GraphNavigator.new()
 var _run_state: DungeonRunState = DungeonRunState.new()
 var _logic_resolver: VertexLogicResolver = VertexLogicResolver.new()
 var _cell_size: float = 2.0
+var current_health: int = 20
 
 
 func _ready() -> void:
@@ -20,6 +26,7 @@ func _ready() -> void:
 	if start_vertex_id == -1:
 		push_warning("Start vertex ID not set for Player.")
 		return
+	current_health = maxi(1, max_health)
 	_set_facing_direction(start_facing_direction)
 	_navigator.set_graph(graph_renderer.graph)
 	_cell_size = graph_renderer.cell_size
@@ -163,5 +170,35 @@ func _attack_enemy_at_vertex(vertex_id: int) -> bool:
 	var enemy := enemy_manager.get_enemy_at_vertex(vertex_id)
 	if enemy == null:
 		return false
-	print("Player attacks enemy on vertex %d" % vertex_id)
+	var result := CombatResolver.resolve_attack(self, enemy)
+	if not result.hit:
+		print("Player misses enemy on vertex %d" % vertex_id)
+		return true
+	enemy.apply_damage(result.damage)
+	var crit_text := " (CRIT)" if result.crit else ""
+	print("Player hits enemy for %d%s on vertex %d" % [result.damage, crit_text, vertex_id])
 	return true
+
+
+func get_attack() -> int:
+	return attack
+
+
+func get_defense() -> int:
+	return defense
+
+
+func get_hit() -> int:
+	return hit
+
+
+func get_dodge() -> int:
+	return dodge
+
+
+func apply_damage(amount: int) -> void:
+	if amount <= 0:
+		return
+	current_health = maxi(0, current_health - amount)
+	if current_health == 0:
+		print("Player has been defeated.")
