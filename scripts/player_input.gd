@@ -20,31 +20,21 @@ func _unhandled_input(event: InputEvent) -> void:
 	if player == null: return
 
 	# Rotation is available on any turn.
-	if key_event.keycode == KEY_E:
-		player.rotate_view(true)
-		return
-	if key_event.keycode == KEY_Q:
-		player.rotate_view(false)
-		return
+	if key_event.keycode == KEY_E: player.rotate_view(true)
+	if key_event.keycode == KEY_Q: player.rotate_view(false)
 
 	if _input_locked: return
 
 	match key_event.keycode:
-		KEY_W:
-			player.try_move_relative(0)
-		KEY_S:
-			player.try_move_relative(180)
-		KEY_D:
-			player.try_move_relative(90)
-		KEY_A:
-			player.try_move_relative(-90)
-		KEY_R:
-			player.try_interact()
+		KEY_W: player.try_move_relative(0)
+		KEY_S: player.try_move_relative(180)
+		KEY_D: player.try_move_relative(90)
+		KEY_A: player.try_move_relative(-90)
+		KEY_R: player.try_interact()
 
 
 func _get_player() -> Player:
-	if is_instance_valid(_player):
-		return _player
+	if is_instance_valid(_player): return _player
 	_player = _resolve_player()
 	return _player
 
@@ -54,10 +44,8 @@ func _resolve_player() -> Player:
 	var scope := get_parent()
 	for node in get_tree().get_nodes_in_group(player_group_name):
 		var player := node as Player
-		if player == null:
-			continue
-		if scope != null and not scope.is_ancestor_of(player):
-			continue
+		if player == null: continue
+		if scope != null and not scope.is_ancestor_of(player): continue
 		return player
 	return null
 

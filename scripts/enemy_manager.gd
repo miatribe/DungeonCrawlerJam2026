@@ -37,8 +37,7 @@ func has_required_references() -> bool:
 
 
 func get_player_vertex_id() -> int:
-	if player == null:
-		return -1
+	if player == null: return -1
 	return player.get_current_vertex_id()
 
 
@@ -51,11 +50,9 @@ func get_neighbor_vertex_ids(vertex_id: int) -> Array[int]:
 
 
 func get_vertex_world_position(vertex_id: int, current_y: float) -> Vector3:
-	if graph == null:
-		return Vector3.ZERO
+	if graph == null: return Vector3.ZERO
 	var vertex: Vertex = graph.vertices.get(vertex_id)
-	if vertex == null:
-		return Vector3.ZERO
+	if vertex == null: return Vector3.ZERO
 	return Vector3(vertex.position.x * cell_size, current_y, vertex.position.y * cell_size)
 
 
@@ -70,12 +67,9 @@ func is_vertex_occupied_by_enemy(vertex_id: int, ignored_enemy: Enemy = null) ->
 
 func get_enemy_at_vertex(vertex_id: int, ignored_enemy: Enemy = null) -> Enemy:
 	for enemy in enemies:
-		if not is_instance_valid(enemy):
-			continue
-		if ignored_enemy != null and enemy == ignored_enemy:
-			continue
-		if enemy.current_vertex_id == vertex_id:
-			return enemy
+		if not is_instance_valid(enemy): continue
+		if ignored_enemy != null and enemy == ignored_enemy: continue
+		if enemy.current_vertex_id == vertex_id: return enemy
 	return null
 
 
@@ -84,8 +78,7 @@ func is_vertex_blocked_for_player(vertex_id: int) -> bool:
 
 
 func is_vertex_blocked_for_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
-	if is_vertex_occupied_by_player(vertex_id):
-		return true
+	if is_vertex_occupied_by_player(vertex_id): return true
 	return is_vertex_occupied_by_enemy(vertex_id, ignored_enemy)
 
 
@@ -93,30 +86,25 @@ func run_all_enemy_turns() -> void:
 	# Keep turn order stable based on this node's child order.
 	_refresh_enemy_list()
 	for enemy in enemies:
-		if is_instance_valid(enemy):
-			enemy.take_turn()
+		if is_instance_valid(enemy): enemy.take_turn()
 
 
 func try_spawn_enemy() -> Enemy:
-	if not has_required_references():
-		return null
+	if not has_required_references(): return null
 	if enemy_scene == null:
 		push_warning("Enemy scene is not assigned on EnemyManager.")
 		return null
 
 	_refresh_enemy_list()
-	if enemies.size() >= max_enemies:
-		return null
+	if enemies.size() >= max_enemies: return null
 
 	var spawn_vertex_id := _find_spawn_vertex_id()
-	if spawn_vertex_id == -1:
-		return null
+	if spawn_vertex_id == -1: return null
 
 	var spawned := enemy_scene.instantiate()
 	if not (spawned is Enemy):
 		push_warning("Enemy scene root must use Enemy script.")
-		if spawned != null:
-			spawned.queue_free()
+		if spawned != null: spawned.queue_free()
 		return null
 
 	var enemy := spawned as Enemy
@@ -137,11 +125,9 @@ func spawn_enemies_up_to_max() -> int:
 	var spawned_count := 0
 	while true:
 		_refresh_enemy_list()
-		if enemies.size() >= max_enemies:
-			break
+		if enemies.size() >= max_enemies: break
 		var spawned := try_spawn_enemy()
-		if spawned == null:
-			break
+		if spawned == null: break
 		spawned_count += 1
 	return spawned_count
 
@@ -163,12 +149,9 @@ func _refresh_enemy_list() -> void:
 
 
 func _find_spawn_vertex_id() -> int:
-	if graph == null:
-		return -1
-	if target_spawn_vertex_id == -1:
-		return -1
-	if not graph.vertices.has(target_spawn_vertex_id):
-		return -1
+	if graph == null: return -1
+	if target_spawn_vertex_id == -1: return -1
+	if not graph.vertices.has(target_spawn_vertex_id): return -1
 
 	var candidates: Array[int] = [target_spawn_vertex_id]
 	for neighbor_id in get_neighbor_vertex_ids(target_spawn_vertex_id):
@@ -183,25 +166,18 @@ func _find_spawn_vertex_id() -> int:
 
 
 func _can_spawn_at_vertex(vertex_id: int) -> bool:
-	if graph == null:
-		return false
-	if not graph.vertices.has(vertex_id):
-		return false
-	if _is_vertex_occupied_by_enemy(vertex_id):
-		return false
+	if graph == null: return false
+	if not graph.vertices.has(vertex_id): return false
+	if _is_vertex_occupied_by_enemy(vertex_id): return false
 
 	var player_vertex_id := get_player_vertex_id()
-	if player_vertex_id != -1 and vertex_id == player_vertex_id:
-		return false
-	if min_spawn_distance_from_player <= 0:
-		return true
-	if player_vertex_id == -1:
-		return true
+	if player_vertex_id != -1 and vertex_id == player_vertex_id: return false
+	if min_spawn_distance_from_player <= 0: return true
+	if player_vertex_id == -1: return true
 
 	var path_to_player: Array[int] = get_bfs_path(vertex_id, player_vertex_id)
-	if path_to_player.is_empty():
-		# If unreachable, treat as sufficiently far for spawning.
-		return true
+	# If unreachable, treat as sufficiently far for spawning.
+	if path_to_player.is_empty(): return true
 
 	var distance_to_player := maxi(path_to_player.size() - 1, 0)
 	return distance_to_player >= min_spawn_distance_from_player
@@ -209,22 +185,17 @@ func _can_spawn_at_vertex(vertex_id: int) -> bool:
 
 func _is_vertex_occupied_by_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
 	for enemy in enemies:
-		if not is_instance_valid(enemy):
-			continue
-		if ignored_enemy != null and enemy == ignored_enemy:
-			continue
-		if enemy.current_vertex_id == vertex_id:
-			return true
+		if not is_instance_valid(enemy): continue
+		if ignored_enemy != null and enemy == ignored_enemy: continue
+		if enemy.current_vertex_id == vertex_id: return true
 	return false
 
 
 func _pick_random_enemy_resource() -> EnemyResource:
 	var valid_resources: Array[EnemyResource] = []
 	for resource in enemy_resources:
-		if resource != null:
-			valid_resources.append(resource)
-	if valid_resources.is_empty():
-		return null
+		if resource != null: valid_resources.append(resource)
+	if valid_resources.is_empty(): return null
 	return valid_resources.pick_random()
 
 
@@ -238,5 +209,4 @@ func _on_child_exiting_tree(_node: Node) -> void:
 
 func _on_player_turn_over() -> void:
 	take_turn()
-	if turn_manager != null:
-		turn_manager.ai_took_turn()
+	if turn_manager != null: turn_manager.ai_took_turn()
