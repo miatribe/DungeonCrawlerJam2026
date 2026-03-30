@@ -260,6 +260,25 @@ vertex_b_id = 22
 direction_from_a = 2
 direction_from_b = 3
 
+[sub_resource type="Resource" id="Resource_8dep7"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_3_logic_1774869575"
+trigger_type = 1
+required_direction = 3
+one_shot = false
+payload = {
+"door_state": 0,
+"door_state_mode": "fixed",
+"edge_id": 80,
+"edge_type": 1,
+"required_direction": 3,
+"type": "set_edge_type"
+}
+
+[sub_resource type="Resource" id="Resource_8hods"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_8dep7")])
+
 [sub_resource type="Resource" id="Resource_qcikp"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_62_logic_1774834428"
@@ -287,25 +306,6 @@ payload = {
 [sub_resource type="Resource" id="Resource_t7x27"]
 script = ExtResource("7_rs16f")
 entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_8ufy7")])
-
-[sub_resource type="Resource" id="Resource_8dep7"]
-script = ExtResource("8_xngqq")
-logic_id = &"vertex_3_logic_1774869575"
-trigger_type = 1
-required_direction = 3
-one_shot = false
-payload = {
-"door_state": 0,
-"door_state_mode": "fixed",
-"edge_id": 80,
-"edge_type": 1,
-"required_direction": 3,
-"type": "set_edge_type"
-}
-
-[sub_resource type="Resource" id="Resource_8hods"]
-script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_8dep7")])
 
 [sub_resource type="Resource" id="Resource_dqox5"]
 script = ExtResource("8_1lnfu")

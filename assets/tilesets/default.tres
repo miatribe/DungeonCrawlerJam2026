@@ -2,15 +2,45 @@
 
 [ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="1_0g2rc"]
 [ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="2_ksbv8"]
-[ext_resource type="Resource" uid="uid://bii0rn4pk386p" path="res://assets/images/floor.tres" id="2_varww"]
-[ext_resource type="Resource" uid="uid://j4lxkf4gr2e4" path="res://assets/images/wall.tres" id="3_84yha"]
+[ext_resource type="Texture2D" uid="uid://cnppjsx8xnq75" path="res://assets/images/floor_tiles_1024x1024_metal_1.png" id="2_varww"]
+[ext_resource type="Texture2D" uid="uid://qalphq4a5as0" path="res://assets/images/Wall_tiles_1024x1024_metal_1.png" id="3_84yha"]
+
+[sub_resource type="Resource" id="Resource_38xai"]
+script = ExtResource("1_0g2rc")
+texture = ExtResource("2_varww")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_hvcxj"]
+script = ExtResource("1_0g2rc")
+texture = ExtResource("3_84yha")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_ldof0"]
+script = ExtResource("1_0g2rc")
+texture = ExtResource("2_varww")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_mstr7"]
+script = ExtResource("1_0g2rc")
+texture = ExtResource("3_84yha")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_yj2aa"]
+script = ExtResource("1_0g2rc")
+texture = ExtResource("3_84yha")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_1dpok"]
+script = ExtResource("1_0g2rc")
+texture = ExtResource("3_84yha")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [resource]
 script = ExtResource("2_ksbv8")
-north_textures = Array[ExtResource("1_0g2rc")]([ExtResource("3_84yha")])
-east_textures = Array[ExtResource("1_0g2rc")]([ExtResource("3_84yha")])
-south_textures = Array[ExtResource("1_0g2rc")]([ExtResource("3_84yha")])
-west_textures = Array[ExtResource("1_0g2rc")]([ExtResource("3_84yha")])
-ceiling_textures = Array[ExtResource("1_0g2rc")]([ExtResource("2_varww")])
-floor_textures = Array[ExtResource("1_0g2rc")]([ExtResource("2_varww")])
+north_textures = Array[ExtResource("1_0g2rc")]([SubResource("Resource_mstr7")])
+east_textures = Array[ExtResource("1_0g2rc")]([SubResource("Resource_hvcxj")])
+south_textures = Array[ExtResource("1_0g2rc")]([SubResource("Resource_yj2aa")])
+west_textures = Array[ExtResource("1_0g2rc")]([SubResource("Resource_1dpok")])
+ceiling_textures = Array[ExtResource("1_0g2rc")]([SubResource("Resource_38xai")])
+floor_textures = Array[ExtResource("1_0g2rc")]([SubResource("Resource_ldof0")])
 metadata/_custom_type_script = "uid://sqxcsw1riabp"

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="3_yi07g"]
 [ext_resource type="Script" uid="uid://dw8nn12j0ahe2" path="res://addons/dungeoncraftercore/scripts/graph.gd" id="4_8gf1p"]
 [ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="5_0elrw"]
-[ext_resource type="Resource" uid="uid://bckyix6yyn5hj" path="res://assets/tilesets/default.tres" id="6_6yipm"]
+[ext_resource type="Resource" uid="uid://dhhfl04nvw6pk" path="res://assets/tilesets/bitrusty.tres" id="6_6yipm"]
 [ext_resource type="Script" uid="uid://ck857vy6ugchx" path="res://addons/dungeoncraftercore/scripts/vertex_logic_list.gd" id="6_f52af"]
 [ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="7_cuu0d"]
 

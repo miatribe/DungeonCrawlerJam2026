@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="TileTexture" format=3 uid="uid://j4lxkf4gr2e4"]
-
-[ext_resource type="Script" uid="uid://cyalxxak2ljvx" path="res://addons/dungeoncraftercore/scripts/tile_texture.gd" id="1_si237"]
-[ext_resource type="Texture2D" uid="uid://qalphq4a5as0" path="res://assets/images/Wall_tiles_1024x1024_metal_1.png" id="2_qfu5u"]
-
-[resource]
-script = ExtResource("1_si237")
-texture = ExtResource("2_qfu5u")
-metadata/_custom_type_script = "uid://cyalxxak2ljvx"
