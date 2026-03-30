@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6w0s")
+loading_screen_hold_seconds = 1.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=196972501]
 layout_mode = 1
@@ -42,6 +43,14 @@ size = Vector2i(1244, 639)
 render_target_update_mode = 4
 
 [node name="HomeBase" parent="AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport" unique_id=395339508 instance=ExtResource("1_th2p1")]
+
+[node name="TempLoadingScreen" type="ColorRect" parent="AspectRatioContainer/DesignRoot" unique_id=532866128]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 1920.0024
+offset_bottom = 1080.0
+color = Color(0.7792917, 0.47070765, 0.019244023, 1)
 
 [node name="TextLog" parent="AspectRatioContainer/DesignRoot" unique_id=685976710 instance=ExtResource("1_xihgh")]
 layout_mode = 1
