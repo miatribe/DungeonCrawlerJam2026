@@ -25,9 +25,7 @@ metadata/_custom_type_script = "uid://b47em3wbcse4b"
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=898481221]
 environment = SubResource("Environment_hm6wk")
 
-[node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer", "turn_manager", "enemy_manager") instance=ExtResource("3_so7uu")]
+[node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer") instance=ExtResource("3_so7uu")]
 graph_renderer = NodePath("..")
-turn_manager = NodePath("")
-enemy_manager = NodePath("")
 start_vertex_id = 0
 start_facing_direction = 1
