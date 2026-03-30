@@ -21,6 +21,7 @@ var _cell_size: float = 2.0
 var current_health: int = 20
 var combat_stats: CombatStats = CombatStats.new()
 var _text_log: TextLog
+var _input_locked := false
 
 
 func _ready() -> void:
@@ -43,6 +44,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _input_locked:
+		return
 	if not (event is InputEventKey): return
 	var key_event := event as InputEventKey
 	if not key_event.pressed or key_event.echo: return
@@ -142,6 +145,8 @@ func _consume_player_turn() -> void:
 
 
 func _try_move(direction: Direction.Cardinal) -> bool:
+	if _input_locked:
+		return false
 	var target_vertex_id := _peek_target_vertex_id(direction)
 	if target_vertex_id != -1 and enemy_manager != null:
 		if enemy_manager.is_vertex_occupied_by_enemy(target_vertex_id):
@@ -213,3 +218,7 @@ func _find_text_log() -> TextLog:
 	if get_tree() == null:
 		return null
 	return get_tree().get_first_node_in_group(TEXT_LOG_GROUP) as TextLog
+
+
+func set_input_locked(is_locked: bool) -> void:
+	_input_locked = is_locked

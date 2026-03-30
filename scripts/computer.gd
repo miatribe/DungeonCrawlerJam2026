@@ -4,6 +4,7 @@ extends Control
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
 }
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
+var player_group_name: StringName = "player"
 
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
 @onready var _temp_loading_screen: Control = %TempLoadingScreen
@@ -67,11 +68,15 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	if scene == null:
 		return
 	_is_swapping_scene = true
+	# Lock players in the currently active scene immediately.
+	_set_player_movement_enabled(false)
 
 	_set_loading_screen_visible(true)
 	await get_tree().process_frame
 
 	_swap_subviewport_scene(scene)
+	# Lock players again so the newly instantiated scene's Player is also locked.
+	_set_player_movement_enabled(false)
 
 	var graph_renderer := _get_current_graph_renderer()
 	if graph_renderer != null:
@@ -80,6 +85,7 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	await get_tree().process_frame
 	await get_tree().create_timer(maxf(0.0, loading_screen_hold_seconds)).timeout
 	_set_loading_screen_visible(false)
+	_set_player_movement_enabled(true)
 	_connect_to_current_graph()
 	_is_swapping_scene = false
 
@@ -95,6 +101,7 @@ func _swap_subviewport_scene(scene: PackedScene) -> void:
 	if next_scene == null:
 		push_warning("Computer: Failed to instantiate replacement scene.")
 		_set_loading_screen_visible(false)
+		_set_player_movement_enabled(true)
 		_is_swapping_scene = false
 		return
 
@@ -110,3 +117,12 @@ func _get_current_graph_renderer() -> GraphRenderer:
 	if _subviewport == null or _subviewport.get_child_count() == 0:
 		return null
 	return _subviewport.get_child(0) as GraphRenderer
+
+
+func _set_player_movement_enabled(is_enabled: bool) -> void:
+	if get_tree() == null: return
+	for node in get_tree().get_nodes_in_group(player_group_name):
+		var player := node as Player
+		if player == null: continue
+		if not is_ancestor_of(player): continue
+		player.set_input_locked(not is_enabled)
