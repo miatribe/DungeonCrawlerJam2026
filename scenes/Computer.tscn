@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bd3n3heqh4kcs" path="res://scenes/HomeBase.tscn" id="1_th2p1"]
 [ext_resource type="PackedScene" uid="uid://csnks0v3ohdgy" path="res://scenes/ui/TextLog.tscn" id="1_xihgh"]
 [ext_resource type="Texture2D" uid="uid://bql0a4g86igtm" path="res://assets/images/ui_basic_sample3.png" id="2_qfqg8"]
+[ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -14,6 +15,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6w0s")
 loading_screen_hold_seconds = 1.0
+
+[node name="PlayerInput" type="Node" parent="." unique_id=1777251988]
+unique_name_in_owner = true
+script = ExtResource("2_ux8a7")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=196972501]
 layout_mode = 1

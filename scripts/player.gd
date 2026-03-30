@@ -21,7 +21,6 @@ var _cell_size: float = 2.0
 var current_health: int = 20
 var combat_stats: CombatStats = CombatStats.new()
 var _text_log: TextLog
-var _input_locked := false
 
 
 func _ready() -> void:
@@ -43,36 +42,43 @@ func _ready() -> void:
 	if !_navigator.set_current_vertex(start_vertex_id, true): push_warning("Player did not find a valid start vertex.")
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if _input_locked:
-		return
-	if not (event is InputEventKey): return
-	var key_event := event as InputEventKey
-	if not key_event.pressed or key_event.echo: return
+func rotate_view(clockwise: bool) -> bool:
+	var rotation_delta := -90.0 if clockwise else 90.0
+	rotate_y(deg_to_rad(rotation_delta))
+	rotation_degrees.y = roundf(rotation_degrees.y)
+	return true
 
-	# Rotating is always allowed and does not consume a turn.
-	if key_event.keycode == KEY_E:
-		rotate_y(deg_to_rad(-90))
-		rotation_degrees.y = roundf(rotation_degrees.y)
-		return
-	if key_event.keycode == KEY_Q:
-		rotate_y(deg_to_rad(90))
-		rotation_degrees.y = roundf(rotation_degrees.y)
-		return
 
+func try_move_relative(relative_degrees: int) -> bool:
 	if not _can_take_turn_action():
-		return
+		return false
 
 	var forward := _get_forward_direction()
-	var move_direction := _get_move_direction(key_event.keycode, forward)
-	if move_direction != Direction.Cardinal.NONE:
-		if _try_move(move_direction):
-			_consume_player_turn()
-		return
+	var move_direction := Direction.Cardinal.NONE
+	match relative_degrees:
+		0: move_direction = forward
+		180: move_direction = Direction.get_opposite(forward)
+		90: move_direction = Direction.get_rotated_direction(forward, 90)
+		-90: move_direction = Direction.get_rotated_direction(forward, -90)
+		_: return false
 
-	if key_event.keycode == KEY_R:
-		if _interact_current_vertex():
-			_consume_player_turn()
+	if move_direction == Direction.Cardinal.NONE:
+		return false
+
+	if _try_move(move_direction):
+		_consume_player_turn()
+		return true
+
+	return false
+
+
+func try_interact() -> bool:
+	if not _can_take_turn_action():
+		return false
+	if _interact_current_vertex():
+		_consume_player_turn()
+		return true
+	return false
 
 
 func _on_vertex_entered(vertex_id: int, _previous_vertex_id: int, _via_direction: Direction.Cardinal) -> void:
@@ -108,15 +114,6 @@ func _get_forward_direction() -> Direction.Cardinal:
 		_: return Direction.Cardinal.NONE
 
 
-func _get_move_direction(keycode: int, forward: Direction.Cardinal) -> Direction.Cardinal:
-	match keycode:
-		KEY_W: return forward
-		KEY_S: return Direction.get_opposite(forward)
-		KEY_D: return Direction.get_rotated_direction(forward, 90)
-		KEY_A: return Direction.get_rotated_direction(forward, -90)
-		_: return Direction.Cardinal.NONE
-
-
 func _set_facing_direction(direction: Direction.Cardinal) -> void:
 	match direction:
 		Direction.Cardinal.NORTH: rotation_degrees.y = 0.0
@@ -145,8 +142,6 @@ func _consume_player_turn() -> void:
 
 
 func _try_move(direction: Direction.Cardinal) -> bool:
-	if _input_locked:
-		return false
 	var target_vertex_id := _peek_target_vertex_id(direction)
 	if target_vertex_id != -1 and enemy_manager != null:
 		if enemy_manager.is_vertex_occupied_by_enemy(target_vertex_id):
@@ -218,7 +213,3 @@ func _find_text_log() -> TextLog:
 	if get_tree() == null:
 		return null
 	return get_tree().get_first_node_in_group(TEXT_LOG_GROUP) as TextLog
-
-
-func set_input_locked(is_locked: bool) -> void:
-	_input_locked = is_locked
