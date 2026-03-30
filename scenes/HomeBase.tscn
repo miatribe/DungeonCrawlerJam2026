@@ -44,7 +44,7 @@ player = NodePath("../Player")
 turn_manager = NodePath("../TurnManager")
 enemy_scene = ExtResource("5_jqnxg")
 enemy_resources = Array[ExtResource("6_wfhjp")]([ExtResource("7_ie2me")])
-min_spawn_distance_from_player = 15
+min_spawn_distance_from_player = 10
 target_spawn_vertex_id = 57
 metadata/_custom_type_script = "uid://chxxomku6c3gl"
 
