@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bckyix6yyn5hj" path="res://assets/tilesets/default.tres" id="6_26alp"]
 [ext_resource type="Script" uid="uid://ck857vy6ugchx" path="res://addons/dungeoncraftercore/scripts/vertex_logic_list.gd" id="7_rs16f"]
 [ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="8_1lnfu"]
+[ext_resource type="Script" uid="uid://clpsx37du4jtm" path="res://addons/dungeoncraftercore/scripts/vertex_logic.gd" id="8_xngqq"]
 
 [sub_resource type="Resource" id="Resource_4mscd"]
 script = ExtResource("2_xngqq")
@@ -190,6 +191,18 @@ vertex_a_id = 62
 vertex_b_id = 58
 direction_from_a = 0
 direction_from_b = 1
+
+[sub_resource type="Resource" id="Resource_lu536"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_62_logic_1774834428"
+payload = {
+"flag_id": &"TP-MapOne",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_txyp2"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_lu536")])
 
 [sub_resource type="Resource" id="Resource_8dep7"]
 script = ExtResource("8_1lnfu")
@@ -426,5 +439,8 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 76: SubResource("Resource_do60q"),
 78: SubResource("Resource_1lkym"),
 79: SubResource("Resource_wcep4")
+})
+vertex_logic = Dictionary[int, ExtResource("7_rs16f")]({
+62: SubResource("Resource_txyp2")
 })
 tilesets = Array[ExtResource("5_m2n8i")]([ExtResource("6_26alp")])
