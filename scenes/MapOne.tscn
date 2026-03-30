@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d11qt3e0tak8v"]
 
 [ext_resource type="Script" uid="uid://b47em3wbcse4b" path="res://addons/dungeoncrafterrenderer/scripts/graph_renderer.gd" id="1_q26i5"]
-[ext_resource type="Resource" uid="uid://dtyb20tktiue2" path="res://assets/graphs/HomeBaseMap.tres" id="2_14vx6"]
+[ext_resource type="Resource" uid="uid://cda8kmsuyksgw" path="res://assets/graphs/TestGraph.tres" id="2_q26i5"]
 [ext_resource type="PackedScene" uid="uid://3hqdxjm15s8q" path="res://scenes/Player.tscn" id="3_ljqne"]
 [ext_resource type="Script" uid="uid://chxxomku6c3gl" path="res://scripts/enemy_manager.gd" id="4_xjkmp"]
 [ext_resource type="PackedScene" uid="uid://ck5vlwmn85tju" path="res://scenes/Enemy.tscn" id="5_0a557"]
@@ -24,7 +24,7 @@ tonemap_mode = 2
 
 [node name="MapOne" type="Node3D" unique_id=395339508]
 script = ExtResource("1_q26i5")
-graph = ExtResource("2_14vx6")
+graph = ExtResource("2_q26i5")
 metadata/_custom_type_script = "uid://b47em3wbcse4b"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=898481221]

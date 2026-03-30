@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://w1ygq5vs881p"]
 
+[ext_resource type="Script" uid="uid://dwhnncpiykop1" path="res://scripts/computer.gd" id="1_n6w0s"]
 [ext_resource type="PackedScene" uid="uid://bd3n3heqh4kcs" path="res://scenes/HomeBase.tscn" id="1_th2p1"]
 [ext_resource type="PackedScene" uid="uid://csnks0v3ohdgy" path="res://scenes/ui/TextLog.tscn" id="1_xihgh"]
 [ext_resource type="Texture2D" uid="uid://bql0a4g86igtm" path="res://assets/images/ui_basic_sample3.png" id="2_qfqg8"]
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_n6w0s")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=196972501]
 layout_mode = 1
