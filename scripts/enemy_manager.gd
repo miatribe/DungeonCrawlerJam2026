@@ -10,11 +10,13 @@ class_name EnemyManager
 @export_range(0, 512, 1) var max_enemies: int = 4
 @export_range(0, 512, 1) var min_spawn_distance_from_player: int = 3
 @export var target_spawn_vertex_id: int = -1
+@export var one_time_spawner: bool = false
 
 var graph: Graph
 var cell_size: float = 2.0
 var navigation_helper: GraphNavigationHelper = GraphNavigationHelper.new()
 var enemies: Array[Enemy] = []
+var _has_spawned_wave: bool = false
 
 
 func _ready() -> void:
@@ -32,8 +34,7 @@ func _ready() -> void:
 		turn_manager.PlayerTurnOver.connect(_on_player_turn_over)
 
 
-func has_required_references() -> bool:
-	return graph != null and player != null
+func has_required_references() -> bool: return graph != null and player != null
 
 
 func get_player_vertex_id() -> int:
@@ -73,8 +74,7 @@ func get_enemy_at_vertex(vertex_id: int, ignored_enemy: Enemy = null) -> Enemy:
 	return null
 
 
-func is_vertex_blocked_for_player(vertex_id: int) -> bool:
-	return is_vertex_occupied_by_enemy(vertex_id)
+func is_vertex_blocked_for_player(vertex_id: int) -> bool: return is_vertex_occupied_by_enemy(vertex_id)
 
 
 func is_vertex_blocked_for_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
@@ -94,24 +94,19 @@ func try_spawn_enemy() -> Enemy:
 	if enemy_scene == null:
 		push_warning("Enemy scene is not assigned on EnemyManager.")
 		return null
-
 	_refresh_enemy_list()
 	if enemies.size() >= max_enemies: return null
-
 	var spawn_vertex_id := _find_spawn_vertex_id()
 	if spawn_vertex_id == -1: return null
-
 	var spawned := enemy_scene.instantiate()
 	if not (spawned is Enemy):
 		push_warning("Enemy scene root must use Enemy script.")
 		if spawned != null: spawned.queue_free()
 		return null
-
 	var enemy := spawned as Enemy
 	enemy.start_vertex_id = spawn_vertex_id
 	var chosen_resource := _pick_random_enemy_resource()
-	if chosen_resource != null:
-		enemy.enemy_resource = chosen_resource
+	if chosen_resource != null: enemy.enemy_resource = chosen_resource
 	else:
 		push_warning("EnemyManager enemy_resources is empty. Add at least one EnemyResource to spawn enemies.")
 		spawned.queue_free()
@@ -122,6 +117,7 @@ func try_spawn_enemy() -> Enemy:
 
 
 func spawn_enemies_up_to_max() -> int:
+	if one_time_spawner and _has_spawned_wave: return 0
 	var spawned_count := 0
 	while true:
 		_refresh_enemy_list()
@@ -129,6 +125,7 @@ func spawn_enemies_up_to_max() -> int:
 		var spawned := try_spawn_enemy()
 		if spawned == null: break
 		spawned_count += 1
+	if one_time_spawner: _has_spawned_wave = true
 	return spawned_count
 
 
@@ -137,31 +134,24 @@ func take_turn() -> void:
 	run_all_enemy_turns()
 
 
-func take_enemy_turns() -> void:
-	run_all_enemy_turns()
+func reset_spawn_cycle() -> void: _has_spawned_wave = false
 
 
 func _refresh_enemy_list() -> void:
 	enemies.clear()
 	for child in get_children():
-		if child is Enemy:
-			enemies.append(child as Enemy)
+		if child is Enemy: enemies.append(child as Enemy)
 
 
 func _find_spawn_vertex_id() -> int:
 	if graph == null: return -1
 	if target_spawn_vertex_id == -1: return -1
 	if not graph.vertices.has(target_spawn_vertex_id): return -1
-
 	var candidates: Array[int] = [target_spawn_vertex_id]
 	for neighbor_id in get_neighbor_vertex_ids(target_spawn_vertex_id):
-		if not candidates.has(neighbor_id):
-			candidates.append(neighbor_id)
-
+		if not candidates.has(neighbor_id): candidates.append(neighbor_id)
 	for candidate_vertex_id in candidates:
-		if _can_spawn_at_vertex(candidate_vertex_id):
-			return candidate_vertex_id
-
+		if _can_spawn_at_vertex(candidate_vertex_id): return candidate_vertex_id
 	return -1
 
 
@@ -199,12 +189,10 @@ func _pick_random_enemy_resource() -> EnemyResource:
 	return valid_resources.pick_random()
 
 
-func _on_child_entered_tree(_node: Node) -> void:
-	_refresh_enemy_list()
+func _on_child_entered_tree(_node: Node) -> void: _refresh_enemy_list()
 
 
-func _on_child_exiting_tree(_node: Node) -> void:
-	_refresh_enemy_list()
+func _on_child_exiting_tree(_node: Node) -> void: _refresh_enemy_list()
 
 
 func _on_player_turn_over() -> void:

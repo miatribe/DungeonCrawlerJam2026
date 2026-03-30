@@ -46,6 +46,7 @@ enemy_scene = ExtResource("5_0a557")
 enemy_resources = Array[ExtResource("6_a37ir")]([ExtResource("7_ur14o")])
 min_spawn_distance_from_player = 10
 target_spawn_vertex_id = 57
+one_time_spawner = true
 metadata/_custom_type_script = "uid://chxxomku6c3gl"
 
 [node name="TurnManager" type="Node" parent="." unique_id=79038389]
