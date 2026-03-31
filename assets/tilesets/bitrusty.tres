@@ -31,12 +31,6 @@ texture = ExtResource("5_4bx6k")
 chance_percent = 40.0
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_qio4b"]
-script = ExtResource("1_o2jyw")
-texture = ExtResource("5_4bx6k")
-chance_percent = 40.0
-metadata/_custom_type_script = "uid://cyalxxak2ljvx"
-
 [sub_resource type="Resource" id="Resource_rhlp8"]
 script = ExtResource("1_o2jyw")
 texture = ExtResource("4_gni4f")
@@ -70,7 +64,7 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 [resource]
 script = ExtResource("4_4bx6k")
 north_textures = Array[ExtResource("1_o2jyw")]([SubResource("Resource_euok5"), SubResource("Resource_lheyx")])
-east_textures = Array[ExtResource("1_o2jyw")]([SubResource("Resource_euok5"), SubResource("Resource_aycl4"), SubResource("Resource_qio4b")])
+east_textures = Array[ExtResource("1_o2jyw")]([SubResource("Resource_euok5"), SubResource("Resource_aycl4")])
 south_textures = Array[ExtResource("1_o2jyw")]([SubResource("Resource_euok5"), SubResource("Resource_x3g7j")])
 west_textures = Array[ExtResource("1_o2jyw")]([SubResource("Resource_euok5"), SubResource("Resource_fi60u")])
 ceiling_textures = Array[ExtResource("1_o2jyw")]([SubResource("Resource_gni4f"), SubResource("Resource_jxb8x")])
