@@ -15,7 +15,7 @@ const TEXT_LOG_GROUP := "text_log"
 @export var max_health: int = 20
 
 var _navigator: GraphNavigator = GraphNavigator.new()
-var _run_state: DungeonRunState = DungeonRunState.new()
+var _run_state: DungeonRunState
 var _logic_resolver: VertexLogicResolver = VertexLogicResolver.new()
 var _cell_size: float = 2.0
 var current_health: int = 20
@@ -23,7 +23,13 @@ var combat_stats: CombatStats = CombatStats.new()
 var _text_log: TextLog
 
 
+func set_run_state(state: DungeonRunState) -> void:
+	_run_state = state
+
+
 func _ready() -> void:
+	if _run_state == null:
+		_run_state = DungeonRunState.new()
 	if graph_renderer == null || not (graph_renderer is GraphRenderer):
 		push_warning("GraphRenderer not assigned to Player.")
 		return

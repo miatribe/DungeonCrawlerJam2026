@@ -11,10 +11,12 @@ extends Control
 
 var _connected_graph: Graph
 var _is_swapping_scene := false
+var _map_state_store: MapStateStore = MapStateStore.new()
 
 
 func _ready() -> void:
 	if _temp_loading_screen != null: _temp_loading_screen.visible = false
+	_inject_run_state_into_player()
 	_connect_to_current_graph()
 
 
@@ -58,7 +60,10 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	_set_player_movement_enabled(false)
 	_set_loading_screen_visible(true)
 	await get_tree().process_frame
+	_save_current_map_state()
 	_swap_subviewport_scene(scene)
+	_restore_current_map_state()
+	_inject_run_state_into_player()
 	var graph_renderer := _get_current_graph_renderer()
 	if graph_renderer != null: graph_renderer.render_graph()
 	await get_tree().process_frame
@@ -95,3 +100,31 @@ func _get_current_graph_renderer() -> GraphRenderer:
 func _set_player_movement_enabled(is_enabled: bool) -> void:
 	if _player_input == null: return
 	_player_input.set_input_locked(not is_enabled)
+
+
+func _save_current_map_state() -> void:
+	if _connected_graph != null:
+		_map_state_store.save_map_state(_connected_graph)
+
+
+func _restore_current_map_state() -> void:
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null or graph_renderer.graph == null:
+		return
+	_map_state_store.restore_map_state(graph_renderer.graph)
+
+
+func _inject_run_state_into_player() -> void:
+	var player := _get_current_player()
+	if player != null:
+		player.set_run_state(_map_state_store.run_state)
+
+
+func _get_current_player() -> Player:
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null:
+		return null
+	for child in graph_renderer.get_children():
+		if child is Player:
+			return child as Player
+	return null
