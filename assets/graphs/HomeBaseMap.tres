@@ -139,6 +139,8 @@ vertex_a_id = 52
 vertex_b_id = 51
 direction_from_a = 0
 direction_from_b = 1
+type = 1
+door_id = 1
 
 [sub_resource type="Resource" id="Resource_rqp2c"]
 script = ExtResource("2_xngqq")
@@ -381,6 +383,37 @@ payload = {
 script = ExtResource("7_rs16f")
 entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_evl6r"), SubResource("Resource_wclco")])
 
+[sub_resource type="Resource" id="Resource_7ty4r"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_66_logic_1774922897"
+trigger_type = 1
+required_direction = 2
+payload = {
+"required_direction": 2,
+"surface": 1,
+"target_vertex_id": -1,
+"texture_id": 0,
+"type": "set_surface_override"
+}
+
+[sub_resource type="Resource" id="Resource_32mxi"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_66_logic_1774922917"
+trigger_type = 1
+required_direction = 2
+payload = {
+"door_state": 0,
+"door_state_mode": "fixed",
+"edge_id": 67,
+"edge_type": 1,
+"required_direction": 2,
+"type": "set_edge_type"
+}
+
+[sub_resource type="Resource" id="Resource_p16fp"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_7ty4r"), SubResource("Resource_32mxi")])
+
 [sub_resource type="Resource" id="Resource_yows4"]
 script = ExtResource("8_1lnfu")
 position = Vector2i(18, 12)
@@ -603,6 +636,9 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_ep4ej"),
 1: SubResource("Resource_lu536")
 })
+surface_texture_overrides = Dictionary[int, int]({
+1: 1
+})
 
 [sub_resource type="Resource" id="Resource_hrrr0"]
 script = ExtResource("8_1lnfu")
@@ -705,6 +741,7 @@ vertex_logic = Dictionary[int, ExtResource("7_rs16f")]({
 22: SubResource("Resource_t3l04"),
 62: SubResource("Resource_yuwlx"),
 63: SubResource("Resource_67ctg"),
+66: SubResource("Resource_p16fp"),
 69: SubResource("Resource_41ujd")
 })
 tilesets = Array[ExtResource("5_m2n8i")]([ExtResource("6_26alp")])
