@@ -8,4 +8,5 @@
 script = ExtResource("1_8we12")
 base_texture = ExtResource("1_4jy5y")
 closed_texture = ExtResource("2_jk2y4")
+open_animation = 1
 metadata/_custom_type_script = "uid://b4f3pcmh05nja"

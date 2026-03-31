@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Door" format=3 uid="uid://d1qry8xuikpnx"]
+
+[ext_resource type="Script" uid="uid://b4f3pcmh05nja" path="res://addons/dungeoncraftercore/scripts/door.gd" id="1_00an3"]
+[ext_resource type="Texture2D" uid="uid://dku3drd4c4v82" path="res://assets/images/Door_Laser_1024x1024.png" id="1_os0ej"]
+
+[resource]
+script = ExtResource("1_00an3")
+base_texture = ExtResource("1_os0ej")
+open_animation = 2
+open_animation_travel = -1.0
+metadata/_custom_type_script = "uid://b4f3pcmh05nja"

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dwhnncpiykop1" path="res://scripts/computer.gd" id="1_n6w0s"]
 [ext_resource type="PackedScene" uid="uid://bd3n3heqh4kcs" path="res://scenes/HomeBase.tscn" id="1_th2p1"]
 [ext_resource type="PackedScene" uid="uid://csnks0v3ohdgy" path="res://scenes/ui/TextLog.tscn" id="1_xihgh"]
-[ext_resource type="Texture2D" uid="uid://bql0a4g86igtm" path="res://assets/images/ui_basic_sample3.png" id="2_qfqg8"]
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
+[ext_resource type="Texture2D" uid="uid://be7pct5k0q7g8" path="res://assets/images/ui_basic_sample7.png" id="5_68ujm"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -61,10 +61,11 @@ color = Color(0.7792917, 0.47070765, 0.019244023, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0333
-anchor_top = 0.78
-anchor_right = 0.687
+anchor_top = 0.78000003
+anchor_right = 0.45800003
 anchor_bottom = 0.948
-offset_right = 0.0
+offset_top = -6.1035156e-05
+offset_right = 0.64001465
 offset_bottom = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
@@ -75,6 +76,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_qfqg8")
+texture = ExtResource("5_68ujm")
 expand_mode = 1
 stretch_mode = 6
