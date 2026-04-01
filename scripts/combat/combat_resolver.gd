@@ -29,6 +29,9 @@ static func resolve_attack(attacker_stats: CombatStats, defender_stats: CombatSt
 		return result
 
 	result.hit = true
+	if attacker_attack <= 0:
+		result.damage = 0
+		return result
 	var base_damage := maxi(1, attacker_attack - defender_defense)
 	var variance := local_rng.randi_range(-2, 2)
 	result.damage = maxi(1, base_damage + variance)

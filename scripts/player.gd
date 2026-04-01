@@ -44,7 +44,6 @@ func _ready() -> void:
 	_navigator.set_graph(graph_renderer.graph)
 	_cell_size = graph_renderer.cell_size
 	_navigator.vertex_entered.connect(_on_vertex_entered)
-	_navigator.movement_blocked.connect(_on_movement_blocked)
 	if !_navigator.set_current_vertex(start_vertex_id, true): push_warning("Player did not find a valid start vertex.")
 
 
@@ -95,10 +94,6 @@ func _on_vertex_entered(vertex_id: int, _previous_vertex_id: int, _via_direction
 		return
 	global_position = Vector3(vertex.position.x * _cell_size, global_position.y, vertex.position.y * _cell_size)
 	_logic_resolver.apply_on_enter(_navigator.graph, _run_state, vertex_id)
-
-
-func _on_movement_blocked(_from_vertex_id: int, _direction: Direction.Cardinal, reason: StringName) -> void:
-	push_warning("Movement blocked: %s" % String(reason))
 
 
 func _interact_current_vertex() -> bool:
@@ -183,15 +178,18 @@ func _attack_enemy_at_vertex(vertex_id: int) -> bool:
 	var enemy := enemy_manager.get_enemy_at_vertex(vertex_id)
 	if enemy == null:
 		return false
+	var enemy_name := "Enemy"
+	if enemy.enemy_resource != null:
+		enemy_name = enemy.enemy_resource.name
 	var result := CombatResolver.resolve_attack(combat_stats, enemy.combat_stats)
 	if not result.hit:
-		var miss_message := "Player misses enemy on vertex %d" % vertex_id
+		var miss_message := "You miss %s." % enemy_name
 		print(miss_message)
 		_log_message(miss_message)
 		return true
 	enemy.apply_damage(result.damage)
 	var crit_text := " (CRIT)" if result.crit else ""
-	var hit_message := "Player hits enemy for %d%s on vertex %d" % [result.damage, crit_text, vertex_id]
+	var hit_message := "You hit %s for %d damage%s." % [enemy_name, result.damage, crit_text]
 	print(hit_message)
 	_log_message(hit_message)
 	return true
@@ -201,10 +199,10 @@ func apply_damage(amount: int) -> void:
 	if amount <= 0:
 		return
 	current_health = maxi(0, current_health - amount)
-	_log_message("Player takes %d damage. HP: %d/%d" % [amount, current_health, max_health])
+	_log_message("You take %d damage. HP: %d/%d" % [amount, current_health, max_health])
 	if current_health == 0:
-		print("Player has been defeated.")
-		_log_message("Player has been defeated.")
+		print("You have been defeated.")
+		_log_message("You have been defeated.")
 
 
 func _log_message(message: String) -> void:
