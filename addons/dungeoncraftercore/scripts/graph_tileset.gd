@@ -27,6 +27,7 @@ func get_texture_for_surface(surface: Direction.Surface, rng: RandomNumberGenera
 
 
 func _pick_weighted_texture(weighted_textures: Array[TileTexture], rng: RandomNumberGenerator = null) -> Texture2D:
+	if weighted_textures.is_empty(): return null
 	if weighted_textures.size() == 1: return weighted_textures[0].texture
 
 	var total_weight := 0.0

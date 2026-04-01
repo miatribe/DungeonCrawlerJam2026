@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://b4m8f44170jkh"]
+
+[ext_resource type="Script" uid="uid://b47em3wbcse4b" path="res://addons/dungeoncrafterrenderer/scripts/graph_renderer.gd" id="1_jrd7e"]
+[ext_resource type="Resource" uid="uid://dlk326n6m4v6" path="res://assets/graphs/Maze.tres" id="2_jrd7e"]
+[ext_resource type="PackedScene" uid="uid://3hqdxjm15s8q" path="res://scenes/Player.tscn" id="3_ceqt7"]
+[ext_resource type="Script" uid="uid://chxxomku6c3gl" path="res://scripts/enemy_manager.gd" id="4_7ufv8"]
+[ext_resource type="PackedScene" uid="uid://ck5vlwmn85tju" path="res://scenes/Enemy.tscn" id="5_kjlwm"]
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="6_m3jo1"]
+[ext_resource type="Resource" uid="uid://deusy8ad3ixac" path="res://assets/enemies/RoboRat.tres" id="7_jrd7e"]
+[ext_resource type="Script" uid="uid://dbdi6adikf8ik" path="res://scripts/turn_manager.gd" id="8_5lwvx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_so7uu"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_w1a86"]
+sky_material = SubResource("ProceduralSkyMaterial_so7uu")
+
+[sub_resource type="Environment" id="Environment_hm6wk"]
+background_mode = 1
+background_color = Color(0.7490196, 0.7490196, 0.7490196, 1)
+sky = SubResource("Sky_w1a86")
+tonemap_mode = 2
+
+[node name="Maze" type="Node3D" unique_id=395339508]
+script = ExtResource("1_jrd7e")
+graph = ExtResource("2_jrd7e")
+metadata/_custom_type_script = "uid://b47em3wbcse4b"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=898481221]
+environment = SubResource("Environment_hm6wk")
+
+[node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer", "turn_manager", "enemy_manager") instance=ExtResource("3_ceqt7")]
+graph_renderer = NodePath("..")
+turn_manager = NodePath("../TurnManager")
+enemy_manager = NodePath("../EnemyManager")
+start_vertex_id = 2
+
+[node name="EnemyManager" type="Node3D" parent="." unique_id=240141659 node_paths=PackedStringArray("graph_renderer", "player", "turn_manager")]
+script = ExtResource("4_7ufv8")
+graph_renderer = NodePath("..")
+player = NodePath("../Player")
+turn_manager = NodePath("../TurnManager")
+enemy_scene = ExtResource("5_kjlwm")
+enemy_resources = Array[ExtResource("6_m3jo1")]([ExtResource("7_jrd7e")])
+min_spawn_distance_from_player = 10
+target_spawn_vertex_id = 28
+one_time_spawner = true
+metadata/_custom_type_script = "uid://chxxomku6c3gl"
+
+[node name="TurnManager" type="Node" parent="." unique_id=79038389]
+script = ExtResource("8_5lwvx")
+metadata/_custom_type_script = "uid://dbdi6adikf8ik"

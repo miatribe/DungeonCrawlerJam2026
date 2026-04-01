@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dwhnncpiykop1" path="res://scripts/computer.gd" id="1_n6w0s"]
 [ext_resource type="PackedScene" uid="uid://bd3n3heqh4kcs" path="res://scenes/HomeBase.tscn" id="1_th2p1"]
 [ext_resource type="PackedScene" uid="uid://csnks0v3ohdgy" path="res://scenes/ui/TextLog.tscn" id="1_xihgh"]
+[ext_resource type="PackedScene" uid="uid://d11qt3e0tak8v" path="res://scenes/MapOne.tscn" id="2_aqdi6"]
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
+[ext_resource type="PackedScene" uid="uid://b4m8f44170jkh" path="res://scenes/Maze.tscn" id="3_c1chd"]
 [ext_resource type="Texture2D" uid="uid://be7pct5k0q7g8" path="res://assets/images/ui_basic_sample7.png" id="5_68ujm"]
 
 [node name="Computer" type="Control" unique_id=716823398]
@@ -14,6 +16,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6w0s")
+logic_scene_map = Dictionary[StringName, PackedScene]({
+&"vertex_212_logic_1775072399": ExtResource("1_th2p1"),
+&"vertex_57_logic_1775071710": ExtResource("3_c1chd"),
+&"vertex_62_logic_1774834428": ExtResource("2_aqdi6")
+})
 loading_screen_hold_seconds = 1.0
 
 [node name="PlayerInput" type="Node" parent="." unique_id=1777251988]

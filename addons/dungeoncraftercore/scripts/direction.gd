@@ -1,4 +1,4 @@
-extends Resource
+extends RefCounted
 class_name Direction
 
 enum Cardinal {NORTH, SOUTH, EAST, WEST, NONE = -1} # TODO fix this in the future so we do not need _CLOCKWISE
