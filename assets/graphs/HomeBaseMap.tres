@@ -279,6 +279,9 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 [sub_resource type="Resource" id="Resource_8dep7"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_1_logic_1775081887"
+trigger_type = 1
+required_direction = 3
+one_shot = false
 payload = {
 "flag_id": &"Talk-01",
 "type": "set_flag"
@@ -350,6 +353,8 @@ entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_k1juy")])
 [sub_resource type="Resource" id="Resource_evl6r"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_62_logic_1774834428"
+trigger_type = 1
+required_direction = 1
 one_shot = false
 payload = {
 "flag_id": &"TP-MapOne",
@@ -396,6 +401,7 @@ script = ExtResource("8_xngqq")
 logic_id = &"vertex_66_logic_1774922917"
 trigger_type = 1
 required_direction = 2
+one_shot = false
 payload = {
 "door_state": 0,
 "door_state_mode": "fixed",
