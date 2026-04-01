@@ -21,6 +21,9 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_57_logic_1775071710": ExtResource("3_c1chd"),
 &"vertex_62_logic_1774834428": ExtResource("2_aqdi6")
 })
+logic_message_map = Dictionary[StringName, String]({
+&"vertex_1_logic_1775081887": "This is a test message beep boop"
+})
 loading_screen_hold_seconds = 1.0
 
 [node name="PlayerInput" type="Node" parent="." unique_id=1777251988]
@@ -65,6 +68,7 @@ offset_bottom = 1080.0
 color = Color(0.7792917, 0.47070765, 0.019244023, 1)
 
 [node name="TextLog" parent="AspectRatioContainer/DesignRoot" unique_id=685976710 instance=ExtResource("1_xihgh")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0333

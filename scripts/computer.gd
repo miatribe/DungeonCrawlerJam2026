@@ -3,11 +3,13 @@ extends Control
 @export var logic_scene_map: Dictionary[StringName, PackedScene] = {
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
 }
+@export var logic_message_map: Dictionary[StringName, String] = {}
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
 
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
 @onready var _temp_loading_screen: Control = %TempLoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
+@onready var _text_log: TextLog = %TextLog
 
 var _connected_graph: Graph
 var _is_swapping_scene := false
@@ -46,6 +48,8 @@ func _disconnect_from_current_graph() -> void:
 
 func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
 	if _is_swapping_scene: return
+	if logic_message_map.has(logic_id) and _text_log != null:
+		_text_log.add_message(logic_message_map[logic_id])
 	if not logic_scene_map.has(logic_id): return
 	var target_scene: PackedScene = logic_scene_map.get(logic_id)
 	if target_scene == null:
