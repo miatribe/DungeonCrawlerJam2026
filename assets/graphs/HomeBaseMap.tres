@@ -278,6 +278,18 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_8dep7"]
 script = ExtResource("8_xngqq")
+logic_id = &"vertex_1_logic_1775081887"
+payload = {
+"flag_id": &"Talk-01",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_8hods"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_8dep7")])
+
+[sub_resource type="Resource" id="Resource_dqox5"]
+script = ExtResource("8_xngqq")
 logic_id = &"vertex_3_logic_1774869575"
 trigger_type = 1
 required_direction = 3
@@ -291,11 +303,11 @@ payload = {
 "type": "set_edge_type"
 }
 
-[sub_resource type="Resource" id="Resource_8hods"]
+[sub_resource type="Resource" id="Resource_ggufy"]
 script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_8dep7")])
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_dqox5")])
 
-[sub_resource type="Resource" id="Resource_dqox5"]
+[sub_resource type="Resource" id="Resource_t3l04"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_22_logic_1774918633"
 one_shot = false
@@ -307,7 +319,7 @@ payload = {
 "type": "set_edge_type"
 }
 
-[sub_resource type="Resource" id="Resource_ggufy"]
+[sub_resource type="Resource" id="Resource_7u1rd"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_22_logic_1774918781"
 one_shot = false
@@ -318,29 +330,16 @@ payload = {
 "type": "set_surface_override"
 }
 
-[sub_resource type="Resource" id="Resource_t3l04"]
+[sub_resource type="Resource" id="Resource_yuwlx"]
 script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_dqox5"), SubResource("Resource_ggufy")])
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_t3l04"), SubResource("Resource_7u1rd")])
 
-[sub_resource type="Resource" id="Resource_7u1rd"]
+[sub_resource type="Resource" id="Resource_k1juy"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_57_logic_1775071710"
 one_shot = false
 payload = {
 "flag_id": &"TP-Maze",
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_yuwlx"]
-script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_7u1rd")])
-
-[sub_resource type="Resource" id="Resource_k1juy"]
-script = ExtResource("8_xngqq")
-logic_id = &"vertex_62_logic_1774834428"
-one_shot = false
-payload = {
-"flag_id": &"TP-MapOne",
 "type": "set_flag"
 }
 
@@ -350,7 +349,22 @@ entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_k1juy")])
 
 [sub_resource type="Resource" id="Resource_evl6r"]
 script = ExtResource("8_xngqq")
+logic_id = &"vertex_62_logic_1774834428"
+one_shot = false
+payload = {
+"flag_id": &"TP-MapOne",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_wclco"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_evl6r")])
+
+[sub_resource type="Resource" id="Resource_41ujd"]
+script = ExtResource("8_xngqq")
 logic_id = &"vertex_63_logic_1774869559"
+trigger_type = 1
+required_direction = 1
 one_shot = false
 payload = {
 "door_state": 1,
@@ -360,11 +374,11 @@ payload = {
 "type": "set_edge_type"
 }
 
-[sub_resource type="Resource" id="Resource_wclco"]
+[sub_resource type="Resource" id="Resource_yows4"]
 script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_evl6r")])
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_41ujd")])
 
-[sub_resource type="Resource" id="Resource_41ujd"]
+[sub_resource type="Resource" id="Resource_do3nm"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_66_logic_1774922897"
 trigger_type = 1
@@ -377,7 +391,7 @@ payload = {
 "type": "set_surface_override"
 }
 
-[sub_resource type="Resource" id="Resource_yows4"]
+[sub_resource type="Resource" id="Resource_ded1s"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_66_logic_1774922917"
 trigger_type = 1
@@ -391,11 +405,11 @@ payload = {
 "type": "set_edge_type"
 }
 
-[sub_resource type="Resource" id="Resource_do3nm"]
+[sub_resource type="Resource" id="Resource_m0hkw"]
 script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_41ujd"), SubResource("Resource_yows4")])
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_do3nm"), SubResource("Resource_ded1s")])
 
-[sub_resource type="Resource" id="Resource_ded1s"]
+[sub_resource type="Resource" id="Resource_52j04"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_69_logic_1774918417"
 trigger_type = 1
@@ -409,7 +423,7 @@ payload = {
 "type": "set_surface_override"
 }
 
-[sub_resource type="Resource" id="Resource_m0hkw"]
+[sub_resource type="Resource" id="Resource_17wco"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_69_logic_1774918604"
 trigger_type = 1
@@ -424,24 +438,13 @@ payload = {
 "type": "set_edge_type"
 }
 
-[sub_resource type="Resource" id="Resource_52j04"]
-script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_ded1s"), SubResource("Resource_m0hkw")])
-
-[sub_resource type="Resource" id="Resource_17wco"]
-script = ExtResource("8_xngqq")
-logic_id = &"vertex_1_logic_1775081887"
-payload = {
-"flag_id": &"Talk-01",
-"type": "set_flag"
-}
-
 [sub_resource type="Resource" id="Resource_6qkit"]
 script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_17wco")])
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_52j04"), SubResource("Resource_17wco")])
 
 [sub_resource type="Resource" id="Resource_m00ky"]
 script = ExtResource("8_1lnfu")
+id = 24
 position = Vector2i(18, 12)
 edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_26alp")
@@ -763,14 +766,14 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 87: SubResource("Resource_7uf7l")
 })
 vertex_logic = Dictionary[int, ExtResource("7_rs16f")]({
-1: SubResource("Resource_6qkit"),
-3: SubResource("Resource_8hods"),
-22: SubResource("Resource_t3l04"),
-57: SubResource("Resource_yuwlx"),
-62: SubResource("Resource_67ctg"),
-63: SubResource("Resource_wclco"),
-66: SubResource("Resource_do3nm"),
-69: SubResource("Resource_52j04")
+1: SubResource("Resource_8hods"),
+3: SubResource("Resource_ggufy"),
+22: SubResource("Resource_yuwlx"),
+57: SubResource("Resource_67ctg"),
+62: SubResource("Resource_wclco"),
+63: SubResource("Resource_yows4"),
+66: SubResource("Resource_m0hkw"),
+69: SubResource("Resource_6qkit")
 })
 tilesets = Array[ExtResource("5_m2n8i")]([ExtResource("6_26alp")])
 doors = Array[ExtResource("1_4mscd")]([ExtResource("2_ofl54"), ExtResource("3_m2n8i")])

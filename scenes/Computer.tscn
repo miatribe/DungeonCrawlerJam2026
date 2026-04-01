@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
 [ext_resource type="PackedScene" uid="uid://b4m8f44170jkh" path="res://scenes/Maze.tscn" id="3_c1chd"]
 [ext_resource type="Texture2D" uid="uid://be7pct5k0q7g8" path="res://assets/images/ui_basic_sample7.png" id="5_68ujm"]
+[ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -78,6 +79,21 @@ anchor_bottom = 0.948
 offset_top = -6.1035156e-05
 offset_right = 0.64001465
 offset_bottom = 0.0
+
+[node name="MiniMap" parent="AspectRatioContainer/DesignRoot" unique_id=31798792 instance=ExtResource("6_4rg2b")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -255.00122
+offset_top = 11.0
+offset_right = -23.00122
+offset_bottom = 243.0
+reveal_radius = 2
+cell_size = 40.0
+visited_tile_color = Color(0.3254902, 1, 0.41568628, 1)
+unvisited_tile_color = Color(0.2750277, 0.34373164, 0.42306724, 1)
+player_color = Color(0.24840015, 0.24840018, 0.24840015, 1)
+border_color = Color(2.623126e-06, 0.57043785, 0.15670037, 1)
+background_color = Color(0, 0, 0, 0.8862745)
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1

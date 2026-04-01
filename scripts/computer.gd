@@ -4,12 +4,15 @@ extends Control
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
 }
 @export var logic_message_map: Dictionary[StringName, String] = {}
+@export var minimap_unlock_logic_ids: Array[StringName] = []
+@export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
 
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
 @onready var _temp_loading_screen: Control = %TempLoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
 @onready var _text_log: TextLog = %TextLog
+@onready var _mini_map: MiniMap = %MiniMap
 
 var _connected_graph: Graph
 var _is_swapping_scene := false
@@ -20,6 +23,11 @@ func _ready() -> void:
 	if _temp_loading_screen != null: _temp_loading_screen.visible = false
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
+	_setup_mini_map()
+
+
+func _process(_delta: float) -> void:
+	_sync_mini_map_context()
 
 
 func _connect_to_current_graph() -> void:
@@ -50,6 +58,8 @@ func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
 	if _is_swapping_scene: return
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
+	if minimap_unlock_logic_ids.has(logic_id) and _mini_map != null:
+		_mini_map.set_unlocked(true)
 	if not logic_scene_map.has(logic_id): return
 	var target_scene: PackedScene = logic_scene_map.get(logic_id)
 	if target_scene == null:
@@ -75,6 +85,7 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	_set_loading_screen_visible(false)
 	_set_player_movement_enabled(true)
 	_connect_to_current_graph()
+	_sync_mini_map_context()
 	_is_swapping_scene = false
 
 
@@ -124,6 +135,24 @@ func _inject_run_state_into_player() -> void:
 	var player := _get_current_player()
 	if player != null:
 		player.set_run_state(_map_state_store.run_state)
+
+
+func _setup_mini_map() -> void:
+	if _mini_map == null:
+		return
+	_mini_map.set_unlocked(minimap_unlocked_by_default)
+	_sync_mini_map_context()
+
+
+func _sync_mini_map_context() -> void:
+	if _mini_map == null:
+		return
+	var graph_renderer := _get_current_graph_renderer()
+	var player := _get_current_player()
+	if graph_renderer == null:
+		_mini_map.set_context(null, player)
+		return
+	_mini_map.set_context(graph_renderer.graph, player)
 
 
 func _get_current_player() -> Player:
