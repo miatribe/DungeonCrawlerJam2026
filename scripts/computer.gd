@@ -76,7 +76,9 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 
 func _swap_subviewport_scene(scene: PackedScene) -> void:
 	if scene == null or _subviewport == null: return
-	for child in _subviewport.get_children(): child.queue_free()
+	for child in _subviewport.get_children():
+		_subviewport.remove_child(child)
+		child.queue_free()
 	var next_scene := scene.instantiate()
 	if next_scene == null:
 		push_warning("Computer: Failed to instantiate replacement scene.")
