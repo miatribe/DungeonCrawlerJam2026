@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cgtwtue6u0ft5" path="res://assets/images/Wall_tiles_1024x1024_metal_lvl_r2.png" id="5_llkw7"]
 [ext_resource type="Script" uid="uid://sqxcsw1riabp" path="res://addons/dungeoncraftercore/scripts/graph_tileset.gd" id="6_ibfv6"]
 [ext_resource type="Texture2D" uid="uid://bpji4usmxeh4w" path="res://assets/images/Wall_tiles_1024x1024_metal_lvl_r3.png" id="7_yeqmw"]
+[ext_resource type="Texture2D" uid="uid://br27mryc2jquj" path="res://assets/images/ceiling_tiles_1024x1024_1.png" id="8_ceil1"]
+[ext_resource type="Texture2D" uid="uid://q82yxno33jyk" path="res://assets/images/ceiling_tiles_1024x1024_2.png" id="9_ceil2"]
+[ext_resource type="Texture2D" uid="uid://bykfwjrr78rmd" path="res://assets/images/ceiling_tiles_1024x1024_3.png" id="10_ceil3"]
+[ext_resource type="Texture2D" uid="uid://mjvjkqictm83" path="res://assets/images/ceiling_tiles_1024x1024_4.png" id="11_ceil4"]
 
 [sub_resource type="Resource" id="Resource_gni4f"]
 script = ExtResource("1_nw5ic")
@@ -99,12 +103,36 @@ texture = ExtResource("7_yeqmw")
 chance_percent = 50.0
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
+[sub_resource type="Resource" id="Resource_ceil_1"]
+script = ExtResource("1_nw5ic")
+texture = ExtResource("8_ceil1")
+chance_percent = 25.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_ceil_2"]
+script = ExtResource("1_nw5ic")
+texture = ExtResource("9_ceil2")
+chance_percent = 25.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_ceil_3"]
+script = ExtResource("1_nw5ic")
+texture = ExtResource("10_ceil3")
+chance_percent = 25.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_ceil_4"]
+script = ExtResource("1_nw5ic")
+texture = ExtResource("11_ceil4")
+chance_percent = 25.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
 [resource]
 script = ExtResource("6_ibfv6")
 north_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_euok5"), SubResource("Resource_lheyx"), SubResource("Resource_248os")])
 east_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_euok5"), SubResource("Resource_aycl4"), SubResource("Resource_ibfv6")])
 south_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_euok5"), SubResource("Resource_x3g7j"), SubResource("Resource_nmx1e")])
 west_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_euok5"), SubResource("Resource_fi60u"), SubResource("Resource_rkh0l")])
-ceiling_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_gni4f"), SubResource("Resource_jxb8x"), SubResource("Resource_llkw7")])
+ceiling_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_ceil_1"), SubResource("Resource_ceil_2"), SubResource("Resource_ceil_3"), SubResource("Resource_ceil_4")])
 floor_textures = Array[ExtResource("1_nw5ic")]([SubResource("Resource_rhlp8"), SubResource("Resource_4bx6k"), SubResource("Resource_gogpw")])
 metadata/_custom_type_script = "uid://sqxcsw1riabp"
