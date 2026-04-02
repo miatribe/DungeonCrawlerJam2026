@@ -23,7 +23,7 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_62_logic_1774834428": ExtResource("2_aqdi6")
 })
 logic_message_map = Dictionary[StringName, String]({
-&"vertex_1_logic_1775081887": "This is a test message beep boop"
+&"vertex_1_logic_1775081887": "beep boop"
 })
 loading_screen_hold_seconds = 1.0
 
