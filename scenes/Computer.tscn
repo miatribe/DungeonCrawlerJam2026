@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://d11qt3e0tak8v" path="res://scenes/MapOne.tscn" id="2_aqdi6"]
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
 [ext_resource type="PackedScene" uid="uid://b4m8f44170jkh" path="res://scenes/Maze.tscn" id="3_c1chd"]
-[ext_resource type="Texture2D" uid="uid://be7pct5k0q7g8" path="res://assets/images/ui_basic_sample7.png" id="5_68ujm"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
+[ext_resource type="Texture2D" uid="uid://dh5lqtqp2rxrw" path="res://assets/images/ui_basic_sample8.png" id="8_c1chd"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -85,9 +85,9 @@ unique_name_in_owner = true
 layout_mode = 1
 offset_left = -255.00122
 offset_top = 11.0
-offset_right = -23.00122
-offset_bottom = 243.0
-reveal_radius = 2
+offset_right = -20.00122
+offset_bottom = 246.0
+reveal_radius = 3
 cell_size = 40.0
 visited_tile_color = Color(0.3254902, 1, 0.41568628, 1)
 unvisited_tile_color = Color(0.2750277, 0.34373164, 0.42306724, 1)
@@ -103,6 +103,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_68ujm")
+texture = ExtResource("8_c1chd")
 expand_mode = 1
 stretch_mode = 6
