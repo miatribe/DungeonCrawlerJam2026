@@ -13,22 +13,28 @@
 [ext_resource type="Texture2D" uid="uid://bykfwjrr78rmd" path="res://assets/images/ceiling_tiles_1024x1024_3.png" id="10_ceil3"]
 [ext_resource type="Texture2D" uid="uid://mjvjkqictm83" path="res://assets/images/ceiling_tiles_1024x1024_4.png" id="11_ceil4"]
 
-[sub_resource type="Resource" id="Resource_gni4f"]
+[sub_resource type="Resource" id="Resource_ceil_1"]
 script = ExtResource("1_nw5ic")
-texture = ExtResource("2_e7tdv")
-chance_percent = 40.0
+texture = ExtResource("8_ceil1")
+chance_percent = 25.0
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_jxb8x"]
+[sub_resource type="Resource" id="Resource_ceil_2"]
 script = ExtResource("1_nw5ic")
-texture = ExtResource("3_lncmh")
-chance_percent = 10.0
+texture = ExtResource("9_ceil2")
+chance_percent = 25.0
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_llkw7"]
+[sub_resource type="Resource" id="Resource_ceil_3"]
 script = ExtResource("1_nw5ic")
-texture = ExtResource("4_lncmh")
-chance_percent = 50.0
+texture = ExtResource("10_ceil3")
+chance_percent = 25.0
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_ceil_4"]
+script = ExtResource("1_nw5ic")
+texture = ExtResource("11_ceil4")
+chance_percent = 25.0
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_euok5"]
@@ -101,30 +107,6 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 script = ExtResource("1_nw5ic")
 texture = ExtResource("7_yeqmw")
 chance_percent = 50.0
-metadata/_custom_type_script = "uid://cyalxxak2ljvx"
-
-[sub_resource type="Resource" id="Resource_ceil_1"]
-script = ExtResource("1_nw5ic")
-texture = ExtResource("8_ceil1")
-chance_percent = 25.0
-metadata/_custom_type_script = "uid://cyalxxak2ljvx"
-
-[sub_resource type="Resource" id="Resource_ceil_2"]
-script = ExtResource("1_nw5ic")
-texture = ExtResource("9_ceil2")
-chance_percent = 25.0
-metadata/_custom_type_script = "uid://cyalxxak2ljvx"
-
-[sub_resource type="Resource" id="Resource_ceil_3"]
-script = ExtResource("1_nw5ic")
-texture = ExtResource("10_ceil3")
-chance_percent = 25.0
-metadata/_custom_type_script = "uid://cyalxxak2ljvx"
-
-[sub_resource type="Resource" id="Resource_ceil_4"]
-script = ExtResource("1_nw5ic")
-texture = ExtResource("11_ceil4")
-chance_percent = 25.0
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [resource]
