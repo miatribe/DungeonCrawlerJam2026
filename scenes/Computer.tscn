@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d11qt3e0tak8v" path="res://scenes/MapOne.tscn" id="2_aqdi6"]
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
 [ext_resource type="PackedScene" uid="uid://b4m8f44170jkh" path="res://scenes/Maze.tscn" id="3_c1chd"]
+[ext_resource type="PackedScene" uid="uid://mqla7xk304ae" path="res://scenes/Gaunt.tscn" id="5_2xgbv"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 [ext_resource type="Texture2D" uid="uid://dh5lqtqp2rxrw" path="res://assets/images/ui_basic_sample8.png" id="8_c1chd"]
 
@@ -21,7 +22,9 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_1_logic_1775178498": ExtResource("1_th2p1"),
 &"vertex_57_logic_1775071710": ExtResource("3_c1chd"),
 &"vertex_5_logic_1775178932": ExtResource("1_th2p1"),
-&"vertex_62_logic_1774834428": ExtResource("2_aqdi6")
+&"vertex_60_logic_1775184106": ExtResource("2_aqdi6"),
+&"vertex_61_logic_1775184206": ExtResource("5_2xgbv"),
+&"vertex_62_logic_1774834428": ExtResource("1_th2p1")
 })
 logic_message_map = Dictionary[StringName, String]({
 &"vertex_1_logic_1775081887": "beep boop"

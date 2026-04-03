@@ -1,6 +1,7 @@
 extends Node3D
 class_name EnemyManager
 
+const ENEMY_MANAGER_GROUP := "enemy_manager"
 
 @export var graph_renderer: GraphRenderer
 @export var player: Player
@@ -20,6 +21,7 @@ var _has_spawned_wave: bool = false
 
 
 func _ready() -> void:
+	add_to_group(ENEMY_MANAGER_GROUP)
 	if graph_renderer == null or not (graph_renderer is GraphRenderer):
 		push_warning("GraphRenderer not assigned to EnemyManager.")
 		return
@@ -30,8 +32,6 @@ func _ready() -> void:
 	_refresh_enemy_list()
 	child_entered_tree.connect(_on_child_entered_tree)
 	child_exiting_tree.connect(_on_child_exiting_tree)
-	if turn_manager != null and not turn_manager.PlayerTurnOver.is_connected(_on_player_turn_over):
-		turn_manager.PlayerTurnOver.connect(_on_player_turn_over)
 
 
 func has_required_references() -> bool: return graph != null and player != null
@@ -67,10 +67,10 @@ func is_vertex_occupied_by_enemy(vertex_id: int, ignored_enemy: Enemy = null) ->
 
 
 func get_enemy_at_vertex(vertex_id: int, ignored_enemy: Enemy = null) -> Enemy:
-	for enemy in enemies:
-		if not is_instance_valid(enemy): continue
-		if ignored_enemy != null and enemy == ignored_enemy: continue
-		if enemy.current_vertex_id == vertex_id: return enemy
+	for manager in _get_all_enemy_managers():
+		var enemy := manager._get_enemy_at_vertex_local(vertex_id, ignored_enemy)
+		if enemy != null:
+			return enemy
 	return null
 
 
@@ -174,11 +174,37 @@ func _can_spawn_at_vertex(vertex_id: int) -> bool:
 
 
 func _is_vertex_occupied_by_enemy(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
+	for manager in _get_all_enemy_managers():
+		if manager._is_vertex_occupied_by_enemy_local(vertex_id, ignored_enemy):
+			return true
+	return false
+
+
+func _is_vertex_occupied_by_enemy_local(vertex_id: int, ignored_enemy: Enemy = null) -> bool:
 	for enemy in enemies:
 		if not is_instance_valid(enemy): continue
 		if ignored_enemy != null and enemy == ignored_enemy: continue
 		if enemy.current_vertex_id == vertex_id: return true
 	return false
+
+
+func _get_enemy_at_vertex_local(vertex_id: int, ignored_enemy: Enemy = null) -> Enemy:
+	for enemy in enemies:
+		if not is_instance_valid(enemy): continue
+		if ignored_enemy != null and enemy == ignored_enemy: continue
+		if enemy.current_vertex_id == vertex_id: return enemy
+	return null
+
+
+func _get_all_enemy_managers() -> Array[EnemyManager]:
+	var managers: Array[EnemyManager] = []
+	if get_tree() != null:
+		for node in get_tree().get_nodes_in_group(ENEMY_MANAGER_GROUP):
+			if node is EnemyManager and is_instance_valid(node):
+				managers.append(node as EnemyManager)
+	if not managers.has(self):
+		managers.append(self)
+	return managers
 
 
 func _pick_random_enemy_resource() -> EnemyResource:
@@ -193,8 +219,3 @@ func _on_child_entered_tree(_node: Node) -> void: _refresh_enemy_list()
 
 
 func _on_child_exiting_tree(_node: Node) -> void: _refresh_enemy_list()
-
-
-func _on_player_turn_over() -> void:
-	take_turn()
-	if turn_manager != null: turn_manager.ai_took_turn()

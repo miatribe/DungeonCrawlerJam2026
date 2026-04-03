@@ -331,9 +331,12 @@ entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_ggufy"), SubResou
 [sub_resource type="Resource" id="Resource_yuwlx"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_57_logic_1775071710"
+trigger_type = 1
+required_direction = 2
 one_shot = false
 payload = {
 "flag_id": &"TP-Maze",
+"required_direction": 2,
 "type": "set_flag"
 }
 
@@ -344,10 +347,12 @@ entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_yuwlx")])
 [sub_resource type="Resource" id="Resource_67ctg"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_62_logic_1774834428"
+trigger_type = 1
 required_direction = 1
 one_shot = false
 payload = {
-"flag_id": &"TP-MapOne",
+"flag_id": &"TP-Final",
+"required_direction": 1,
 "type": "set_flag"
 }
 
@@ -438,6 +443,38 @@ script = ExtResource("7_rs16f")
 entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_m0hkw"), SubResource("Resource_52j04")])
 
 [sub_resource type="Resource" id="Resource_6qkit"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_60_logic_1775184106"
+trigger_type = 1
+required_direction = 2
+one_shot = false
+payload = {
+"flag_id": &"TP-MapOne",
+"required_direction": 2,
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_m00ky"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_6qkit")])
+
+[sub_resource type="Resource" id="Resource_w4840"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_61_logic_1775184206"
+trigger_type = 1
+required_direction = 3
+one_shot = false
+payload = {
+"flag_id": &"TP-Gaunt",
+"required_direction": 3,
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_wagrp"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_w4840")])
+
+[sub_resource type="Resource" id="Resource_l11c1"]
 script = ExtResource("8_1lnfu")
 id = 24
 position = Vector2i(18, 12)
@@ -445,7 +482,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_26alp")
 })
 
-[sub_resource type="Resource" id="Resource_m00ky"]
+[sub_resource type="Resource" id="Resource_471k5"]
 script = ExtResource("8_1lnfu")
 id = 1
 position = Vector2i(18, 13)
@@ -454,7 +491,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_rs16f")
 })
 
-[sub_resource type="Resource" id="Resource_l11c1"]
+[sub_resource type="Resource" id="Resource_hj483"]
 script = ExtResource("8_1lnfu")
 id = 2
 position = Vector2i(18, 14)
@@ -465,7 +502,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_1lnfu")
 })
 
-[sub_resource type="Resource" id="Resource_471k5"]
+[sub_resource type="Resource" id="Resource_d4x27"]
 script = ExtResource("8_1lnfu")
 id = 3
 position = Vector2i(17, 14)
@@ -475,7 +512,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_s1dam")
 })
 
-[sub_resource type="Resource" id="Resource_hj483"]
+[sub_resource type="Resource" id="Resource_xgfwr"]
 script = ExtResource("8_1lnfu")
 id = 4
 position = Vector2i(19, 14)
@@ -484,7 +521,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_jxjp8")
 })
 
-[sub_resource type="Resource" id="Resource_d4x27"]
+[sub_resource type="Resource" id="Resource_qkc44"]
 script = ExtResource("8_1lnfu")
 id = 22
 position = Vector2i(17, 16)
@@ -494,7 +531,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_qcikp")
 })
 
-[sub_resource type="Resource" id="Resource_xgfwr"]
+[sub_resource type="Resource" id="Resource_r4ryc"]
 script = ExtResource("8_1lnfu")
 id = 23
 position = Vector2i(17, 15)
@@ -504,7 +541,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 2: SubResource("Resource_l427v")
 })
 
-[sub_resource type="Resource" id="Resource_qkc44"]
+[sub_resource type="Resource" id="Resource_4axe7"]
 script = ExtResource("8_1lnfu")
 id = 24
 position = Vector2i(18, 15)
@@ -515,7 +552,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_l427v")
 })
 
-[sub_resource type="Resource" id="Resource_r4ryc"]
+[sub_resource type="Resource" id="Resource_fimfm"]
 script = ExtResource("8_1lnfu")
 id = 25
 position = Vector2i(18, 16)
@@ -526,7 +563,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_akeqx")
 })
 
-[sub_resource type="Resource" id="Resource_4axe7"]
+[sub_resource type="Resource" id="Resource_ko0jg"]
 script = ExtResource("8_1lnfu")
 id = 26
 position = Vector2i(19, 16)
@@ -535,7 +572,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_3i0d7")
 })
 
-[sub_resource type="Resource" id="Resource_fimfm"]
+[sub_resource type="Resource" id="Resource_pyaa4"]
 script = ExtResource("8_1lnfu")
 id = 27
 position = Vector2i(19, 15)
@@ -545,7 +582,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_ixvrp")
 })
 
-[sub_resource type="Resource" id="Resource_ko0jg"]
+[sub_resource type="Resource" id="Resource_7vh0m"]
 script = ExtResource("8_1lnfu")
 id = 51
 position = Vector2i(18, 17)
@@ -554,7 +591,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_0dkyb")
 })
 
-[sub_resource type="Resource" id="Resource_pyaa4"]
+[sub_resource type="Resource" id="Resource_ana28"]
 script = ExtResource("8_1lnfu")
 id = 52
 position = Vector2i(18, 18)
@@ -564,7 +601,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 2: SubResource("Resource_75bhx")
 })
 
-[sub_resource type="Resource" id="Resource_7vh0m"]
+[sub_resource type="Resource" id="Resource_lsfwy"]
 script = ExtResource("8_1lnfu")
 id = 55
 position = Vector2i(18, 19)
@@ -573,7 +610,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_yn6dj")
 })
 
-[sub_resource type="Resource" id="Resource_ana28"]
+[sub_resource type="Resource" id="Resource_oi5ys"]
 script = ExtResource("8_1lnfu")
 id = 57
 position = Vector2i(19, 18)
@@ -581,7 +618,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_75bhx")
 })
 
-[sub_resource type="Resource" id="Resource_lsfwy"]
+[sub_resource type="Resource" id="Resource_vcsro"]
 script = ExtResource("8_1lnfu")
 id = 58
 position = Vector2i(18, 20)
@@ -592,7 +629,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_ivte6")
 })
 
-[sub_resource type="Resource" id="Resource_oi5ys"]
+[sub_resource type="Resource" id="Resource_hrrr0"]
 script = ExtResource("8_1lnfu")
 id = 60
 position = Vector2i(19, 20)
@@ -600,7 +637,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_20smd")
 })
 
-[sub_resource type="Resource" id="Resource_vcsro"]
+[sub_resource type="Resource" id="Resource_cdedn"]
 script = ExtResource("8_1lnfu")
 id = 61
 position = Vector2i(17, 20)
@@ -608,7 +645,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 2: SubResource("Resource_ivte6")
 })
 
-[sub_resource type="Resource" id="Resource_hrrr0"]
+[sub_resource type="Resource" id="Resource_rxdjj"]
 script = ExtResource("8_1lnfu")
 id = 62
 position = Vector2i(18, 21)
@@ -616,7 +653,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_rfppb")
 })
 
-[sub_resource type="Resource" id="Resource_cdedn"]
+[sub_resource type="Resource" id="Resource_7ty4r"]
 script = ExtResource("8_1lnfu")
 id = 63
 position = Vector2i(16, 14)
@@ -625,7 +662,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_v47yp")
 })
 
-[sub_resource type="Resource" id="Resource_rxdjj"]
+[sub_resource type="Resource" id="Resource_32mxi"]
 script = ExtResource("8_1lnfu")
 id = 64
 position = Vector2i(15, 14)
@@ -634,7 +671,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_pk35i")
 })
 
-[sub_resource type="Resource" id="Resource_7ty4r"]
+[sub_resource type="Resource" id="Resource_p16fp"]
 script = ExtResource("8_1lnfu")
 id = 65
 position = Vector2i(14, 14)
@@ -643,7 +680,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 2: SubResource("Resource_pk35i")
 })
 
-[sub_resource type="Resource" id="Resource_32mxi"]
+[sub_resource type="Resource" id="Resource_j33rs"]
 script = ExtResource("8_1lnfu")
 id = 66
 position = Vector2i(14, 15)
@@ -655,7 +692,7 @@ surface_texture_overrides = Dictionary[int, int]({
 1: 1
 })
 
-[sub_resource type="Resource" id="Resource_p16fp"]
+[sub_resource type="Resource" id="Resource_13xcs"]
 script = ExtResource("8_1lnfu")
 id = 67
 position = Vector2i(14, 16)
@@ -664,7 +701,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 2: SubResource("Resource_lu536")
 })
 
-[sub_resource type="Resource" id="Resource_j33rs"]
+[sub_resource type="Resource" id="Resource_brndg"]
 script = ExtResource("8_1lnfu")
 id = 68
 position = Vector2i(15, 16)
@@ -673,7 +710,7 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 3: SubResource("Resource_lu536")
 })
 
-[sub_resource type="Resource" id="Resource_13xcs"]
+[sub_resource type="Resource" id="Resource_lwol7"]
 script = ExtResource("8_1lnfu")
 id = 69
 position = Vector2i(16, 16)
@@ -690,32 +727,32 @@ script = ExtResource("4_ofl54")
 _next_vertex_id = 70
 _next_edge_id = 88
 vertices = Dictionary[int, ExtResource("8_1lnfu")]({
-0: SubResource("Resource_6qkit"),
-1: SubResource("Resource_m00ky"),
-2: SubResource("Resource_l11c1"),
-3: SubResource("Resource_471k5"),
-4: SubResource("Resource_hj483"),
-22: SubResource("Resource_d4x27"),
-23: SubResource("Resource_xgfwr"),
-24: SubResource("Resource_qkc44"),
-25: SubResource("Resource_r4ryc"),
-26: SubResource("Resource_4axe7"),
-27: SubResource("Resource_fimfm"),
-51: SubResource("Resource_ko0jg"),
-52: SubResource("Resource_pyaa4"),
-55: SubResource("Resource_7vh0m"),
-57: SubResource("Resource_ana28"),
-58: SubResource("Resource_lsfwy"),
-60: SubResource("Resource_oi5ys"),
-61: SubResource("Resource_vcsro"),
-62: SubResource("Resource_hrrr0"),
-63: SubResource("Resource_cdedn"),
-64: SubResource("Resource_rxdjj"),
-65: SubResource("Resource_7ty4r"),
-66: SubResource("Resource_32mxi"),
-67: SubResource("Resource_p16fp"),
-68: SubResource("Resource_j33rs"),
-69: SubResource("Resource_13xcs")
+0: SubResource("Resource_l11c1"),
+1: SubResource("Resource_471k5"),
+2: SubResource("Resource_hj483"),
+3: SubResource("Resource_d4x27"),
+4: SubResource("Resource_xgfwr"),
+22: SubResource("Resource_qkc44"),
+23: SubResource("Resource_r4ryc"),
+24: SubResource("Resource_4axe7"),
+25: SubResource("Resource_fimfm"),
+26: SubResource("Resource_ko0jg"),
+27: SubResource("Resource_pyaa4"),
+51: SubResource("Resource_7vh0m"),
+52: SubResource("Resource_ana28"),
+55: SubResource("Resource_lsfwy"),
+57: SubResource("Resource_oi5ys"),
+58: SubResource("Resource_vcsro"),
+60: SubResource("Resource_hrrr0"),
+61: SubResource("Resource_cdedn"),
+62: SubResource("Resource_rxdjj"),
+63: SubResource("Resource_7ty4r"),
+64: SubResource("Resource_32mxi"),
+65: SubResource("Resource_p16fp"),
+66: SubResource("Resource_j33rs"),
+67: SubResource("Resource_13xcs"),
+68: SubResource("Resource_brndg"),
+69: SubResource("Resource_lwol7")
 })
 edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_26alp"),
@@ -754,6 +791,8 @@ vertex_logic = Dictionary[int, ExtResource("7_rs16f")]({
 3: SubResource("Resource_dqox5"),
 22: SubResource("Resource_7u1rd"),
 57: SubResource("Resource_k1juy"),
+60: SubResource("Resource_m00ky"),
+61: SubResource("Resource_wagrp"),
 62: SubResource("Resource_evl6r"),
 63: SubResource("Resource_41ujd"),
 66: SubResource("Resource_ded1s"),

@@ -1,9 +1,12 @@
 extends Control
 
+const STAT_BONUS_FLAG_PREFIX := &"stat_bonus_applied_"
+
 @export var logic_scene_map: Dictionary[StringName, PackedScene] = {
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
 }
 @export var logic_message_map: Dictionary[StringName, String] = {}
+@export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
@@ -58,6 +61,7 @@ func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
 	if _is_swapping_scene: return
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
+	_apply_logic_stat_bonus_once(logic_id)
 	if minimap_unlock_logic_ids.has(logic_id) and _mini_map != null:
 		_mini_map.set_unlocked(true)
 	if not logic_scene_map.has(logic_id): return
@@ -135,6 +139,51 @@ func _inject_run_state_into_player() -> void:
 	var player := _get_current_player()
 	if player != null:
 		player.set_run_state(_map_state_store.run_state)
+		_apply_all_persistent_logic_stat_bonuses(player)
+
+
+func _apply_logic_stat_bonus_once(logic_id: StringName) -> void:
+	if not logic_stat_bonus_map.has(logic_id):
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	var flag_id := _get_stat_bonus_flag_id(logic_id)
+	if run_state.has_flag(flag_id):
+		return
+	run_state.set_flag(flag_id, true)
+	var player := _get_current_player()
+	if player != null:
+		_apply_all_persistent_logic_stat_bonuses(player)
+
+
+func _apply_all_persistent_logic_stat_bonuses(player: Player) -> void:
+	if player == null:
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		player.set_persistent_stat_bonuses(0, 0, 0, 0, 0)
+		return
+	var attack_bonus := 0
+	var defense_bonus := 0
+	var hit_bonus := 0
+	var dodge_bonus := 0
+	var max_health_bonus := 0
+	for key in logic_stat_bonus_map.keys():
+		var logic_id := key as StringName
+		if not run_state.has_flag(_get_stat_bonus_flag_id(logic_id)):
+			continue
+		var bonus_config: Dictionary = logic_stat_bonus_map.get(logic_id, {})
+		attack_bonus += int(bonus_config.get(&"attack", 0))
+		defense_bonus += int(bonus_config.get(&"defense", 0))
+		hit_bonus += int(bonus_config.get(&"hit", 0))
+		dodge_bonus += int(bonus_config.get(&"dodge", 0))
+		max_health_bonus += int(bonus_config.get(&"max_health", 0))
+	player.set_persistent_stat_bonuses(attack_bonus, defense_bonus, hit_bonus, dodge_bonus, max_health_bonus)
+
+
+func _get_stat_bonus_flag_id(logic_id: StringName) -> StringName:
+	return StringName(String(STAT_BONUS_FLAG_PREFIX) + String(logic_id))
 
 
 func _setup_mini_map() -> void:
