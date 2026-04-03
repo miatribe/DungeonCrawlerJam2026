@@ -2,9 +2,42 @@
 
 [ext_resource type="Script" path="res://scripts/ui/player_hp_text.gd" id="1_l2n3m"]
 
-[node name="PlayerHpText" type="Label"]
-custom_minimum_size = Vector2(80, 24)
-offset_right = 80.0
-offset_bottom = 24.0
-text = "0/1"
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_text_bg"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.12, 0.45, 0.12, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="PlayerHpText" type="PanelContainer"]
+custom_minimum_size = Vector2(96, 28)
+offset_right = 96.0
+offset_bottom = 28.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hp_text_bg")
 script = ExtResource("1_l2n3m")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 3
+
+[node name="HealthLabel" type="Label" parent="Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "0/1"

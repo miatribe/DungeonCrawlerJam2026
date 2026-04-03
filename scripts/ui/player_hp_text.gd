@@ -1,4 +1,4 @@
-extends Label
+extends PanelContainer
 class_name PlayerHpText
 
 @export var player_path: NodePath
@@ -9,11 +9,14 @@ var _player: Player
 var _find_timer: float = 0.0
 var _last_current_hp: int = -1
 var _last_max_hp: int = -1
+@onready var _label: Label = %HealthLabel
 
 
 func _ready() -> void:
-	horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	if _label != null:
+		_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_label.add_theme_color_override("font_color", Color(0.2, 0.95, 0.2, 1.0))
 	set_health(0, 1)
 	_resolve_player_reference()
 	_refresh_from_player()
@@ -40,7 +43,8 @@ func set_health(current_hp: int, max_hp: int) -> void:
 	var safe_current := clampi(current_hp, 0, safe_max)
 	_last_current_hp = safe_current
 	_last_max_hp = safe_max
-	text = "%d/%d" % [safe_current, safe_max]
+	if _label != null:
+		_label.text = "%d/%d" % [safe_current, safe_max]
 
 
 func _refresh_from_player() -> void:

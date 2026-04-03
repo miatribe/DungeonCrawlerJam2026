@@ -15,6 +15,18 @@
 [ext_resource type="Script" uid="uid://t4f5o2d8knah" path="res://scripts/ui/player_hp_bar.gd" id="13_eywps"]
 [ext_resource type="Script" uid="uid://6a3yk4q814df" path="res://scripts/ui/player_hp_text.gd" id="14_1x23v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_text_bg"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.12, 0.45, 0.12, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
 anchors_preset = 15
@@ -149,15 +161,31 @@ offset_right = 1845.0012
 offset_bottom = 628.0
 script = ExtResource("13_eywps")
 
-[node name="PlayerHpText" type="Label" parent="AspectRatioContainer/DesignRoot" unique_id=354581613]
+[node name="PlayerHpText" type="PanelContainer" parent="AspectRatioContainer/DesignRoot" unique_id=354581613]
 layout_mode = 0
-offset_left = 1578.0012
-offset_top = 679.0
-offset_right = 1752.0012
-offset_bottom = 747.0
+offset_left = 1574.0012
+offset_top = 669.0
+offset_right = 1755.0012
+offset_bottom = 755.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hp_text_bg")
+script = ExtResource("14_1x23v")
+
+[node name="Margin" type="MarginContainer" parent="AspectRatioContainer/DesignRoot/PlayerHpText" unique_id=1774609481]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 3
+
+[node name="HealthLabel" type="Label" parent="AspectRatioContainer/DesignRoot/PlayerHpText/Margin" unique_id=2056861141]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "0/1"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("14_1x23v")
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1
