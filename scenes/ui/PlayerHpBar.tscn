@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/player_hp_bar.gd" id="1_6a7k8"]
+
+[node name="PlayerHpBar" type="ProgressBar"]
+custom_minimum_size = Vector2(260, 22)
+offset_right = 260.0
+offset_bottom = 22.0
+show_percentage = false
+script = ExtResource("1_6a7k8")

@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/player_hp_text.gd" id="1_l2n3m"]
+
+[node name="PlayerHpText" type="Label"]
+custom_minimum_size = Vector2(80, 24)
+offset_right = 80.0
+offset_bottom = 24.0
+text = "0/1"
+script = ExtResource("1_l2n3m")

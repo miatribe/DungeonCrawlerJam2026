@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://xodj8sv8ccd8" path="res://scripts/ui/upgrade_indicator.gd" id="9_ipp67"]
 [ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_xvgcs"]
 [ext_resource type="Texture2D" uid="uid://rhysq773u72i" path="res://assets/images/ui_basic_sample9.png" id="11_xvgcs"]
+[ext_resource type="Script" uid="uid://t4f5o2d8knah" path="res://scripts/ui/player_hp_bar.gd" id="13_eywps"]
+[ext_resource type="Script" uid="uid://6a3yk4q814df" path="res://scripts/ui/player_hp_text.gd" id="14_1x23v"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -138,6 +140,24 @@ offset_bottom = 497.0
 texture = ExtResource("9_xvgcs")
 expand_mode = 3
 script = ExtResource("9_ipp67")
+
+[node name="PlayerHpBar" type="ProgressBar" parent="AspectRatioContainer/DesignRoot" unique_id=1034684737]
+layout_mode = 0
+offset_left = 1486.0012
+offset_top = 560.0
+offset_right = 1845.0012
+offset_bottom = 628.0
+script = ExtResource("13_eywps")
+
+[node name="PlayerHpText" type="Label" parent="AspectRatioContainer/DesignRoot" unique_id=354581613]
+layout_mode = 0
+offset_left = 1578.0012
+offset_top = 679.0
+offset_right = 1752.0012
+offset_bottom = 747.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_1x23v")
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1
