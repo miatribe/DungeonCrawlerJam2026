@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ds7bw2ccatme1" path="res://assets/images/Wall_switch_ON.png" id="7_ddkvn"]
 [ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="7_polxq"]
 [ext_resource type="Script" uid="uid://clpsx37du4jtm" path="res://addons/dungeoncraftercore/scripts/vertex_logic.gd" id="7_tvadd"]
+[ext_resource type="Texture2D" uid="uid://ccyqgvq56ywxu" path="res://assets/images/teleporter_Floor-ceiling.png" id="8_rq1s5"]
 [ext_resource type="Resource" uid="uid://dcr4bpfpf06j0" path="res://assets/tilesets/MoreRusty.tres" id="10_yd8hl"]
 
 [sub_resource type="Resource" id="Resource_rq1s5"]
@@ -938,6 +939,11 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 [sub_resource type="Resource" id="Resource_hlfvs"]
 script = ExtResource("3_6ntdk")
 texture = ExtResource("7_ddkvn")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_1mnpl"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("8_rq1s5")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_6ntdk"]
@@ -2081,4 +2087,4 @@ vertex_logic = Dictionary[int, ExtResource("6_fq6iw")]({
 })
 tilesets = Array[ExtResource("5_6tkmt")]([ExtResource("10_yd8hl")])
 doors = Array[ExtResource("1_q4lky")]([ExtResource("2_polxq"), ExtResource("3_rq1s5")])
-override_textures = Array[ExtResource("3_6ntdk")]([SubResource("Resource_ilx0p"), SubResource("Resource_hlfvs")])
+override_textures = Array[ExtResource("3_6ntdk")]([SubResource("Resource_ilx0p"), SubResource("Resource_hlfvs"), SubResource("Resource_1mnpl")])

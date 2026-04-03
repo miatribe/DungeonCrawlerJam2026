@@ -8,6 +8,7 @@ script = ExtResource("1_g4hli")
 sprite = ExtResource("2_g4hli")
 name = "Goomra Rat"
 passive = true
+aggro_range = 6
 health = 1
 attack = 0
 metadata/_custom_type_script = "uid://hs8lniq4yfva"

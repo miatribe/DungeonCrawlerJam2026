@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://drfbciq6ccrp6"]
+
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_pg0ma"]
+[ext_resource type="Texture2D" uid="uid://d2pwux8wsmxo3" path="res://assets/images/Robot_Boss_2_maid.png" id="2_pg0ma"]
+
+[resource]
+script = ExtResource("1_pg0ma")
+sprite = ExtResource("2_pg0ma")
+name = "Maid bot"
+health = 5
+defense = 1
+hit = 1
+metadata/_custom_type_script = "uid://hs8lniq4yfva"

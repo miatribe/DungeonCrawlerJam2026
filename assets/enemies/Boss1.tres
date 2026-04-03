@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://brykb8gqtir20"]
+
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_xgt6t"]
+[ext_resource type="Texture2D" uid="uid://c2ysl6ra674g5" path="res://assets/images/robot_boss_1.png" id="2_paetq"]
+
+[resource]
+script = ExtResource("1_xgt6t")
+sprite = ExtResource("2_paetq")
+name = "Boss1"
+health = 5
+attack = 2
+defense = 2
+hit = 2
+dodge = 1
+metadata/_custom_type_script = "uid://hs8lniq4yfva"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://ficdpvhynoem"]
+
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_f2mkd"]
+[ext_resource type="Texture2D" uid="uid://tk1cefq5diei" path="res://assets/images/Final_Boss_0.png" id="2_f2mkd"]
+
+[resource]
+script = ExtResource("1_f2mkd")
+sprite = ExtResource("2_f2mkd")
+name = "FinalBoss"
+health = 15
+attack = 6
+defense = 2
+hit = 2
+dodge = 1
+metadata/_custom_type_script = "uid://hs8lniq4yfva"
