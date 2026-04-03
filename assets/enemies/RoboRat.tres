@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://deusy8ad3ixac"]
 
 [ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_g4hli"]
-[ext_resource type="Texture2D" uid="uid://buly0b1220aat" path="res://assets/images/Robot_Rat_by_Goomra_1.png" id="2_g4hli"]
+[ext_resource type="Texture2D" uid="uid://bsjyyqt716pwr" path="res://assets/images/Robot_Rat_by_Goomra_2.png" id="2_g4hli"]
 
 [resource]
 script = ExtResource("1_g4hli")
 sprite = ExtResource("2_g4hli")
-name = "Robot Rat"
+name = "Goomra Rat"
 passive = true
 health = 1
 attack = 0

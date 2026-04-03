@@ -1723,6 +1723,19 @@ script = ExtResource("3_kfra2")
 texture = ExtResource("7_fif0h")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
+[sub_resource type="Resource" id="Resource_hfuba"]
+script = ExtResource("8_kfra2")
+logic_id = &"vertex_1_logic_1775178498"
+one_shot = false
+payload = {
+"flag_id": &"TP-Home-From-Start-maze",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_efl5f"]
+script = ExtResource("6_m7v80")
+entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_hfuba")])
+
 [sub_resource type="Resource" id="Resource_43l1d"]
 script = ExtResource("8_kfra2")
 logic_id = &"vertex_3_logic_1775177245"
@@ -1855,6 +1868,19 @@ payload = {
 [sub_resource type="Resource" id="Resource_f6b1g"]
 script = ExtResource("6_m7v80")
 entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_lq1qi"), SubResource("Resource_cg0cq"), SubResource("Resource_qmvfp"), SubResource("Resource_kmxhh"), SubResource("Resource_u74nv")])
+
+[sub_resource type="Resource" id="Resource_u0xrw"]
+script = ExtResource("8_kfra2")
+logic_id = &"vertex_5_logic_1775178932"
+one_shot = false
+payload = {
+"flag_id": &"Tp-home-from-maze-end",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_qqayc"]
+script = ExtResource("6_m7v80")
+entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_u0xrw")])
 
 [sub_resource type="Resource" id="Resource_1mnte"]
 script = ExtResource("8_kfra2")
@@ -1991,32 +2017,6 @@ entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_qk2cu"), SubResou
 
 [sub_resource type="Resource" id="Resource_4hhk6"]
 script = ExtResource("6_m7v80")
-
-[sub_resource type="Resource" id="Resource_hfuba"]
-script = ExtResource("8_kfra2")
-logic_id = &"vertex_1_logic_1775178498"
-one_shot = false
-payload = {
-"flag_id": &"TP-Home-From-Start-maze",
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_efl5f"]
-script = ExtResource("6_m7v80")
-entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_hfuba")])
-
-[sub_resource type="Resource" id="Resource_u0xrw"]
-script = ExtResource("8_kfra2")
-logic_id = &"vertex_5_logic_1775178932"
-one_shot = false
-payload = {
-"flag_id": &"Tp-home-from-maze-end",
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_qqayc"]
-script = ExtResource("6_m7v80")
-entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_u0xrw")])
 
 [sub_resource type="Resource" id="Resource_sg8xv"]
 script = ExtResource("7_f17oi")

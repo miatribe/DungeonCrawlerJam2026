@@ -45,9 +45,19 @@ enemy_scene = ExtResource("5_kjlwm")
 enemy_resources = Array[ExtResource("6_m3jo1")]([ExtResource("7_jrd7e")])
 min_spawn_distance_from_player = 10
 target_spawn_vertex_id = 28
-one_time_spawner = true
 metadata/_custom_type_script = "uid://chxxomku6c3gl"
 
 [node name="TurnManager" type="Node" parent="." unique_id=79038389]
 script = ExtResource("8_5lwvx")
 metadata/_custom_type_script = "uid://dbdi6adikf8ik"
+
+[node name="EnemyManager2" type="Node3D" parent="." unique_id=103204921 node_paths=PackedStringArray("graph_renderer", "player", "turn_manager")]
+script = ExtResource("4_7ufv8")
+graph_renderer = NodePath("..")
+player = NodePath("../Player")
+turn_manager = NodePath("../TurnManager")
+enemy_scene = ExtResource("5_kjlwm")
+enemy_resources = Array[ExtResource("6_m3jo1")]([ExtResource("7_jrd7e")])
+min_spawn_distance_from_player = 10
+target_spawn_vertex_id = 82
+metadata/_custom_type_script = "uid://chxxomku6c3gl"

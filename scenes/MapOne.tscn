@@ -34,7 +34,7 @@ environment = SubResource("Environment_hm6wk")
 graph_renderer = NodePath("..")
 turn_manager = NodePath("../TurnManager")
 enemy_manager = NodePath("../EnemyManager")
-start_vertex_id = 2
+start_vertex_id = 0
 
 [node name="EnemyManager" type="Node3D" parent="." unique_id=240141659 node_paths=PackedStringArray("graph_renderer", "player", "turn_manager")]
 script = ExtResource("4_xjkmp")
