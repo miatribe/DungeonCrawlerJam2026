@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mqla7xk304ae" path="res://scenes/Gaunt.tscn" id="5_2xgbv"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 [ext_resource type="Texture2D" uid="uid://dh5lqtqp2rxrw" path="res://assets/images/ui_basic_sample8.png" id="8_c1chd"]
+[ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_ipp67"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -68,8 +69,8 @@ render_target_update_mode = 4
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
-offset_right = 1920.0024
-offset_bottom = 1080.0
+offset_right = 1386.0012
+offset_bottom = 786.0
 color = Color(0.7792917, 0.47070765, 0.019244023, 1)
 
 [node name="TextLog" parent="AspectRatioContainer/DesignRoot" unique_id=685976710 instance=ExtResource("1_xihgh")]
@@ -98,6 +99,24 @@ unvisited_tile_color = Color(0.2750277, 0.34373164, 0.42306724, 1)
 player_color = Color(0.24840015, 0.24840018, 0.24840015, 1)
 border_color = Color(2.623126e-06, 0.57043785, 0.15670037, 1)
 background_color = Color(0, 0, 0, 0.8862745)
+
+[node name="TextureRect2" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1730064061]
+layout_mode = 0
+offset_left = 1661.0012
+offset_top = 246.0
+offset_right = 1911.0012
+offset_bottom = 496.0
+texture = ExtResource("9_ipp67")
+expand_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=292992040]
+layout_mode = 0
+offset_left = 1393.0012
+offset_top = 246.0
+offset_right = 1643.0012
+offset_bottom = 496.0
+texture = ExtResource("9_ipp67")
+expand_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1
