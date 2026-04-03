@@ -272,7 +272,6 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_1_logic_1775081887"
 required_direction = 0
-one_shot = false
 payload = {
 "flag_id": &"Talk-01",
 "type": "set_flag"
