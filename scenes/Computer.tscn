@@ -29,7 +29,16 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_62_logic_1774834428": ExtResource("1_th2p1")
 })
 logic_message_map = Dictionary[StringName, String]({
-&"vertex_1_logic_1775081887": "beep boop"
+&"vertex_1_logic_1775081887": "beep boop",
+&"vertex_6_logic_1775186759": "Battery Upgrade!"
+})
+logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
+&"vertex_6_logic_1775186759": {
+"attack": 1,
+"defense": 1,
+"dodge": 1,
+"hit": 1
+}
 })
 loading_screen_hold_seconds = 1.0
 
@@ -102,11 +111,12 @@ border_color = Color(2.623126e-06, 0.57043785, 0.15670037, 1)
 background_color = Color(0, 0, 0, 0.8862745)
 
 [node name="UpgradeIndicator" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=861631923]
+custom_minimum_size = Vector2(256, 256)
 layout_mode = 0
 offset_left = 1395.0012
-offset_top = 250.0
-offset_right = 1645.0012
-offset_bottom = 500.0
+offset_top = 247.0
+offset_right = 1651.0012
+offset_bottom = 503.0
 texture = ExtResource("9_xvgcs")
 expand_mode = 3
 script = ExtResource("9_ipp67")

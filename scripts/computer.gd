@@ -145,6 +145,7 @@ func _inject_run_state_into_player() -> void:
 func _apply_logic_stat_bonus_once(logic_id: StringName) -> void:
 	if not logic_stat_bonus_map.has(logic_id):
 		return
+	var bonus_config: Dictionary = logic_stat_bonus_map.get(logic_id, {})
 	var run_state := _map_state_store.run_state
 	if run_state == null:
 		return
@@ -153,6 +154,7 @@ func _apply_logic_stat_bonus_once(logic_id: StringName) -> void:
 		return
 	run_state.set_flag(flag_id, true)
 	var player := _get_current_player()
+	_log_stat_bonus_gain(player, bonus_config)
 	if player != null:
 		_apply_all_persistent_logic_stat_bonuses(player)
 
@@ -184,6 +186,41 @@ func _apply_all_persistent_logic_stat_bonuses(player: Player) -> void:
 
 func _get_stat_bonus_flag_id(logic_id: StringName) -> StringName:
 	return StringName(String(STAT_BONUS_FLAG_PREFIX) + String(logic_id))
+
+
+func _log_stat_bonus_gain(player: Player, bonus_config: Dictionary) -> void:
+	if _text_log == null:
+		return
+	var parts: Array[String] = []
+
+	var attack_gain := int(bonus_config.get(&"attack", 0))
+	if attack_gain != 0:
+		var base_attack := player.attack if player != null else 0
+		parts.append("Attack %d + %d" % [base_attack, attack_gain])
+
+	var defense_gain := int(bonus_config.get(&"defense", 0))
+	if defense_gain != 0:
+		var base_defense := player.defense if player != null else 0
+		parts.append("Defense %d + %d" % [base_defense, defense_gain])
+
+	var hit_gain := int(bonus_config.get(&"hit", 0))
+	if hit_gain != 0:
+		var base_hit := player.hit if player != null else 0
+		parts.append("Hit %d + %d" % [base_hit, hit_gain])
+
+	var dodge_gain := int(bonus_config.get(&"dodge", 0))
+	if dodge_gain != 0:
+		var base_dodge := player.dodge if player != null else 0
+		parts.append("Dodge %d + %d" % [base_dodge, dodge_gain])
+
+	var max_health_gain := int(bonus_config.get(&"max_health", 0))
+	if max_health_gain != 0:
+		var base_max_health := player.max_health if player != null else 0
+		parts.append("Max HP %d + %d" % [base_max_health, max_health_gain])
+
+	if parts.is_empty():
+		return
+	_text_log.add_message("Stat gain: %s" % ", ".join(parts))
 
 
 func _setup_mini_map() -> void:
