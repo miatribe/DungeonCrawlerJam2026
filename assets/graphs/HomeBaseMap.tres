@@ -343,6 +343,38 @@ payload = {
 script = ExtResource("7_rs16f")
 entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_yuwlx")])
 
+[sub_resource type="Resource" id="Resource_6qkit"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_60_logic_1775184106"
+trigger_type = 1
+required_direction = 2
+one_shot = false
+payload = {
+"flag_id": &"TP-MapOne",
+"required_direction": 2,
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_m00ky"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_6qkit")])
+
+[sub_resource type="Resource" id="Resource_w4840"]
+script = ExtResource("8_xngqq")
+logic_id = &"vertex_61_logic_1775184206"
+trigger_type = 1
+required_direction = 3
+one_shot = false
+payload = {
+"flag_id": &"TP-Gaunt",
+"required_direction": 3,
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_wagrp"]
+script = ExtResource("7_rs16f")
+entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_w4840")])
+
 [sub_resource type="Resource" id="Resource_67ctg"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_62_logic_1774834428"
@@ -440,38 +472,6 @@ payload = {
 [sub_resource type="Resource" id="Resource_17wco"]
 script = ExtResource("7_rs16f")
 entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_m0hkw"), SubResource("Resource_52j04")])
-
-[sub_resource type="Resource" id="Resource_6qkit"]
-script = ExtResource("8_xngqq")
-logic_id = &"vertex_60_logic_1775184106"
-trigger_type = 1
-required_direction = 2
-one_shot = false
-payload = {
-"flag_id": &"TP-MapOne",
-"required_direction": 2,
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_m00ky"]
-script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_6qkit")])
-
-[sub_resource type="Resource" id="Resource_w4840"]
-script = ExtResource("8_xngqq")
-logic_id = &"vertex_61_logic_1775184206"
-trigger_type = 1
-required_direction = 3
-one_shot = false
-payload = {
-"flag_id": &"TP-Gaunt",
-"required_direction": 3,
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_wagrp"]
-script = ExtResource("7_rs16f")
-entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_w4840")])
 
 [sub_resource type="Resource" id="Resource_l11c1"]
 script = ExtResource("8_1lnfu")

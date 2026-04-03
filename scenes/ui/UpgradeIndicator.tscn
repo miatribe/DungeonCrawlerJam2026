@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/upgrade_indicator.gd" id="1_yls4w"]
+[ext_resource type="Texture2D" path="res://assets/images/Battery_panel_Off.png" id="2_18m2m"]
+[ext_resource type="Texture2D" path="res://assets/images/Battery_panel_ON.png" id="3_umq5g"]
+
+[node name="UpgradeIndicator" type="TextureRect"]
+custom_minimum_size = Vector2(256, 256)
+texture_filter = 1
+texture = ExtResource("2_18m2m")
+offset_right = 256.0
+offset_bottom = 256.0
+expand_mode = 0
+stretch_mode = 5
+script = ExtResource("1_yls4w")
+not_upgraded_texture = ExtResource("2_18m2m")
+upgraded_texture = ExtResource("3_umq5g")

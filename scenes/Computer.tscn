@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://mqla7xk304ae" path="res://scenes/Gaunt.tscn" id="5_2xgbv"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 [ext_resource type="Texture2D" uid="uid://dh5lqtqp2rxrw" path="res://assets/images/ui_basic_sample8.png" id="8_c1chd"]
-[ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_ipp67"]
+[ext_resource type="Script" uid="uid://xodj8sv8ccd8" path="res://scripts/ui/upgrade_indicator.gd" id="9_ipp67"]
+[ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_xvgcs"]
 
 [node name="Computer" type="Control" unique_id=716823398]
 layout_mode = 3
@@ -100,23 +101,26 @@ player_color = Color(0.24840015, 0.24840018, 0.24840015, 1)
 border_color = Color(2.623126e-06, 0.57043785, 0.15670037, 1)
 background_color = Color(0, 0, 0, 0.8862745)
 
-[node name="TextureRect2" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1730064061]
+[node name="UpgradeIndicator" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=861631923]
 layout_mode = 0
-offset_left = 1661.0012
-offset_top = 246.0
-offset_right = 1911.0012
-offset_bottom = 496.0
-texture = ExtResource("9_ipp67")
-expand_mode = 5
+offset_left = 1395.0012
+offset_top = 250.0
+offset_right = 1645.0012
+offset_bottom = 500.0
+texture = ExtResource("9_xvgcs")
+expand_mode = 3
+script = ExtResource("9_ipp67")
 
-[node name="TextureRect3" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=292992040]
+[node name="UpgradeIndicator2" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1690168283]
+custom_minimum_size = Vector2(256, 256)
 layout_mode = 0
-offset_left = 1393.0012
-offset_top = 246.0
-offset_right = 1643.0012
-offset_bottom = 496.0
-texture = ExtResource("9_ipp67")
-expand_mode = 5
+offset_left = 1655.0012
+offset_top = 247.0
+offset_right = 1905.0012
+offset_bottom = 497.0
+texture = ExtResource("9_xvgcs")
+expand_mode = 3
+script = ExtResource("9_ipp67")
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1
