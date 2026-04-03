@@ -14,7 +14,7 @@ const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
 
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
-@onready var _temp_loading_screen: Control = %TempLoadingScreen
+@onready var _temp_loading_screen: Control = %LoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap

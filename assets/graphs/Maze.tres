@@ -1882,6 +1882,18 @@ payload = {
 script = ExtResource("6_m7v80")
 entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_elk30")])
 
+[sub_resource type="Resource" id="Resource_rv11x"]
+script = ExtResource("8_kfra2")
+logic_id = &"vertex_6_logic_1775186759"
+payload = {
+"flag_id": &"Upgrade-1",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_857eo"]
+script = ExtResource("6_m7v80")
+entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_rv11x")])
+
 [sub_resource type="Resource" id="Resource_xni4k"]
 script = ExtResource("8_kfra2")
 logic_id = &"vertex_7_logic_1775177421"
@@ -2017,18 +2029,6 @@ entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_0emrp"), SubResou
 
 [sub_resource type="Resource" id="Resource_jp38y"]
 script = ExtResource("6_m7v80")
-
-[sub_resource type="Resource" id="Resource_rv11x"]
-script = ExtResource("8_kfra2")
-logic_id = &"vertex_6_logic_1775186759"
-payload = {
-"flag_id": &"Upgrade-1",
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_857eo"]
-script = ExtResource("6_m7v80")
-entries = Array[ExtResource("8_kfra2")]([SubResource("Resource_rv11x")])
 
 [sub_resource type="Resource" id="Resource_yjmq3"]
 script = ExtResource("7_f17oi")

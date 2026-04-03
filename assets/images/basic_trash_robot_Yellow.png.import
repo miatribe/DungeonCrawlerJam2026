@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh5lqtqp2rxrw"
-path="res://.godot/imported/ui_basic_sample8.png-bf28ef6693b739cda00232072c164f50.ctex"
+uid="uid://bp67pu6khw5aj"
+path="res://.godot/imported/basic_trash_robot_Yellow.png-f5532b637c776be4f0bc0d1b071fba56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ui_basic_sample8.png"
-dest_files=["res://.godot/imported/ui_basic_sample8.png-bf28ef6693b739cda00232072c164f50.ctex"]
+source_file="res://assets/images/basic_trash_robot_Yellow.png"
+dest_files=["res://.godot/imported/basic_trash_robot_Yellow.png-f5532b637c776be4f0bc0d1b071fba56.ctex"]
 
 [params]
 
