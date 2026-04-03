@@ -202,8 +202,8 @@ func _get_all_enemy_managers() -> Array[EnemyManager]:
 		for node in get_tree().get_nodes_in_group(ENEMY_MANAGER_GROUP):
 			if node is EnemyManager and is_instance_valid(node):
 				managers.append(node as EnemyManager)
-	if not managers.has(self):
-		managers.append(self)
+	if not managers.has(self ):
+		managers.append(self )
 	return managers
 
 
