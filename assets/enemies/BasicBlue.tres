@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dq7lqmk7yvbwb"]
+
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_okeua"]
+[ext_resource type="Texture2D" uid="uid://b1dx8enpfuqv1" path="res://assets/images/basic_trash_robot_Blue.png" id="2_okeua"]
+
+[resource]
+script = ExtResource("1_okeua")
+sprite = ExtResource("2_okeua")
+name = "Blue Bot"
+health = 2
+defense = 1
+hit = 1
+metadata/_custom_type_script = "uid://hs8lniq4yfva"

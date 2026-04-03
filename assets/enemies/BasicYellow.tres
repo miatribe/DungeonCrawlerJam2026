@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://ccwkjf4uhsn50"]
+
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_4a02k"]
+[ext_resource type="Texture2D" uid="uid://bp67pu6khw5aj" path="res://assets/images/basic_trash_robot_Yellow.png" id="2_4a02k"]
+
+[resource]
+script = ExtResource("1_4a02k")
+sprite = ExtResource("2_4a02k")
+name = "Yellow Bot"
+health = 2
+defense = 1
+hit = 1
+metadata/_custom_type_script = "uid://hs8lniq4yfva"

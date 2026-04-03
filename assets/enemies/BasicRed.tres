@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://btvpix5bugeyw"]
+
+[ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="1_k48xh"]
+[ext_resource type="Texture2D" uid="uid://nj1pixqw8qwk" path="res://assets/images/basic_trash_Red.png" id="2_k48xh"]
+
+[resource]
+script = ExtResource("1_k48xh")
+sprite = ExtResource("2_k48xh")
+name = "Red Bot"
+health = 2
+defense = 1
+hit = 1
+metadata/_custom_type_script = "uid://hs8lniq4yfva"

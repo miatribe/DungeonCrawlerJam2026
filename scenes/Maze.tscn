@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://hs8lniq4yfva" path="res://scripts/resources/enemy_resource.gd" id="6_m3jo1"]
 [ext_resource type="Resource" uid="uid://deusy8ad3ixac" path="res://assets/enemies/RoboRat.tres" id="7_jrd7e"]
 [ext_resource type="Script" uid="uid://dbdi6adikf8ik" path="res://scripts/turn_manager.gd" id="8_5lwvx"]
+[ext_resource type="Resource" uid="uid://drfbciq6ccrp6" path="res://assets/enemies/Boss2.tres" id="9_oan0w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_so7uu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -59,4 +60,17 @@ enemy_scene = ExtResource("5_kjlwm")
 enemy_resources = Array[ExtResource("6_m3jo1")]([ExtResource("7_jrd7e")])
 min_spawn_distance_from_player = 10
 target_spawn_vertex_id = 82
+metadata/_custom_type_script = "uid://chxxomku6c3gl"
+
+[node name="EnemyManager3" type="Node3D" parent="." unique_id=792329351 node_paths=PackedStringArray("graph_renderer", "player", "turn_manager")]
+script = ExtResource("4_7ufv8")
+graph_renderer = NodePath("..")
+player = NodePath("../Player")
+turn_manager = NodePath("../TurnManager")
+enemy_scene = ExtResource("5_kjlwm")
+enemy_resources = Array[ExtResource("6_m3jo1")]([ExtResource("9_oan0w")])
+max_enemies = 1
+min_spawn_distance_from_player = 10
+target_spawn_vertex_id = 101
+one_time_spawner = true
 metadata/_custom_type_script = "uid://chxxomku6c3gl"
