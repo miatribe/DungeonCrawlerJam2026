@@ -40,6 +40,9 @@ logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
 "hit": 1
 }
 })
+logic_upgrade_indicator_map = Dictionary[StringName, NodePath]({
+&"vertex_6_logic_1775186759": NodePath("AspectRatioContainer/DesignRoot/UpgradeIndicator")
+})
 loading_screen_hold_seconds = 1.0
 
 [node name="PlayerInput" type="Node" parent="." unique_id=1777251988]

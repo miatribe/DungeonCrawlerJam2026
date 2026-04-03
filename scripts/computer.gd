@@ -1,12 +1,14 @@
 extends Control
 
 const STAT_BONUS_FLAG_PREFIX := &"stat_bonus_applied_"
+const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
 
 @export var logic_scene_map: Dictionary[StringName, PackedScene] = {
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
 }
 @export var logic_message_map: Dictionary[StringName, String] = {}
 @export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
+@export var logic_upgrade_indicator_map: Dictionary[StringName, NodePath] = {}
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
@@ -27,6 +29,7 @@ func _ready() -> void:
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
 	_setup_mini_map()
+	_apply_all_persistent_upgrade_indicators()
 
 
 func _process(_delta: float) -> void:
@@ -62,6 +65,7 @@ func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
 	_apply_logic_stat_bonus_once(logic_id)
+	_apply_logic_upgrade_indicator_once(logic_id)
 	if minimap_unlock_logic_ids.has(logic_id) and _mini_map != null:
 		_mini_map.set_unlocked(true)
 	if not logic_scene_map.has(logic_id): return
@@ -186,6 +190,49 @@ func _apply_all_persistent_logic_stat_bonuses(player: Player) -> void:
 
 func _get_stat_bonus_flag_id(logic_id: StringName) -> StringName:
 	return StringName(String(STAT_BONUS_FLAG_PREFIX) + String(logic_id))
+
+
+func _apply_logic_upgrade_indicator_once(logic_id: StringName) -> void:
+	if not logic_upgrade_indicator_map.has(logic_id):
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	var flag_id := _get_upgrade_indicator_flag_id(logic_id)
+	if run_state.has_flag(flag_id):
+		return
+	run_state.set_flag(flag_id, true)
+	_apply_indicator_upgrade(logic_id)
+
+
+func _apply_all_persistent_upgrade_indicators() -> void:
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	for key in logic_upgrade_indicator_map.keys():
+		var logic_id := key as StringName
+		if run_state.has_flag(_get_upgrade_indicator_flag_id(logic_id)):
+			_apply_indicator_upgrade(logic_id)
+
+
+func _apply_indicator_upgrade(logic_id: StringName) -> void:
+	if not logic_upgrade_indicator_map.has(logic_id):
+		return
+	var node_path: NodePath = logic_upgrade_indicator_map.get(logic_id)
+	if node_path == NodePath(""):
+		return
+	var node := get_node_or_null(node_path)
+	if node == null:
+		push_warning("Computer: UpgradeIndicator path not found for logic '%s': %s" % [String(logic_id), String(node_path)])
+		return
+	if not (node is UpgradeIndicator):
+		push_warning("Computer: Node at path '%s' for logic '%s' is not an UpgradeIndicator." % [String(node_path), String(logic_id)])
+		return
+	(node as UpgradeIndicator).set_upgraded(true)
+
+
+func _get_upgrade_indicator_flag_id(logic_id: StringName) -> StringName:
+	return StringName(String(UPGRADE_INDICATOR_FLAG_PREFIX) + String(logic_id))
 
 
 func _log_stat_bonus_gain(player: Player, bonus_config: Dictionary) -> void:
