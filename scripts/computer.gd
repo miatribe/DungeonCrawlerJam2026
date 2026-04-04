@@ -96,48 +96,64 @@ func _wire_button_actions() -> void:
 
 
 func _on_move_forward_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_move_forward()
 
 
 func _on_move_backward_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_move_backward()
 
 
 func _on_move_left_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_move_left()
 
 
 func _on_move_right_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_move_right()
 
 
 func _on_rotate_left_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_rotate_left()
 
 
 func _on_rotate_right_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_rotate_right()
 
 
 func _on_attack_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_attack()
 
 
 func _on_interact_pressed() -> void:
+	if not _can_accept_player_commands():
+		return
 	if _player_input == null:
 		return
 	_player_input.command_interact()
@@ -278,6 +294,14 @@ func _set_menu_overlay_open(is_open: bool) -> void:
 				_temp_loading_screen.texture = _default_loading_screen_texture
 			_temp_loading_screen.visible = false
 	_set_player_movement_enabled(not is_open)
+
+
+func _can_accept_player_commands() -> bool:
+	if _is_menu_open:
+		return false
+	if _is_swapping_scene:
+		return false
+	return true
 
 
 func _get_current_graph_renderer() -> GraphRenderer:

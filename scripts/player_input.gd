@@ -27,6 +27,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func command_rotate_right() -> void:
+	if _input_locked:
+		return
 	var player := _get_player()
 	if player == null:
 		return
@@ -34,6 +36,8 @@ func command_rotate_right() -> void:
 
 
 func command_rotate_left() -> void:
+	if _input_locked:
+		return
 	var player := _get_player()
 	if player == null:
 		return
