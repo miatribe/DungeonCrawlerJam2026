@@ -71,6 +71,12 @@ logic_message_map = Dictionary[StringName, String]({
 &"vertex_6_logic_1775186759": "Battery Upgrade!"
 })
 logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
+&"vertex_131_Get_gun": {
+"attack": 2,
+"defense": 1,
+"dodge": 1,
+"hit": 2
+},
 &"vertex_6_logic_1775186759": {
 "attack": 1,
 "defense": 1,
