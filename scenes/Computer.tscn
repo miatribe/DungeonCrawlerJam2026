@@ -55,6 +55,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6w0s")
 logic_scene_map = Dictionary[StringName, PackedScene]({
+&"vertex_150_TP_Home": ExtResource("1_th2p1"),
+&"vertex_151_TP_HOME": ExtResource("1_th2p1"),
 &"vertex_1_logic_1775178498": ExtResource("1_th2p1"),
 &"vertex_57_logic_1775071710": ExtResource("3_c1chd"),
 &"vertex_5_logic_1775178932": ExtResource("1_th2p1"),
