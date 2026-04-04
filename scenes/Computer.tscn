@@ -98,7 +98,12 @@ ratio = 1.77778
 stretch_mode = 1
 
 [node name="DesignRoot" type="Control" parent="AspectRatioContainer" unique_id=1782394411]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer/DesignRoot" unique_id=1821302160]
 layout_mode = 1
@@ -123,11 +128,12 @@ render_target_update_mode = 4
 [node name="LoadingScreen" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1937347913]
 unique_name_in_owner = true
 visible = false
-layout_mode = 0
-offset_left = 67.00122
-offset_top = 60.0
-offset_right = 1337.0012
-offset_bottom = 718.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03489647
+anchor_top = 0.055555556
+anchor_right = 0.6963548
+anchor_bottom = 0.66481483
 texture = ExtResource("7_65h6p")
 expand_mode = 3
 
@@ -160,43 +166,47 @@ background_color = Color(0, 0, 0, 0.8862745)
 
 [node name="UpgradeIndicator" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=861631923]
 custom_minimum_size = Vector2(256, 256)
-layout_mode = 0
-offset_left = 1395.0012
-offset_top = 247.0
-offset_right = 1651.0012
-offset_bottom = 503.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7265631
+anchor_top = 0.22870371
+anchor_right = 0.8598965
+anchor_bottom = 0.46574074
 texture = ExtResource("9_xvgcs")
 expand_mode = 3
 script = ExtResource("9_ipp67")
 
 [node name="UpgradeIndicator2" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1690168283]
 custom_minimum_size = Vector2(256, 256)
-layout_mode = 0
-offset_left = 1655.0012
-offset_top = 247.0
-offset_right = 1905.0012
-offset_bottom = 497.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86198086
+anchor_top = 0.22870371
+anchor_right = 0.99218816
+anchor_bottom = 0.4601852
 texture = ExtResource("9_xvgcs")
 expand_mode = 3
 script = ExtResource("9_ipp67")
 
 [node name="PlayerHpBar" type="ProgressBar" parent="AspectRatioContainer/DesignRoot" unique_id=1034684737]
-layout_mode = 0
-offset_left = 1486.0012
-offset_top = 558.0
-offset_right = 1845.0012
-offset_bottom = 630.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.773959
+anchor_top = 0.51666665
+anchor_right = 0.96093816
+anchor_bottom = 0.5833333
 theme_override_styles/background = SubResource("StyleBoxFlat_hp_bar_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hp_bar_fill")
 show_percentage = false
 script = ExtResource("13_eywps")
 
 [node name="PlayerHpText" type="PanelContainer" parent="AspectRatioContainer/DesignRoot" unique_id=354581613]
-layout_mode = 0
-offset_left = 1574.0012
-offset_top = 669.0
-offset_right = 1755.0012
-offset_bottom = 755.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8197923
+anchor_top = 0.61944443
+anchor_right = 0.9140631
+anchor_bottom = 0.6990741
 theme_override_styles/panel = SubResource("StyleBoxFlat_hp_text_bg")
 script = ExtResource("14_1x23v")
 
@@ -218,11 +228,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LaserGunUpgradePanel" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1498791362]
-layout_mode = 0
-offset_left = 1404.0012
-offset_top = 13.0
-offset_right = 1634.0012
-offset_bottom = 243.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73125064
+anchor_top = 0.012037037
+anchor_right = 0.8500006
+anchor_bottom = 0.225
 texture = ExtResource("14_ebepl")
 expand_mode = 1
 stretch_mode = 5
@@ -243,87 +254,71 @@ stretch_mode = 6
 [node name="MoveFoward" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=787481461]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1124.0012
-offset_top = 898.0
-offset_right = 1183.3212
-offset_bottom = 956.44
+anchor_left = 0.5854173
+anchor_top = 0.83148146
+anchor_right = 0.6163131
+anchor_bottom = 0.8855926
 flat = true
 
 [node name="RotLeft" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=920239459]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1049.0012
-offset_top = 898.0
-offset_right = 1108.3212
-offset_bottom = 956.44
+anchor_left = 0.5463548
+anchor_top = 0.83148146
+anchor_right = 0.5772506
+anchor_bottom = 0.8855926
 flat = true
 
 [node name="RotRight" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1655365027]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1200.0012
-offset_top = 897.0
-offset_right = 1259.3212
-offset_bottom = 955.44
+anchor_left = 0.6250006
+anchor_top = 0.83055556
+anchor_right = 0.6558965
+anchor_bottom = 0.8846667
 flat = true
 
 [node name="MoveBackwards" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1701844530]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1126.0012
-offset_top = 972.0
-offset_right = 1185.3212
-offset_bottom = 1030.44
+anchor_left = 0.5864589
+anchor_top = 0.9
+anchor_right = 0.6173548
+anchor_bottom = 0.9541111
 flat = true
 
 [node name="MoveLeft" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1596705256]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1051.0012
-offset_top = 971.0
-offset_right = 1110.3212
-offset_bottom = 1029.44
+anchor_left = 0.5473965
+anchor_top = 0.8990741
+anchor_right = 0.5782923
+anchor_bottom = 0.9531852
 flat = true
 
 [node name="MoveRight" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1294595273]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1202.0012
-offset_top = 972.0
-offset_right = 1261.3212
-offset_bottom = 1030.44
+anchor_left = 0.6260423
+anchor_top = 0.9
+anchor_right = 0.65693814
+anchor_bottom = 0.9541111
 flat = true
 
 [node name="Attack" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1460716608]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1049.0012
-offset_top = 823.0
-offset_right = 1108.3212
-offset_bottom = 881.44
+anchor_left = 0.5463548
+anchor_top = 0.76111114
+anchor_right = 0.5772506
+anchor_bottom = 0.81614816
 flat = true
 
 [node name="Interact" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1107556300]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.004
-anchor_bottom = 0.007
-offset_left = 1200.0012
-offset_top = 824.0
-offset_right = 1259.3212
-offset_bottom = 882.44
+anchor_left = 0.6250006
+anchor_top = 0.762963
+anchor_right = 0.6558965
+anchor_bottom = 0.81707406
 flat = true
