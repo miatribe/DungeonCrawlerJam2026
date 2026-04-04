@@ -2,6 +2,7 @@ extends Control
 
 const STAT_BONUS_FLAG_PREFIX := &"stat_bonus_applied_"
 const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
+const LASER_PANEL_FLAG_PREFIX := &"laser_panel_applied_"
 const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
 
 @export var logic_scene_map: Dictionary[StringName, PackedScene] = {
@@ -10,6 +11,8 @@ const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
 @export var logic_message_map: Dictionary[StringName, String] = {}
 @export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
 @export var logic_upgrade_indicator_map: Dictionary[StringName, NodePath] = {}
+@export var laser_upgrade_logic_id: StringName = &""
+@export_range(0, 5, 1) var laser_upgrade_step: int = 0
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
@@ -17,8 +20,14 @@ const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
 	"res://assets/graphs/Maze.tres": {
 		&"vertex_id": 6,
 		&"texture": preload("res://assets/images/Battery_pack.png"),
+	},
+		"res://assets/graphs/TestGraph.tres": {
+		&"vertex_id": 131,
+		&"texture": preload("res://assets/images/laser_gun.png"),
 	}
 }
+
+
 @export var default_battery_pickup_texture: Texture2D = preload("res://assets/images/Battery_pack.png")
 @export_range(0.0, 10.0, 0.1) var default_battery_pickup_height: float = 0.6
 @export_range(0.0001, 0.05, 0.0001) var default_battery_pickup_pixel_size: float = 0.002
@@ -36,6 +45,7 @@ const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
 @onready var _btn_rotate_right: Button = $AspectRatioContainer/DesignRoot/RotRight
 @onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
 @onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
+@onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
 
 var _connected_graph: Graph
 var _is_swapping_scene := false
@@ -51,6 +61,7 @@ func _ready() -> void:
 	_refresh_battery_pickup_visual()
 	_setup_mini_map()
 	_apply_all_persistent_upgrade_indicators()
+	_apply_all_persistent_laser_panel_upgrades()
 
 
 func _wire_button_actions() -> void:
@@ -157,6 +168,7 @@ func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
 		_text_log.add_message(logic_message_map[logic_id])
 	_apply_logic_stat_bonus_once(logic_id)
 	_apply_logic_upgrade_indicator_once(logic_id)
+	_apply_logic_laser_panel_upgrade_once(logic_id)
 	if minimap_unlock_logic_ids.has(logic_id) and _mini_map != null:
 		_mini_map.set_unlocked(true)
 	if not logic_scene_map.has(logic_id): return
@@ -327,6 +339,45 @@ func _get_upgrade_indicator_flag_id(logic_id: StringName) -> StringName:
 	return StringName(String(UPGRADE_INDICATOR_FLAG_PREFIX) + String(logic_id))
 
 
+func _apply_logic_laser_panel_upgrade_once(logic_id: StringName) -> void:
+	if laser_upgrade_logic_id == &"":
+		return
+	if logic_id != laser_upgrade_logic_id:
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	var flag_id := _get_laser_panel_flag_id()
+	if run_state.has_flag(flag_id):
+		return
+	run_state.set_flag(flag_id, true)
+	_apply_laser_panel_upgrade()
+
+
+func _apply_all_persistent_laser_panel_upgrades() -> void:
+	if laser_upgrade_logic_id == &"":
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	if run_state.has_flag(_get_laser_panel_flag_id()):
+		_apply_laser_panel_upgrade()
+
+
+func _apply_laser_panel_upgrade() -> void:
+	if _laser_gun_upgrade_panel == null:
+		push_warning("Computer: LaserGunUpgradePanel not found at expected path.")
+		return
+	_laser_gun_upgrade_panel.set_upgraded(true)
+	_laser_gun_upgrade_panel.set_current_step(laser_upgrade_step)
+
+
+func _get_laser_panel_flag_id() -> StringName:
+	if laser_upgrade_logic_id == &"":
+		return &""
+	return StringName(String(LASER_PANEL_FLAG_PREFIX) + String(laser_upgrade_logic_id))
+
+
 func _log_stat_bonus_gain(player: Player, bonus_config: Dictionary) -> void:
 	if _text_log == null:
 		return
@@ -447,8 +498,6 @@ func _update_battery_pickup_collection() -> void:
 		return
 	_set_battery_pickup_collected(graph_renderer.graph, vertex_id, true)
 	_clear_battery_pickup_sprite()
-	if _text_log != null:
-		_text_log.add_message("Battery pack collected.")
 
 
 func _is_battery_pickup_collected(graph: Graph, vertex_id: int) -> bool:
