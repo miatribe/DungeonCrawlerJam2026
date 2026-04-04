@@ -13,7 +13,14 @@
 [ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="7_polxq"]
 [ext_resource type="Script" uid="uid://clpsx37du4jtm" path="res://addons/dungeoncraftercore/scripts/vertex_logic.gd" id="7_tvadd"]
 [ext_resource type="Texture2D" uid="uid://ccyqgvq56ywxu" path="res://assets/images/teleporter_Floor-ceiling.png" id="8_rq1s5"]
+[ext_resource type="Texture2D" uid="uid://bhy52yrvn8rlo" path="res://assets/images/Pressure_plate_1024x1024_Off.png" id="9_xhrb8"]
+[ext_resource type="Texture2D" uid="uid://dq71441l7jvwi" path="res://assets/images/Pressure_plate_1024x1024_ON.png" id="10_78tyt"]
 [ext_resource type="Resource" uid="uid://dcr4bpfpf06j0" path="res://assets/tilesets/MoreRusty.tres" id="10_yd8hl"]
+[ext_resource type="Texture2D" uid="uid://dt83cl0jn2qsc" path="res://assets/images/Teleporter_wall_Hoome_Base.png" id="11_4c3o6"]
+[ext_resource type="Texture2D" uid="uid://hqsyp6x8pxcm" path="res://assets/images/Teleporter_wall_Maze.png" id="12_o7rlx"]
+[ext_resource type="Texture2D" uid="uid://dox7journyyiq" path="res://assets/images/Teleporter_wall_RoomieMap.png" id="13_ssg7p"]
+[ext_resource type="Texture2D" uid="uid://dmfit32hblyv2" path="res://assets/images/Teleporter_wall_Gauntlet.png" id="14_v6cj3"]
+[ext_resource type="Texture2D" uid="uid://cy3uic0eh8l7w" path="res://assets/images/Teleporter_wall_Final.png" id="15_35w6j"]
 
 [sub_resource type="Resource" id="Resource_rq1s5"]
 script = ExtResource("2_tvadd")
@@ -931,19 +938,54 @@ vertex_b_id = 74
 direction_from_a = 1
 direction_from_b = 0
 
-[sub_resource type="Resource" id="Resource_ilx0p"]
+[sub_resource type="Resource" id="Resource_8ufy7"]
 script = ExtResource("3_6ntdk")
 texture = ExtResource("6_1bmp5")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_hlfvs"]
+[sub_resource type="Resource" id="Resource_t7x27"]
 script = ExtResource("3_6ntdk")
 texture = ExtResource("7_ddkvn")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_1mnpl"]
+[sub_resource type="Resource" id="Resource_8dep7"]
 script = ExtResource("3_6ntdk")
 texture = ExtResource("8_rq1s5")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_n2y34"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("9_xhrb8")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_ybfm5"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("10_78tyt")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_i4p0u"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("11_4c3o6")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_g8wjc"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("12_o7rlx")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_guov4"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("13_ssg7p")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_nerld"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("14_v6cj3")
+metadata/_custom_type_script = "uid://cyalxxak2ljvx"
+
+[sub_resource type="Resource" id="Resource_p5ups"]
+script = ExtResource("3_6ntdk")
+texture = ExtResource("15_35w6j")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_6ntdk"]
@@ -2087,4 +2129,4 @@ vertex_logic = Dictionary[int, ExtResource("6_fq6iw")]({
 })
 tilesets = Array[ExtResource("5_6tkmt")]([ExtResource("10_yd8hl")])
 doors = Array[ExtResource("1_q4lky")]([ExtResource("2_polxq"), ExtResource("3_rq1s5")])
-override_textures = Array[ExtResource("3_6ntdk")]([SubResource("Resource_ilx0p"), SubResource("Resource_hlfvs"), SubResource("Resource_1mnpl")])
+override_textures = Array[ExtResource("3_6ntdk")]([SubResource("Resource_8ufy7"), SubResource("Resource_t7x27"), SubResource("Resource_8dep7"), SubResource("Resource_n2y34"), SubResource("Resource_ybfm5"), SubResource("Resource_i4p0u"), SubResource("Resource_g8wjc"), SubResource("Resource_guov4"), SubResource("Resource_nerld"), SubResource("Resource_p5ups")])
