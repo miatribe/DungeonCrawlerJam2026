@@ -73,7 +73,11 @@ func _update_texture() -> void:
 
 
 func _ensure_visible_defaults() -> void:
-	if size == Vector2.ZERO:
+	if _uses_fixed_rect_layout() and size == Vector2.ZERO:
 		size = Vector2(230, 230)
 	if texture == null:
 		texture = not_upgraded_texture
+
+
+func _uses_fixed_rect_layout() -> bool:
+	return is_equal_approx(anchor_left, anchor_right) and is_equal_approx(anchor_top, anchor_bottom)

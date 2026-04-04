@@ -82,6 +82,7 @@ logic_upgrade_indicator_map = Dictionary[StringName, NodePath]({
 &"vertex_6_logic_1775186759": NodePath("AspectRatioContainer/DesignRoot/UpgradeIndicator")
 })
 loading_screen_hold_seconds = 1.0
+default_battery_pickup_height = 0.0
 
 [node name="PlayerInput" type="Node" parent="." unique_id=1777251988]
 unique_name_in_owner = true
@@ -98,12 +99,7 @@ ratio = 1.77778
 stretch_mode = 1
 
 [node name="DesignRoot" type="Control" parent="AspectRatioContainer" unique_id=1782394411]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="AspectRatioContainer/DesignRoot" unique_id=1821302160]
 layout_mode = 1
@@ -151,6 +147,7 @@ offset_bottom = 0.0
 
 [node name="MiniMap" parent="AspectRatioContainer/DesignRoot" unique_id=31798792 instance=ExtResource("6_4rg2b")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.8671875
@@ -161,7 +158,6 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
-custom_minimum_size = Vector2(0, 0)
 reveal_radius = 3
 cell_size = 40.0
 visited_tile_color = Color(0.3254902, 1, 0.41568628, 1)
@@ -171,7 +167,6 @@ border_color = Color(2.623126e-06, 0.57043785, 0.15670037, 1)
 background_color = Color(0, 0, 0, 0.8862745)
 
 [node name="UpgradeIndicator" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=861631923]
-custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.7265631
@@ -185,7 +180,6 @@ script = ExtResource("9_ipp67")
 enforce_default_size = false
 
 [node name="UpgradeIndicator2" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1690168283]
-custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.86198086

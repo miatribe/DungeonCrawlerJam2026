@@ -2,6 +2,7 @@ extends Control
 
 const STAT_BONUS_FLAG_PREFIX := &"stat_bonus_applied_"
 const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
+const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
 
 @export var logic_scene_map: Dictionary[StringName, PackedScene] = {
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
@@ -12,6 +13,15 @@ const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
+@export var battery_pickup_map: Dictionary[String, Dictionary] = {
+	"res://assets/graphs/Maze.tres": {
+		&"vertex_id": 6,
+		&"texture": preload("res://assets/images/Battery_pack.png"),
+	}
+}
+@export var default_battery_pickup_texture: Texture2D = preload("res://assets/images/Battery_pack.png")
+@export_range(0.0, 10.0, 0.1) var default_battery_pickup_height: float = 0.6
+@export_range(0.0001, 0.05, 0.0001) var default_battery_pickup_pixel_size: float = 0.002
 
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
 @onready var _temp_loading_screen: Control = %LoadingScreen
@@ -30,6 +40,7 @@ const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
 var _connected_graph: Graph
 var _is_swapping_scene := false
 var _map_state_store: MapStateStore = MapStateStore.new()
+var _battery_pickup_sprite: Sprite3D
 
 
 func _ready() -> void:
@@ -37,6 +48,7 @@ func _ready() -> void:
 	_wire_button_actions()
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
+	_refresh_battery_pickup_visual()
 	_setup_mini_map()
 	_apply_all_persistent_upgrade_indicators()
 
@@ -110,6 +122,7 @@ func _on_interact_pressed() -> void:
 
 func _process(_delta: float) -> void:
 	_sync_mini_map_context()
+	_update_battery_pickup_collection()
 
 
 func _connect_to_current_graph() -> void:
@@ -127,6 +140,7 @@ func _connect_to_current_graph() -> void:
 	_connected_graph = graph_renderer.graph
 	if not _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.connect(_on_vertex_logic_triggered)
+	_refresh_battery_pickup_visual()
 
 
 func _disconnect_from_current_graph() -> void:
@@ -134,6 +148,7 @@ func _disconnect_from_current_graph() -> void:
 	if _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.disconnect(_on_vertex_logic_triggered)
 	_connected_graph = null
+	_clear_battery_pickup_sprite()
 
 
 func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
@@ -169,6 +184,7 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	_set_loading_screen_visible(false)
 	_set_player_movement_enabled(true)
 	_connect_to_current_graph()
+	_refresh_battery_pickup_visual()
 	_sync_mini_map_context()
 	_is_swapping_scene = false
 
@@ -372,3 +388,111 @@ func _get_current_player() -> Player:
 		if child is Player:
 			return child as Player
 	return null
+
+
+func _refresh_battery_pickup_visual() -> void:
+	_clear_battery_pickup_sprite()
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null or graph_renderer.graph == null:
+		return
+	var pickup_config := _get_battery_pickup_config_for_graph(graph_renderer.graph)
+	if pickup_config.is_empty():
+		return
+	var vertex_id := int(pickup_config.get(&"vertex_id", -1))
+	if vertex_id < 0:
+		return
+	var texture := pickup_config.get(&"texture", default_battery_pickup_texture) as Texture2D
+	if texture == null:
+		return
+	var pickup_height := float(pickup_config.get(&"height", default_battery_pickup_height))
+	var pickup_pixel_size := float(pickup_config.get(&"pixel_size", default_battery_pickup_pixel_size))
+	if not graph_renderer.graph.vertices.has(vertex_id):
+		return
+	if _is_battery_pickup_collected(graph_renderer.graph, vertex_id):
+		return
+
+	var vertex: Vertex = graph_renderer.graph.vertices.get(vertex_id)
+	if vertex == null:
+		return
+
+	var sprite := Sprite3D.new()
+	sprite.name = "BatteryPickup"
+	sprite.texture = texture
+	sprite.billboard = 1
+	sprite.pixel_size = pickup_pixel_size
+	sprite.double_sided = false
+	sprite.position = Vector3(vertex.position.x * graph_renderer.cell_size, pickup_height, vertex.position.y * graph_renderer.cell_size)
+	graph_renderer.add_child(sprite)
+	_battery_pickup_sprite = sprite
+
+
+func _update_battery_pickup_collection() -> void:
+	if _is_swapping_scene:
+		return
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null or graph_renderer.graph == null:
+		return
+	var pickup_config := _get_battery_pickup_config_for_graph(graph_renderer.graph)
+	if pickup_config.is_empty():
+		return
+	var vertex_id := int(pickup_config.get(&"vertex_id", -1))
+	if vertex_id < 0:
+		return
+	if _is_battery_pickup_collected(graph_renderer.graph, vertex_id):
+		return
+	var player := _get_current_player()
+	if player == null:
+		return
+	if player.get_current_vertex_id() != vertex_id:
+		return
+	_set_battery_pickup_collected(graph_renderer.graph, vertex_id, true)
+	_clear_battery_pickup_sprite()
+	if _text_log != null:
+		_text_log.add_message("Battery pack collected.")
+
+
+func _is_battery_pickup_collected(graph: Graph, vertex_id: int) -> bool:
+	if graph == null:
+		return false
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return false
+	return run_state.has_flag(_get_battery_pickup_flag_id(graph, vertex_id))
+
+
+func _set_battery_pickup_collected(graph: Graph, vertex_id: int, value: bool) -> void:
+	if graph == null:
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	run_state.set_flag(_get_battery_pickup_flag_id(graph, vertex_id), value)
+
+
+func _get_battery_pickup_flag_id(graph: Graph, vertex_id: int) -> StringName:
+	if graph == null:
+		return &""
+	var map_key := graph.resource_path
+	if map_key.is_empty():
+		map_key = "runtime_%d" % graph.get_instance_id()
+	return StringName("%s%s_%d" % [String(BATTERY_PICKUP_FLAG_PREFIX), map_key, vertex_id])
+
+
+func _get_battery_pickup_config_for_graph(graph: Graph) -> Dictionary:
+	if graph == null:
+		return {}
+	var graph_key := graph.resource_path
+	if graph_key.is_empty():
+		return {}
+	if not battery_pickup_map.has(graph_key):
+		return {}
+	var config: Variant = battery_pickup_map.get(graph_key, {})
+	if config is Dictionary:
+		return config as Dictionary
+	return {}
+
+
+func _clear_battery_pickup_sprite() -> void:
+	if _battery_pickup_sprite != null and is_instance_valid(_battery_pickup_sprite):
+		_battery_pickup_sprite.queue_free()
+	_battery_pickup_sprite = null
