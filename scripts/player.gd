@@ -30,6 +30,8 @@ var _dodge_bonus: int = 0
 var _max_health_bonus: int = 0
 var _is_defeated := false
 
+@onready var _move_sfx_player: RandomSfxPlayer = get_node_or_null("MoveSfx") as RandomSfxPlayer
+
 
 func set_run_state(state: DungeonRunState) -> void:
 	_run_state = state
@@ -66,6 +68,7 @@ func rotate_view(clockwise: bool) -> bool:
 func try_move_relative(relative_degrees: int) -> bool:
 	if not _can_take_turn_action():
 		return false
+	var previous_vertex_id := _navigator.current_vertex_id
 
 	var forward := _get_forward_direction()
 	var move_direction := Direction.Cardinal.NONE
@@ -80,6 +83,8 @@ func try_move_relative(relative_degrees: int) -> bool:
 		return false
 
 	if _try_move(move_direction):
+		if _navigator.current_vertex_id != previous_vertex_id and _move_sfx_player != null:
+			_move_sfx_player.play_random()
 		_consume_player_turn()
 		return true
 
