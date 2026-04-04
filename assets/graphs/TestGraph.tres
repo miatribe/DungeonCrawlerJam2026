@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://ds7bw2ccatme1" path="res://assets/images/Wall_switch_ON.png" id="7_y4esy"]
 [ext_resource type="Texture2D" uid="uid://ccyqgvq56ywxu" path="res://assets/images/teleporter_Floor-ceiling.png" id="8_r3ij3"]
 [ext_resource type="Script" uid="uid://clpsx37du4jtm" path="res://addons/dungeoncraftercore/scripts/vertex_logic.gd" id="8_yi07g"]
-[ext_resource type="Texture2D" uid="uid://bhy52yrvn8rlo" path="res://assets/images/Pressure_plate_1024x1024_Off.png" id="9_weeju"]
-[ext_resource type="Texture2D" uid="uid://dq71441l7jvwi" path="res://assets/images/Pressure_plate_1024x1024_ON.png" id="10_6wlqg"]
+[ext_resource type="Texture2D" uid="uid://bk21e5x6pynyn" path="res://assets/images/Pressure_plate_2_Off.png" id="9_048ns"]
+[ext_resource type="Texture2D" uid="uid://c7m7jgf0521ss" path="res://assets/images/Pressure_plate_2_ON.png" id="10_gorrc"]
 [ext_resource type="Texture2D" uid="uid://dt83cl0jn2qsc" path="res://assets/images/Teleporter_wall_Hoome_Base.png" id="11_048ns"]
 [ext_resource type="Texture2D" uid="uid://hqsyp6x8pxcm" path="res://assets/images/Teleporter_wall_Maze.png" id="12_gorrc"]
 [ext_resource type="Texture2D" uid="uid://dox7journyyiq" path="res://assets/images/Teleporter_wall_RoomieMap.png" id="13_mml0y"]
@@ -1636,62 +1636,62 @@ vertex_b_id = 1
 direction_from_a = 1
 direction_from_b = 0
 
-[sub_resource type="Resource" id="Resource_abrl5"]
+[sub_resource type="Resource" id="Resource_8ufy7"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("6_5dfwq")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_f3235"]
+[sub_resource type="Resource" id="Resource_t7x27"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("7_y4esy")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_1uilf"]
+[sub_resource type="Resource" id="Resource_8dep7"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("8_r3ij3")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_jmkg1"]
+[sub_resource type="Resource" id="Resource_n2y34"]
 script = ExtResource("3_yi07g")
-texture = ExtResource("9_weeju")
+texture = ExtResource("9_048ns")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_tt5ii"]
+[sub_resource type="Resource" id="Resource_ybfm5"]
 script = ExtResource("3_yi07g")
-texture = ExtResource("10_6wlqg")
+texture = ExtResource("10_gorrc")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_cbyad"]
+[sub_resource type="Resource" id="Resource_i4p0u"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("11_048ns")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_d23sh"]
+[sub_resource type="Resource" id="Resource_g8wjc"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("12_gorrc")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_ou1ee"]
+[sub_resource type="Resource" id="Resource_guov4"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("13_mml0y")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_skcy8"]
+[sub_resource type="Resource" id="Resource_nerld"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("14_dfgsg")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_v2ddb"]
+[sub_resource type="Resource" id="Resource_p5ups"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("15_fpwr4")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_rh7gl"]
+[sub_resource type="Resource" id="Resource_k4wps"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("16_048ns")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_wn2vf"]
+[sub_resource type="Resource" id="Resource_ffcix"]
 script = ExtResource("3_yi07g")
 texture = ExtResource("17_gorrc")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
@@ -3578,4 +3578,4 @@ vertex_logic = Dictionary[int, ExtResource("6_f52af")]({
 })
 tilesets = Array[ExtResource("5_0elrw")]([ExtResource("7_0elrw")])
 doors = Array[ExtResource("1_07mg3")]([ExtResource("2_0elrw"), ExtResource("2_8gf1p")])
-override_textures = Array[ExtResource("3_yi07g")]([SubResource("Resource_abrl5"), SubResource("Resource_f3235"), SubResource("Resource_1uilf"), SubResource("Resource_jmkg1"), SubResource("Resource_tt5ii"), SubResource("Resource_cbyad"), SubResource("Resource_d23sh"), SubResource("Resource_ou1ee"), SubResource("Resource_skcy8"), SubResource("Resource_v2ddb"), SubResource("Resource_rh7gl"), SubResource("Resource_wn2vf")])
+override_textures = Array[ExtResource("3_yi07g")]([SubResource("Resource_8ufy7"), SubResource("Resource_t7x27"), SubResource("Resource_8dep7"), SubResource("Resource_n2y34"), SubResource("Resource_ybfm5"), SubResource("Resource_i4p0u"), SubResource("Resource_g8wjc"), SubResource("Resource_guov4"), SubResource("Resource_nerld"), SubResource("Resource_p5ups"), SubResource("Resource_k4wps"), SubResource("Resource_ffcix")])

@@ -14,8 +14,8 @@
 [ext_resource type="Script" uid="uid://bb0j6441q4hx6" path="res://addons/dungeoncraftercore/scripts/vertex.gd" id="8_1lnfu"]
 [ext_resource type="Texture2D" uid="uid://ccyqgvq56ywxu" path="res://assets/images/teleporter_Floor-ceiling.png" id="8_rs16f"]
 [ext_resource type="Script" uid="uid://clpsx37du4jtm" path="res://addons/dungeoncraftercore/scripts/vertex_logic.gd" id="8_xngqq"]
-[ext_resource type="Texture2D" uid="uid://bhy52yrvn8rlo" path="res://assets/images/Pressure_plate_1024x1024_Off.png" id="9_f5c5o"]
-[ext_resource type="Texture2D" uid="uid://dq71441l7jvwi" path="res://assets/images/Pressure_plate_1024x1024_ON.png" id="10_akeqx"]
+[ext_resource type="Texture2D" uid="uid://bk21e5x6pynyn" path="res://assets/images/Pressure_plate_2_Off.png" id="9_3i0d7"]
+[ext_resource type="Texture2D" uid="uid://c7m7jgf0521ss" path="res://assets/images/Pressure_plate_2_ON.png" id="10_18bdu"]
 [ext_resource type="Texture2D" uid="uid://dt83cl0jn2qsc" path="res://assets/images/Teleporter_wall_Hoome_Base.png" id="11_3i0d7"]
 [ext_resource type="Texture2D" uid="uid://hqsyp6x8pxcm" path="res://assets/images/Teleporter_wall_Maze.png" id="12_18bdu"]
 [ext_resource type="Texture2D" uid="uid://dox7journyyiq" path="res://assets/images/Teleporter_wall_RoomieMap.png" id="13_wcep4"]
@@ -287,12 +287,12 @@ metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_n2y34"]
 script = ExtResource("3_dbx8w")
-texture = ExtResource("9_f5c5o")
+texture = ExtResource("9_3i0d7")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_ybfm5"]
 script = ExtResource("3_dbx8w")
-texture = ExtResource("10_akeqx")
+texture = ExtResource("10_18bdu")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
 [sub_resource type="Resource" id="Resource_i4p0u"]
