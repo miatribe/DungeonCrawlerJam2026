@@ -40,6 +40,7 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
 @onready var _temp_loading_screen: TextureRect = %LoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
+@onready var _music_system: MusicSystem = %MusicSystem
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap
 @onready var _btn_move_forward: Button = $AspectRatioContainer/DesignRoot/MoveFoward
@@ -842,3 +843,15 @@ func _clear_battery_pickup_sprite() -> void:
 	if _battery_pickup_sprite != null and is_instance_valid(_battery_pickup_sprite):
 		_battery_pickup_sprite.queue_free()
 	_battery_pickup_sprite = null
+
+
+func play_gameplay_music() -> void:
+	if _music_system == null:
+		return
+	_music_system.play_gameplay_track(false)
+
+
+func play_boss_music() -> void:
+	if _music_system == null:
+		return
+	_music_system.play_boss_track(true)
