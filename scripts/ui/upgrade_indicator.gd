@@ -4,6 +4,7 @@ class_name UpgradeIndicator
 
 @export var not_upgraded_texture: Texture2D = preload("res://assets/images/Battery_panel_Off.png")
 @export var upgraded_texture: Texture2D = preload("res://assets/images/Battery_panel_ON.png")
+@export var enforce_default_size: bool = true
 @export var starts_upgraded: bool = false:
 	set(value):
 		starts_upgraded = value
@@ -41,9 +42,9 @@ func is_upgraded() -> bool:
 
 
 func _ensure_visible_defaults() -> void:
-	if custom_minimum_size == Vector2.ZERO:
+	if enforce_default_size and custom_minimum_size == Vector2.ZERO:
 		custom_minimum_size = Vector2(256, 256)
-	if size == Vector2.ZERO:
+	if enforce_default_size and size == Vector2.ZERO:
 		size = custom_minimum_size
 	if texture == null:
 		texture = not_upgraded_texture

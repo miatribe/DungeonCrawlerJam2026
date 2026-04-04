@@ -152,10 +152,16 @@ offset_bottom = 0.0
 [node name="MiniMap" parent="AspectRatioContainer/DesignRoot" unique_id=31798792 instance=ExtResource("6_4rg2b")]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = -255.00122
-offset_top = 11.0
-offset_right = -20.00122
-offset_bottom = 246.0
+anchors_preset = -1
+anchor_left = 0.8671875
+anchor_top = 0.010185185
+anchor_right = 0.9895833
+anchor_bottom = 0.22777778
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+custom_minimum_size = Vector2(0, 0)
 reveal_radius = 3
 cell_size = 40.0
 visited_tile_color = Color(0.3254902, 1, 0.41568628, 1)
@@ -165,7 +171,7 @@ border_color = Color(2.623126e-06, 0.57043785, 0.15670037, 1)
 background_color = Color(0, 0, 0, 0.8862745)
 
 [node name="UpgradeIndicator" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=861631923]
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.7265631
@@ -173,11 +179,13 @@ anchor_top = 0.22870371
 anchor_right = 0.8598965
 anchor_bottom = 0.46574074
 texture = ExtResource("9_xvgcs")
-expand_mode = 3
+expand_mode = 1
+stretch_mode = 5
 script = ExtResource("9_ipp67")
+enforce_default_size = false
 
 [node name="UpgradeIndicator2" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1690168283]
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.86198086
@@ -185,8 +193,10 @@ anchor_top = 0.22870371
 anchor_right = 0.99218816
 anchor_bottom = 0.4601852
 texture = ExtResource("9_xvgcs")
-expand_mode = 3
+expand_mode = 1
+stretch_mode = 5
 script = ExtResource("9_ipp67")
+enforce_default_size = false
 
 [node name="PlayerHpBar" type="ProgressBar" parent="AspectRatioContainer/DesignRoot" unique_id=1034684737]
 layout_mode = 1
