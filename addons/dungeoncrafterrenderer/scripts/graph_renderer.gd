@@ -533,8 +533,13 @@ func _get_or_create_material(texture: Texture2D, surface: Direction.Surface) -> 
 		standard_material.albedo_texture = texture
 		standard_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		if _texture_has_alpha(texture):
-			standard_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			standard_material.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+			# Keep floors/ceilings depth-stable even when source textures contain alpha.
+			if surface == Direction.Surface.FLOOR or surface == Direction.Surface.CEILING:
+				standard_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+				standard_material.alpha_scissor_threshold = 0.5
+			else:
+				standard_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				standard_material.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
 		material = standard_material
 
 	_material_cache[key] = material
