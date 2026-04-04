@@ -343,3 +343,16 @@ anchor_top = 0.762963
 anchor_right = 0.6558965
 anchor_bottom = 0.81707406
 flat = true
+
+[node name="Menu" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=233867855]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82900006
+anchor_top = 0.80600005
+anchor_right = 0.89400005
+anchor_bottom = 0.92
+offset_left = -0.6809082
+offset_top = 0.5199585
+offset_right = -0.4810791
+offset_bottom = 0.39996338
+flat = true
