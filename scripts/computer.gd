@@ -262,7 +262,7 @@ func _apply_logic_stat_bonus_once(logic_id: StringName) -> void:
 		return
 	run_state.set_flag(flag_id, true)
 	var player := _get_current_player()
-	_log_stat_bonus_gain(player, bonus_config)
+	_log_stat_bonus_gain(player, bonus_config, logic_id)
 	if player != null:
 		_apply_all_persistent_logic_stat_bonuses(player)
 
@@ -378,10 +378,13 @@ func _get_laser_panel_flag_id() -> StringName:
 	return StringName(String(LASER_PANEL_FLAG_PREFIX) + String(laser_upgrade_logic_id))
 
 
-func _log_stat_bonus_gain(player: Player, bonus_config: Dictionary) -> void:
+func _log_stat_bonus_gain(player: Player, bonus_config: Dictionary, logic_id: StringName) -> void:
 	if _text_log == null:
 		return
 	var parts: Array[String] = []
+	var upgrade_name := String(bonus_config.get(&"name", bonus_config.get(&"upgrade_name", ""))).strip_edges()
+	if upgrade_name.is_empty():
+		upgrade_name = String(logic_id)
 
 	var attack_gain := int(bonus_config.get(&"attack", 0))
 	if attack_gain != 0:
@@ -408,9 +411,12 @@ func _log_stat_bonus_gain(player: Player, bonus_config: Dictionary) -> void:
 		var base_max_health := player.max_health if player != null else 0
 		parts.append("Max HP %d + %d" % [base_max_health, max_health_gain])
 
-	if parts.is_empty():
+	if parts.is_empty() and upgrade_name.is_empty():
 		return
-	_text_log.add_message("Stat gain: %s" % ", ".join(parts))
+	if parts.is_empty():
+		_text_log.add_message("You got %s." % upgrade_name)
+		return
+	_text_log.add_message("You got %s - %s" % [upgrade_name, ", ".join(parts)])
 
 
 func _setup_mini_map() -> void:

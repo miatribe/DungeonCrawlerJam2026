@@ -75,13 +75,15 @@ logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
 "attack": 2,
 "defense": 1,
 "dodge": 1,
-"hit": 2
+"hit": 2,
+"name": "Laser Gun"
 },
 &"vertex_6_logic_1775186759": {
 "attack": 1,
 "defense": 1,
 "dodge": 1,
-"hit": 1
+"hit": 1,
+"name": "Power Upgrade"
 }
 })
 logic_upgrade_indicator_map = Dictionary[StringName, NodePath]({
