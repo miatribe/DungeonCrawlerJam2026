@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://rhysq773u72i" path="res://assets/images/ui_basic_sample9.png" id="11_xvgcs"]
 [ext_resource type="Script" uid="uid://t4f5o2d8knah" path="res://scripts/ui/player_hp_bar.gd" id="13_eywps"]
 [ext_resource type="Script" uid="uid://6a3yk4q814df" path="res://scripts/ui/player_hp_text.gd" id="14_1x23v"]
+[ext_resource type="Texture2D" uid="uid://d54mfrhsnopl" path="res://assets/images/Laser_gun_panel__offline.png" id="14_ebepl"]
+[ext_resource type="Script" uid="uid://ckaq4nr1fi0ig" path="res://scripts/ui/laser_gun_upgrade_panel.gd" id="15_ypmvi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bar_bg"]
 bg_color = Color(0, 0, 0, 1)
@@ -210,6 +212,16 @@ theme_override_font_sizes/font_size = 50
 text = "0/1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LaserGunUpgradePanel" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1498791362]
+layout_mode = 0
+offset_left = 1404.0012
+offset_top = 13.0
+offset_right = 1634.0012
+offset_bottom = 243.0
+texture = ExtResource("14_ebepl")
+expand_mode = 3
+script = ExtResource("15_ypmvi")
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=505607981]
 layout_mode = 1

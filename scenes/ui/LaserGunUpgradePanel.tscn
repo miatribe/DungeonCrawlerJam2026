@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/laser_gun_upgrade_panel.gd" id="1_bud6m"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel__offline.png" id="2_h4ayf"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_0.png" id="3_kr2j8"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_1.png" id="4_89kq0"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_2.png" id="5_v3szn"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_3.png" id="6_7lqf1"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_4.png" id="7_4jcxp"]
+[ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_5.png" id="8_4x7ru"]
+
+[node name="LaserGunUpgradePanel" type="TextureRect"]
+custom_minimum_size = Vector2(256, 256)
+texture_filter = 1
+texture = ExtResource("2_h4ayf")
+offset_right = 256.0
+offset_bottom = 256.0
+expand_mode = 0
+stretch_mode = 5
+script = ExtResource("1_bud6m")
+not_upgraded_texture = ExtResource("2_h4ayf")
+upgraded_step_textures = Array[Texture2D]([ExtResource("3_kr2j8"), ExtResource("4_89kq0"), ExtResource("5_v3szn"), ExtResource("6_7lqf1"), ExtResource("7_4jcxp"), ExtResource("8_4x7ru")])
