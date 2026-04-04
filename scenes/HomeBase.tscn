@@ -27,5 +27,5 @@ environment = SubResource("Environment_hm6wk")
 
 [node name="Player" parent="." unique_id=608341986 node_paths=PackedStringArray("graph_renderer") instance=ExtResource("3_so7uu")]
 graph_renderer = NodePath("..")
-start_vertex_id = 0
+start_vertex_id = 1
 start_facing_direction = 1
