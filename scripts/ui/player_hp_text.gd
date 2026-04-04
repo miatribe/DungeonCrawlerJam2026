@@ -4,11 +4,16 @@ class_name PlayerHpText
 @export var player_path: NodePath
 @export var auto_find_player: bool = true
 @export_range(0.1, 5.0, 0.1) var auto_find_interval_seconds: float = 0.5
+@export var auto_scale_font: bool = true
+@export_range(8, 128, 1) var min_font_size: int = 12
+@export_range(8, 256, 1) var max_font_size: int = 64
+@export_range(0.1, 1.0, 0.05) var font_height_ratio: float = 0.62
 
 var _player: Player
 var _find_timer: float = 0.0
 var _last_current_hp: int = -1
 var _last_max_hp: int = -1
+var _last_font_size: int = -1
 @onready var _label: Label = %HealthLabel
 
 
@@ -30,6 +35,7 @@ func _process(delta: float) -> void:
 		if _find_timer >= auto_find_interval_seconds:
 			_find_timer = 0.0
 			_resolve_player_reference()
+	_update_font_size()
 	_refresh_from_player()
 
 
@@ -78,3 +84,14 @@ func _find_player_recursive(node: Node) -> Player:
 		if found != null:
 			return found
 	return null
+
+
+func _update_font_size() -> void:
+	if not auto_scale_font or _label == null:
+		return
+	var target_size := int(round(size.y * font_height_ratio))
+	target_size = clampi(target_size, min_font_size, max_font_size)
+	if target_size == _last_font_size:
+		return
+	_last_font_size = target_size
+	_label.add_theme_font_size_override("font_size", target_size)
