@@ -176,7 +176,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if _is_menu_open:
 		return
-	if key_event.keycode != KEY_F:
+	if key_event.keycode != KEY_F and key_event.keycode != KEY_KP_9:
 		return
 	_try_fire_laser()
 

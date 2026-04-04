@@ -17,13 +17,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not key_event.pressed or key_event.echo: return
 
 	match key_event.keycode:
-		KEY_E: command_rotate_right()
-		KEY_Q: command_rotate_left()
-		KEY_W: command_move_forward()
-		KEY_S: command_move_backward()
-		KEY_D: command_move_right()
-		KEY_A: command_move_left()
-		KEY_R: command_interact()
+		KEY_E, KEY_KP_6, KEY_RIGHT: command_rotate_right()
+		KEY_Q, KEY_KP_4, KEY_LEFT: command_rotate_left()
+		KEY_W, KEY_KP_5, KEY_UP: command_move_forward()
+		KEY_S, KEY_KP_2, KEY_DOWN: command_move_backward()
+		KEY_D, KEY_KP_3: command_move_right()
+		KEY_A, KEY_KP_1: command_move_left()
+		KEY_R, KEY_KP_7: command_interact()
 
 
 func command_rotate_right() -> void:
