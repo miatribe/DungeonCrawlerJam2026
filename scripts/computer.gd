@@ -79,6 +79,7 @@ func _ready() -> void:
 	_apply_all_persistent_upgrade_indicators()
 	_apply_all_persistent_laser_panel_upgrades()
 	_update_gun_not_ready_visibility()
+	call_deferred("_run_initial_ai_turn_after_load")
 
 
 func _wire_button_actions() -> void:
@@ -253,6 +254,7 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	var graph_renderer := _get_current_graph_renderer()
 	if graph_renderer != null: graph_renderer.render_graph()
 	await get_tree().process_frame
+	_run_initial_ai_turn_for_current_scene()
 	await get_tree().create_timer(maxf(0.0, loading_screen_hold_seconds)).timeout
 	_set_loading_screen_visible(false)
 	_set_player_movement_enabled(true)
@@ -423,12 +425,28 @@ func _respawn_player_to_home() -> void:
 	if graph_renderer != null:
 		graph_renderer.render_graph()
 	_connect_to_current_graph()
+	await get_tree().process_frame
+	_run_initial_ai_turn_for_current_scene()
 	_refresh_battery_pickup_visual()
 	_sync_mini_map_context()
 	_loading_screen_texture_override = null
 	_set_loading_screen_visible(false)
 	_set_player_movement_enabled(true)
 	_is_swapping_scene = false
+
+
+func _run_initial_ai_turn_after_load() -> void:
+	if get_tree() == null:
+		return
+	await get_tree().process_frame
+	_run_initial_ai_turn_for_current_scene()
+
+
+func _run_initial_ai_turn_for_current_scene() -> void:
+	var turn_manager := _get_current_turn_manager()
+	if turn_manager == null:
+		return
+	turn_manager.run_initial_ai_turn()
 
 
 func _save_current_map_state() -> void:

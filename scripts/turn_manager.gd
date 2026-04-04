@@ -9,6 +9,7 @@ signal AITurnOver(int)
 
 var is_player_turn: bool = true
 var turn_count: int = 0
+var _has_completed_initial_ai_turn: bool = false
 
 
 func player_took_turn() -> void:
@@ -16,6 +17,15 @@ func player_took_turn() -> void:
 	PlayerTurnOver.emit()
 	_run_ai_turns()
 	ai_took_turn()
+
+
+func run_initial_ai_turn() -> void:
+	if _has_completed_initial_ai_turn:
+		return
+	is_player_turn = false
+	_run_ai_turns()
+	ai_took_turn()
+	_has_completed_initial_ai_turn = true
 
 
 func ai_took_turn() -> void:
