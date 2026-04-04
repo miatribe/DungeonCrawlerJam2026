@@ -18,6 +18,9 @@ const LASER_PANEL_MAX_STEP := 5
 @export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
 @export var menu_screen_texture: Texture2D = preload("res://assets/images/Drone_Menu_screen.png")
+@export_range(0.0, 10.0, 0.1) var death_screen_hold_seconds: float = 2.0
+@export var death_screen_texture: Texture2D = preload("res://assets/images/Drone_deathscreen.png")
+@export var respawn_home_scene: PackedScene = preload("res://scenes/HomeBase.tscn")
 @export var battery_pickup_map: Dictionary[String, Dictionary] = {
 	"res://assets/graphs/Maze.tres": {
 		&"vertex_id": 6,
@@ -58,6 +61,8 @@ var _is_menu_open := false
 var _map_state_store: MapStateStore = MapStateStore.new()
 var _battery_pickup_sprite: Sprite3D
 var _default_loading_screen_texture: Texture2D
+var _loading_screen_texture_override: Texture2D
+var _connected_player: Player
 
 
 func _ready() -> void:
@@ -67,6 +72,7 @@ func _ready() -> void:
 	_wire_button_actions()
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
+	_connect_to_current_player()
 	_refresh_battery_pickup_visual()
 	_setup_mini_map()
 	_apply_all_persistent_upgrade_indicators()
@@ -160,6 +166,7 @@ func _on_interact_pressed() -> void:
 
 
 func _process(_delta: float) -> void:
+	_ensure_player_defeat_wiring()
 	_sync_mini_map_context()
 	_update_battery_pickup_collection()
 
@@ -210,6 +217,7 @@ func _disconnect_from_current_graph() -> void:
 		_connected_graph.vertex_logic_triggered.disconnect(_on_vertex_logic_triggered)
 	_connected_graph = null
 	_disconnect_from_current_turn_manager()
+	_disconnect_from_current_player()
 	_clear_battery_pickup_sprite()
 
 
@@ -240,6 +248,7 @@ func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
 	_swap_subviewport_scene(scene)
 	_restore_current_map_state()
 	_inject_run_state_into_player()
+	_connect_to_current_player()
 	var graph_renderer := _get_current_graph_renderer()
 	if graph_renderer != null: graph_renderer.render_graph()
 	await get_tree().process_frame
@@ -269,8 +278,11 @@ func _swap_subviewport_scene(scene: PackedScene) -> void:
 
 func _set_loading_screen_visible(new_is_visible: bool) -> void:
 	if _temp_loading_screen != null:
-		if not _is_menu_open and _default_loading_screen_texture != null:
-			_temp_loading_screen.texture = _default_loading_screen_texture
+		if not _is_menu_open:
+			if _loading_screen_texture_override != null:
+				_temp_loading_screen.texture = _loading_screen_texture_override
+			elif _default_loading_screen_texture != null:
+				_temp_loading_screen.texture = _default_loading_screen_texture
 		_temp_loading_screen.visible = new_is_visible
 
 
@@ -344,6 +356,78 @@ func _on_player_turn_over() -> void:
 func _set_player_movement_enabled(is_enabled: bool) -> void:
 	if _player_input == null: return
 	_player_input.set_input_locked(not is_enabled)
+
+
+func _connect_to_current_player() -> void:
+	_disconnect_from_current_player()
+	var player := _get_current_player()
+	if player == null:
+		return
+	_connected_player = player
+	if not _connected_player.defeated.is_connected(_on_player_defeated):
+		_connected_player.defeated.connect(_on_player_defeated)
+
+
+func _ensure_player_defeat_wiring() -> void:
+	if _is_swapping_scene:
+		return
+	var player := _get_current_player()
+	if player == null:
+		_disconnect_from_current_player()
+		return
+	if _connected_player != player:
+		_connect_to_current_player()
+		return
+	if not _connected_player.defeated.is_connected(_on_player_defeated):
+		_connected_player.defeated.connect(_on_player_defeated)
+	# Fallback in case death happened before the signal was connected this frame.
+	if player.current_health <= 0:
+		_on_player_defeated()
+
+
+func _disconnect_from_current_player() -> void:
+	if _connected_player == null:
+		return
+	if _connected_player.defeated.is_connected(_on_player_defeated):
+		_connected_player.defeated.disconnect(_on_player_defeated)
+	_connected_player = null
+
+
+func _on_player_defeated() -> void:
+	if _is_swapping_scene:
+		return
+	await _respawn_player_to_home()
+
+
+func _respawn_player_to_home() -> void:
+	if respawn_home_scene == null:
+		push_warning("Computer: Home respawn scene is not assigned.")
+		return
+	_is_swapping_scene = true
+	_set_player_movement_enabled(false)
+	_loading_screen_texture_override = death_screen_texture
+	_set_loading_screen_visible(true)
+	if _text_log != null:
+		_text_log.add_message("System failure detected. Respawning at Home Base...")
+	await get_tree().create_timer(maxf(0.0, death_screen_hold_seconds)).timeout
+	_save_current_map_state()
+	_swap_subviewport_scene(respawn_home_scene)
+	_restore_current_map_state()
+	_inject_run_state_into_player()
+	_connect_to_current_player()
+	var player := _get_current_player()
+	if player != null:
+		player.respawn_to_start_full_health()
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer != null:
+		graph_renderer.render_graph()
+	_connect_to_current_graph()
+	_refresh_battery_pickup_visual()
+	_sync_mini_map_context()
+	_loading_screen_texture_override = null
+	_set_loading_screen_visible(false)
+	_set_player_movement_enabled(true)
+	_is_swapping_scene = false
 
 
 func _save_current_map_state() -> void:

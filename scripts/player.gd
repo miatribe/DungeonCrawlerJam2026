@@ -1,6 +1,8 @@
 extends Node3D
 class_name Player
 
+signal defeated
+
 const TEXT_LOG_GROUP := "text_log"
 const ENEMY_MANAGER_GROUP := "enemy_manager"
 
@@ -26,6 +28,7 @@ var _defense_bonus: int = 0
 var _hit_bonus: int = 0
 var _dodge_bonus: int = 0
 var _max_health_bonus: int = 0
+var _is_defeated := false
 
 
 func set_run_state(state: DungeonRunState) -> void:
@@ -45,6 +48,7 @@ func _ready() -> void:
 	_log_message("Combat log connected.")
 	combat_stats.set_values(attack + _attack_bonus, defense + _defense_bonus, hit + _hit_bonus, dodge + _dodge_bonus)
 	current_health = maxi(1, max_health + _max_health_bonus)
+	_is_defeated = false
 	_set_facing_direction(start_facing_direction)
 	_navigator.set_graph(graph_renderer.graph)
 	_cell_size = graph_renderer.cell_size
@@ -231,11 +235,27 @@ func _get_enemy_managers() -> Array[EnemyManager]:
 func apply_damage(amount: int) -> void:
 	if amount <= 0:
 		return
+	if _is_defeated:
+		return
 	current_health = maxi(0, current_health - amount)
 	_log_message("You take %d damage. HP: %d/%d" % [amount, current_health, get_effective_max_health()])
 	if current_health == 0:
+		_is_defeated = true
 		print("You have been defeated.")
 		_log_message("You have been defeated.")
+		defeated.emit()
+
+
+func respawn_to_start_full_health() -> void:
+	current_health = get_effective_max_health()
+	_is_defeated = false
+	_set_facing_direction(start_facing_direction)
+	if _navigator.graph == null:
+		return
+	if start_vertex_id == -1:
+		return
+	if not _navigator.set_current_vertex(start_vertex_id, true):
+		push_warning("Player respawn failed: start vertex is invalid.")
 
 
 func set_persistent_stat_bonuses(
