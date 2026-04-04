@@ -4,6 +4,7 @@ const STAT_BONUS_FLAG_PREFIX := &"stat_bonus_applied_"
 const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
 const LASER_PANEL_FLAG_PREFIX := &"laser_panel_applied_"
 const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
+const LASER_PANEL_MAX_STEP := 5
 
 @export var logic_scene_map: Dictionary[StringName, PackedScene] = {
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
@@ -48,6 +49,7 @@ const BATTERY_PICKUP_FLAG_PREFIX := &"battery_pickup_collected_"
 @onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
 
 var _connected_graph: Graph
+var _connected_turn_manager: TurnManager
 var _is_swapping_scene := false
 var _map_state_store: MapStateStore = MapStateStore.new()
 var _battery_pickup_sprite: Sprite3D
@@ -151,6 +153,7 @@ func _connect_to_current_graph() -> void:
 	_connected_graph = graph_renderer.graph
 	if not _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.connect(_on_vertex_logic_triggered)
+	_connect_to_current_turn_manager()
 	_refresh_battery_pickup_visual()
 
 
@@ -159,6 +162,7 @@ func _disconnect_from_current_graph() -> void:
 	if _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.disconnect(_on_vertex_logic_triggered)
 	_connected_graph = null
+	_disconnect_from_current_turn_manager()
 	_clear_battery_pickup_sprite()
 
 
@@ -224,6 +228,38 @@ func _set_loading_screen_visible(new_is_visible: bool) -> void:
 func _get_current_graph_renderer() -> GraphRenderer:
 	if _subviewport == null or _subviewport.get_child_count() == 0: return null
 	return _subviewport.get_child(0) as GraphRenderer
+
+
+func _get_current_turn_manager() -> TurnManager:
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null:
+		return null
+	for child in graph_renderer.get_children():
+		if child is TurnManager:
+			return child as TurnManager
+	return null
+
+
+func _connect_to_current_turn_manager() -> void:
+	_disconnect_from_current_turn_manager()
+	var turn_manager := _get_current_turn_manager()
+	if turn_manager == null:
+		return
+	_connected_turn_manager = turn_manager
+	if not _connected_turn_manager.PlayerTurnOver.is_connected(_on_player_turn_over):
+		_connected_turn_manager.PlayerTurnOver.connect(_on_player_turn_over)
+
+
+func _disconnect_from_current_turn_manager() -> void:
+	if _connected_turn_manager == null:
+		return
+	if _connected_turn_manager.PlayerTurnOver.is_connected(_on_player_turn_over):
+		_connected_turn_manager.PlayerTurnOver.disconnect(_on_player_turn_over)
+	_connected_turn_manager = null
+
+
+func _on_player_turn_over() -> void:
+	_advance_laser_upgrade_step()
 
 
 func _set_player_movement_enabled(is_enabled: bool) -> void:
@@ -370,6 +406,20 @@ func _apply_laser_panel_upgrade() -> void:
 		return
 	_laser_gun_upgrade_panel.set_upgraded(true)
 	_laser_gun_upgrade_panel.set_current_step(laser_upgrade_step)
+
+
+func _advance_laser_upgrade_step() -> void:
+	if laser_upgrade_logic_id == &"":
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	if not run_state.has_flag(_get_laser_panel_flag_id()):
+		return
+	if laser_upgrade_step >= LASER_PANEL_MAX_STEP:
+		return
+	laser_upgrade_step = mini(laser_upgrade_step + 1, LASER_PANEL_MAX_STEP)
+	_apply_laser_panel_upgrade()
 
 
 func _get_laser_panel_flag_id() -> StringName:
