@@ -31,6 +31,7 @@ var _max_health_bonus: int = 0
 var _is_defeated := false
 
 @onready var _move_sfx_player: RandomSfxPlayer = get_node_or_null("MoveSfx") as RandomSfxPlayer
+@onready var _attack_sfx_player: RandomSfxPlayer = get_node_or_null("AttackSfx") as RandomSfxPlayer
 
 
 func set_run_state(state: DungeonRunState) -> void:
@@ -150,10 +151,10 @@ func get_forward_direction() -> Direction.Cardinal:
 	return _get_forward_direction()
 
 
-func attack_enemy_at_vertex(vertex_id: int) -> bool:
+func attack_enemy_at_vertex(vertex_id: int, play_attack_sfx: bool = true) -> bool:
 	for manager in _get_enemy_managers():
 		if manager.is_vertex_occupied_by_enemy(vertex_id):
-			return _attack_enemy_at_vertex(vertex_id, manager)
+			return _attack_enemy_at_vertex(vertex_id, manager, play_attack_sfx)
 	return false
 
 
@@ -172,7 +173,7 @@ func _try_move(direction: Direction.Cardinal) -> bool:
 	if target_vertex_id != -1:
 		for manager in _get_enemy_managers():
 			if manager.is_vertex_occupied_by_enemy(target_vertex_id):
-				return _attack_enemy_at_vertex(target_vertex_id, manager)
+				return _attack_enemy_at_vertex(target_vertex_id, manager, true)
 		for manager in _get_enemy_managers():
 			if manager.is_vertex_blocked_for_player(target_vertex_id):
 				return false
@@ -199,12 +200,14 @@ func _peek_target_vertex_id(direction: Direction.Cardinal) -> int:
 	return -1
 
 
-func _attack_enemy_at_vertex(vertex_id: int, manager: EnemyManager) -> bool:
+func _attack_enemy_at_vertex(vertex_id: int, manager: EnemyManager, play_attack_sfx: bool) -> bool:
 	if manager == null:
 		return false
 	var enemy := manager.get_enemy_at_vertex(vertex_id)
 	if enemy == null:
 		return false
+	if play_attack_sfx:
+		play_attack_sfx_random()
 	var enemy_name := "Enemy"
 	if enemy.enemy_resource != null:
 		enemy_name = enemy.enemy_resource.name
@@ -220,6 +223,12 @@ func _attack_enemy_at_vertex(vertex_id: int, manager: EnemyManager) -> bool:
 	print(hit_message)
 	_log_message(hit_message)
 	return true
+
+
+func play_attack_sfx_random() -> void:
+	if _attack_sfx_player == null:
+		return
+	_attack_sfx_player.play_random()
 
 
 func _get_enemy_managers() -> Array[EnemyManager]:

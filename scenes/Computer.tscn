@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bd3n3heqh4kcs" path="res://scenes/HomeBase.tscn" id="1_th2p1"]
 [ext_resource type="PackedScene" uid="uid://csnks0v3ohdgy" path="res://scenes/ui/TextLog.tscn" id="1_xihgh"]
 [ext_resource type="Script" path="res://scripts/audio/music_system.gd" id="1_kg0vu"]
+[ext_resource type="Script" path="res://scripts/audio/random_sfx_player.gd" id="1_u0h4h"]
 [ext_resource type="PackedScene" uid="uid://d11qt3e0tak8v" path="res://scenes/MapOne.tscn" id="2_aqdi6"]
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
 [ext_resource type="PackedScene" uid="uid://b4m8f44170jkh" path="res://scenes/Maze.tscn" id="3_c1chd"]
@@ -11,6 +12,7 @@
 [ext_resource type="AudioStream" path="res://assets/audio/music/robot_doctor_mutant_boss_loop_horror.wav" id="5_p4o76"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 [ext_resource type="AudioStream" path="res://assets/audio/music/scarier_retro_futuristic_boss_loop.wav" id="6_mx3s8"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/activation_button_2_heavy.wav" id="6_ubq4r"]
 [ext_resource type="Texture2D" uid="uid://cftrgeswdyl7p" path="res://assets/images/teleport_screen.png" id="7_65h6p"]
 [ext_resource type="Script" uid="uid://xodj8sv8ccd8" path="res://scripts/ui/upgrade_indicator.gd" id="9_ipp67"]
 [ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_xvgcs"]
@@ -105,6 +107,11 @@ unique_name_in_owner = true
 script = ExtResource("1_kg0vu")
 gameplay_track = ExtResource("5_p4o76")
 boss_track = ExtResource("6_mx3s8")
+
+[node name="LogicInteractSfx" type="Node" parent="." unique_id=1114982064]
+unique_name_in_owner = true
+script = ExtResource("1_u0h4h")
+sounds = Array[AudioStream]([ExtResource("6_ubq4r")])
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=196972501]
 layout_mode = 1

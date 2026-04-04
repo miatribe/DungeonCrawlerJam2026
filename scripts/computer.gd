@@ -41,6 +41,7 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _temp_loading_screen: TextureRect = %LoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
 @onready var _music_system: MusicSystem = %MusicSystem
+@onready var _logic_interact_sfx: RandomSfxPlayer = %LogicInteractSfx
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap
 @onready var _btn_move_forward: Button = $AspectRatioContainer/DesignRoot/MoveFoward
@@ -79,6 +80,7 @@ func _ready() -> void:
 	_apply_all_persistent_upgrade_indicators()
 	_apply_all_persistent_laser_panel_upgrades()
 	_update_gun_not_ready_visibility()
+	_update_attack_button_enabled_state()
 	call_deferred("_run_initial_ai_turn_after_load")
 
 
@@ -154,9 +156,7 @@ func _on_rotate_right_pressed() -> void:
 func _on_attack_pressed() -> void:
 	if not _can_accept_player_commands():
 		return
-	if _player_input == null:
-		return
-	_player_input.command_attack()
+	_try_fire_laser()
 
 
 func _on_interact_pressed() -> void:
@@ -223,8 +223,9 @@ func _disconnect_from_current_graph() -> void:
 	_clear_battery_pickup_sprite()
 
 
-func _on_vertex_logic_triggered(_vertex_id: int, logic_id: StringName) -> void:
+func _on_vertex_logic_triggered(vertex_id: int, logic_id: StringName) -> void:
 	if _is_swapping_scene: return
+	_play_interact_logic_sfx_if_needed(vertex_id, logic_id)
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
 	_apply_logic_stat_bonus_once(logic_id)
@@ -359,6 +360,23 @@ func _on_player_turn_over() -> void:
 func _set_player_movement_enabled(is_enabled: bool) -> void:
 	if _player_input == null: return
 	_player_input.set_input_locked(not is_enabled)
+
+
+func _play_interact_logic_sfx_if_needed(vertex_id: int, logic_id: StringName) -> void:
+	if _logic_interact_sfx == null:
+		return
+	if _connected_graph == null:
+		return
+	var entries := _connected_graph.get_vertex_logic(vertex_id)
+	for logic in entries:
+		if logic == null:
+			continue
+		if logic.logic_id != logic_id:
+			continue
+		if logic.trigger_type != VertexLogic.TriggerType.ON_INTERACT:
+			continue
+		_logic_interact_sfx.play_random()
+		return
 
 
 func _connect_to_current_player() -> void:
@@ -595,6 +613,13 @@ func _update_gun_not_ready_visibility() -> void:
 	if _gun_not_ready == null:
 		return
 	_gun_not_ready.visible = laser_upgrade_step < LASER_PANEL_MAX_STEP
+	_update_attack_button_enabled_state()
+
+
+func _update_attack_button_enabled_state() -> void:
+	if _btn_attack == null:
+		return
+	_btn_attack.disabled = laser_upgrade_step < LASER_PANEL_MAX_STEP
 
 
 func _advance_laser_upgrade_step() -> void:
@@ -624,6 +649,7 @@ func _try_fire_laser() -> void:
 		return
 	if not _can_player_take_turn_action(player):
 		return
+	player.play_attack_sfx_random()
 	_fire_laser_forward(player)
 	laser_upgrade_step = 0
 	_apply_laser_panel_upgrade()
@@ -661,7 +687,7 @@ func _fire_laser_forward(player: Player) -> void:
 		if next_vertex_id < 0:
 			return
 
-		if player.attack_enemy_at_vertex(next_vertex_id):
+		if player.attack_enemy_at_vertex(next_vertex_id, false):
 			return
 
 		current_vertex_id = next_vertex_id
