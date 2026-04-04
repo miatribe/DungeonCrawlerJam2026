@@ -138,6 +138,17 @@ func _process(_delta: float) -> void:
 	_update_battery_pickup_collection()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not (event is InputEventKey):
+		return
+	var key_event := event as InputEventKey
+	if not key_event.pressed or key_event.echo:
+		return
+	if key_event.keycode != KEY_F:
+		return
+	_try_fire_laser()
+
+
 func _connect_to_current_graph() -> void:
 	_disconnect_from_current_graph()
 	if _subviewport == null or _subviewport.get_child_count() == 0:
@@ -420,6 +431,77 @@ func _advance_laser_upgrade_step() -> void:
 		return
 	laser_upgrade_step = mini(laser_upgrade_step + 1, LASER_PANEL_MAX_STEP)
 	_apply_laser_panel_upgrade()
+
+
+func _try_fire_laser() -> void:
+	if _is_swapping_scene:
+		return
+	if laser_upgrade_step < LASER_PANEL_MAX_STEP:
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null or not run_state.has_flag(_get_laser_panel_flag_id()):
+		return
+	var player := _get_current_player()
+	if player == null:
+		return
+	if not _can_player_take_turn_action(player):
+		return
+	_fire_laser_forward(player)
+	laser_upgrade_step = 0
+	_apply_laser_panel_upgrade()
+	_consume_player_turn(player)
+
+
+func _fire_laser_forward(player: Player) -> void:
+	if player == null:
+		return
+	var graph := player.get_navigation_graph()
+	if graph == null:
+		return
+	var direction := player.get_forward_direction()
+	if direction == Direction.Cardinal.NONE:
+		return
+	var current_vertex_id := player.get_current_vertex_id()
+	if current_vertex_id < 0:
+		return
+
+	while true:
+		var current_vertex: Vertex = graph.vertices.get(current_vertex_id)
+		if current_vertex == null:
+			return
+		if not current_vertex.edges.has(direction):
+			return
+		var edge: Edge = current_vertex.edges.get(direction)
+		if edge == null or not edge.is_passable():
+			return
+
+		var next_vertex_id := -1
+		if edge.vertex_a_id == current_vertex_id:
+			next_vertex_id = edge.vertex_b_id
+		elif edge.vertex_b_id == current_vertex_id:
+			next_vertex_id = edge.vertex_a_id
+		if next_vertex_id < 0:
+			return
+
+		if player.attack_enemy_at_vertex(next_vertex_id):
+			return
+
+		current_vertex_id = next_vertex_id
+
+
+func _can_player_take_turn_action(player: Player) -> bool:
+	if player == null:
+		return false
+	if player.turn_manager == null:
+		return true
+	return player.turn_manager.is_player_turn
+
+
+func _consume_player_turn(player: Player) -> void:
+	if player == null or player.turn_manager == null:
+		return
+	if player.turn_manager.is_player_turn:
+		player.turn_manager.player_took_turn()
 
 
 func _get_laser_panel_flag_id() -> StringName:

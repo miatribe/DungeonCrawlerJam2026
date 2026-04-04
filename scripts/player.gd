@@ -137,6 +137,17 @@ func get_navigation_graph() -> Graph:
 	return _navigator.graph
 
 
+func get_forward_direction() -> Direction.Cardinal:
+	return _get_forward_direction()
+
+
+func attack_enemy_at_vertex(vertex_id: int) -> bool:
+	for manager in _get_enemy_managers():
+		if manager.is_vertex_occupied_by_enemy(vertex_id):
+			return _attack_enemy_at_vertex(vertex_id, manager)
+	return false
+
+
 func _can_take_turn_action() -> bool:
 	if turn_manager == null: return true
 	return turn_manager.is_player_turn
