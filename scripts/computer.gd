@@ -47,6 +47,7 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
 @onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
 @onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
+@onready var _gun_not_ready: CanvasItem = get_node_or_null("AspectRatioContainer/DesignRoot/GunNotReady") as CanvasItem
 
 var _connected_graph: Graph
 var _connected_turn_manager: TurnManager
@@ -64,6 +65,7 @@ func _ready() -> void:
 	_setup_mini_map()
 	_apply_all_persistent_upgrade_indicators()
 	_apply_all_persistent_laser_panel_upgrades()
+	_update_gun_not_ready_visibility()
 
 
 func _wire_button_actions() -> void:
@@ -412,11 +414,18 @@ func _apply_all_persistent_laser_panel_upgrades() -> void:
 
 
 func _apply_laser_panel_upgrade() -> void:
+	_update_gun_not_ready_visibility()
 	if _laser_gun_upgrade_panel == null:
 		push_warning("Computer: LaserGunUpgradePanel not found at expected path.")
 		return
 	_laser_gun_upgrade_panel.set_upgraded(true)
 	_laser_gun_upgrade_panel.set_current_step(laser_upgrade_step)
+
+
+func _update_gun_not_ready_visibility() -> void:
+	if _gun_not_ready == null:
+		return
+	_gun_not_ready.visible = laser_upgrade_step < LASER_PANEL_MAX_STEP
 
 
 func _advance_laser_upgrade_step() -> void:

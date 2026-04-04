@@ -11,11 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://cftrgeswdyl7p" path="res://assets/images/teleport_screen.png" id="7_65h6p"]
 [ext_resource type="Script" uid="uid://xodj8sv8ccd8" path="res://scripts/ui/upgrade_indicator.gd" id="9_ipp67"]
 [ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_xvgcs"]
-[ext_resource type="Texture2D" uid="uid://rhysq773u72i" path="res://assets/images/ui_basic_sample9.png" id="11_xvgcs"]
 [ext_resource type="Script" uid="uid://t4f5o2d8knah" path="res://scripts/ui/player_hp_bar.gd" id="13_eywps"]
 [ext_resource type="Script" uid="uid://6a3yk4q814df" path="res://scripts/ui/player_hp_text.gd" id="14_1x23v"]
 [ext_resource type="Texture2D" uid="uid://d54mfrhsnopl" path="res://assets/images/Laser_gun_panel__offline.png" id="14_ebepl"]
 [ext_resource type="Script" uid="uid://ckaq4nr1fi0ig" path="res://scripts/ui/laser_gun_upgrade_panel.gd" id="15_ypmvi"]
+[ext_resource type="Texture2D" uid="uid://cp2tdjb378oi1" path="res://assets/images/ui_basic_sample11.png" id="16_ebepl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bar_bg"]
 bg_color = Color(0, 0, 0, 1)
@@ -259,9 +259,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("11_xvgcs")
+texture = ExtResource("16_ebepl")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="GunNotReady" type="ColorRect" parent="AspectRatioContainer/DesignRoot" unique_id=1559125508]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5447923
+anchor_top = 0.76111114
+anchor_right = 0.5822923
+anchor_bottom = 0.82592595
+color = Color(0, 0, 0, 0.7921569)
 
 [node name="MoveFoward" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=787481461]
 layout_mode = 1

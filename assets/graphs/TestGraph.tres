@@ -1760,6 +1760,18 @@ payload = {
 script = ExtResource("6_f52af")
 entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_2sf4s")])
 
+[sub_resource type="Resource" id="Resource_2i3wq"]
+script = ExtResource("8_yi07g")
+logic_id = &"vertex_131_Get_gun"
+payload = {
+"flag_id": &"GetGun",
+"type": "set_flag"
+}
+
+[sub_resource type="Resource" id="Resource_nud5w"]
+script = ExtResource("6_f52af")
+entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_2i3wq")])
+
 [sub_resource type="Resource" id="Resource_iwj4g"]
 script = ExtResource("8_yi07g")
 logic_id = &"vertex_150_TP_Home"
@@ -1791,18 +1803,6 @@ payload = {
 [sub_resource type="Resource" id="Resource_f7w5a"]
 script = ExtResource("6_f52af")
 entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_pw4ns")])
-
-[sub_resource type="Resource" id="Resource_2i3wq"]
-script = ExtResource("8_yi07g")
-logic_id = &"vertex_131_Get_gun"
-payload = {
-"flag_id": &"GetGun",
-"type": "set_flag"
-}
-
-[sub_resource type="Resource" id="Resource_nud5w"]
-script = ExtResource("6_f52af")
-entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_2i3wq")])
 
 [sub_resource type="Resource" id="Resource_w5o7j"]
 script = ExtResource("7_cuu0d")
