@@ -132,13 +132,16 @@ render_target_update_mode = 4
 
 [node name="LoadingScreen" type="TextureRect" parent="AspectRatioContainer/DesignRoot" unique_id=1937347913]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.03489647
-anchor_top = 0.055555556
-anchor_right = 0.6963548
-anchor_bottom = 0.66481483
+anchor_left = 0.034
+anchor_top = 0.060000002
+anchor_right = 0.688
+anchor_bottom = 0.66
+offset_left = 0.7211304
+offset_top = 0.19999695
+offset_right = 0.03955078
+offset_bottom = 0.19995117
 texture = ExtResource("7_65h6p")
 expand_mode = 3
 
