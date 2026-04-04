@@ -17,6 +17,7 @@ const LASER_PANEL_MAX_STEP := 5
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
+@export var menu_screen_texture: Texture2D = preload("res://assets/images/Drone_Menu_screen.png")
 @export var battery_pickup_map: Dictionary[String, Dictionary] = {
 	"res://assets/graphs/Maze.tres": {
 		&"vertex_id": 6,
@@ -34,7 +35,7 @@ const LASER_PANEL_MAX_STEP := 5
 @export_range(0.0001, 0.05, 0.0001) var default_battery_pickup_pixel_size: float = 0.002
 
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
-@onready var _temp_loading_screen: Control = %LoadingScreen
+@onready var _temp_loading_screen: TextureRect = %LoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap
@@ -46,18 +47,23 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _btn_rotate_right: Button = $AspectRatioContainer/DesignRoot/RotRight
 @onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
 @onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
+@onready var _btn_menu: Button = get_node_or_null("AspectRatioContainer/DesignRoot/Menu") as Button
 @onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
 @onready var _gun_not_ready: CanvasItem = get_node_or_null("AspectRatioContainer/DesignRoot/GunNotReady") as CanvasItem
 
 var _connected_graph: Graph
 var _connected_turn_manager: TurnManager
 var _is_swapping_scene := false
+var _is_menu_open := false
 var _map_state_store: MapStateStore = MapStateStore.new()
 var _battery_pickup_sprite: Sprite3D
+var _default_loading_screen_texture: Texture2D
 
 
 func _ready() -> void:
-	if _temp_loading_screen != null: _temp_loading_screen.visible = false
+	if _temp_loading_screen != null:
+		_default_loading_screen_texture = _temp_loading_screen.texture
+		_temp_loading_screen.visible = false
 	_wire_button_actions()
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
@@ -85,6 +91,8 @@ func _wire_button_actions() -> void:
 		_btn_attack.pressed.connect(_on_attack_pressed)
 	if _btn_interact != null and not _btn_interact.pressed.is_connected(_on_interact_pressed):
 		_btn_interact.pressed.connect(_on_interact_pressed)
+	if _btn_menu != null and not _btn_menu.pressed.is_connected(_on_menu_pressed):
+		_btn_menu.pressed.connect(_on_menu_pressed)
 
 
 func _on_move_forward_pressed() -> void:
@@ -146,9 +154,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	var key_event := event as InputEventKey
 	if not key_event.pressed or key_event.echo:
 		return
+	if key_event.keycode == KEY_ESCAPE:
+		_toggle_menu_overlay()
+		get_viewport().set_input_as_handled()
+		return
+	if _is_menu_open:
+		return
 	if key_event.keycode != KEY_F:
 		return
 	_try_fire_laser()
+
+
+func _on_menu_pressed() -> void:
+	_toggle_menu_overlay()
 
 
 func _connect_to_current_graph() -> void:
@@ -235,7 +253,31 @@ func _swap_subviewport_scene(scene: PackedScene) -> void:
 
 func _set_loading_screen_visible(new_is_visible: bool) -> void:
 	if _temp_loading_screen != null:
+		if not _is_menu_open and _default_loading_screen_texture != null:
+			_temp_loading_screen.texture = _default_loading_screen_texture
 		_temp_loading_screen.visible = new_is_visible
+
+
+func _toggle_menu_overlay() -> void:
+	if _is_swapping_scene:
+		return
+	_set_menu_overlay_open(not _is_menu_open)
+
+
+func _set_menu_overlay_open(is_open: bool) -> void:
+	if _is_menu_open == is_open:
+		return
+	_is_menu_open = is_open
+	if _temp_loading_screen != null:
+		if is_open:
+			if menu_screen_texture != null:
+				_temp_loading_screen.texture = menu_screen_texture
+			_temp_loading_screen.visible = true
+		else:
+			if _default_loading_screen_texture != null:
+				_temp_loading_screen.texture = _default_loading_screen_texture
+			_temp_loading_screen.visible = false
+	_set_player_movement_enabled(not is_open)
 
 
 func _get_current_graph_renderer() -> GraphRenderer:
