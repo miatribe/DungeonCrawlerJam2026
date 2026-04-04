@@ -10,11 +10,10 @@
 [ext_resource type="Texture2D" path="res://assets/images/Laser_gun_panel_5.png" id="8_4x7ru"]
 
 [node name="LaserGunUpgradePanel" type="TextureRect"]
-custom_minimum_size = Vector2(256, 256)
 texture_filter = 1
 texture = ExtResource("2_h4ayf")
-offset_right = 256.0
-offset_bottom = 256.0
+offset_right = 230.0
+offset_bottom = 230.0
 expand_mode = 0
 stretch_mode = 5
 script = ExtResource("1_bud6m")

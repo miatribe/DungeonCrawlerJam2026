@@ -73,9 +73,7 @@ func _update_texture() -> void:
 
 
 func _ensure_visible_defaults() -> void:
-	if custom_minimum_size == Vector2.ZERO:
-		custom_minimum_size = Vector2(256, 256)
 	if size == Vector2.ZERO:
-		size = custom_minimum_size
+		size = Vector2(230, 230)
 	if texture == null:
 		texture = not_upgraded_texture
