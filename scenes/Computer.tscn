@@ -220,3 +220,91 @@ mouse_filter = 2
 texture = ExtResource("11_xvgcs")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="MoveFoward" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=787481461]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1124.0012
+offset_top = 898.0
+offset_right = 1183.3212
+offset_bottom = 956.44
+flat = true
+
+[node name="RotLeft" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=920239459]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1049.0012
+offset_top = 898.0
+offset_right = 1108.3212
+offset_bottom = 956.44
+flat = true
+
+[node name="RotRight" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1655365027]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1200.0012
+offset_top = 897.0
+offset_right = 1259.3212
+offset_bottom = 955.44
+flat = true
+
+[node name="MoveBackwards" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1701844530]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1126.0012
+offset_top = 972.0
+offset_right = 1185.3212
+offset_bottom = 1030.44
+flat = true
+
+[node name="MoveLeft" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1596705256]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1051.0012
+offset_top = 971.0
+offset_right = 1110.3212
+offset_bottom = 1029.44
+flat = true
+
+[node name="MoveRight" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1294595273]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1202.0012
+offset_top = 972.0
+offset_right = 1261.3212
+offset_bottom = 1030.44
+flat = true
+
+[node name="Attack" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1460716608]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1049.0012
+offset_top = 823.0
+offset_right = 1108.3212
+offset_bottom = 881.44
+flat = true
+
+[node name="Interact" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=1107556300]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.004
+anchor_bottom = 0.007
+offset_left = 1200.0012
+offset_top = 824.0
+offset_right = 1259.3212
+offset_bottom = 882.44
+flat = true
