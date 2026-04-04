@@ -18,6 +18,14 @@ const UPGRADE_INDICATOR_FLAG_PREFIX := &"upgrade_indicator_applied_"
 @onready var _player_input: PlayerInput = $PlayerInput
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap
+@onready var _btn_move_forward: Button = $AspectRatioContainer/DesignRoot/MoveFoward
+@onready var _btn_move_backward: Button = $AspectRatioContainer/DesignRoot/MoveBackwards
+@onready var _btn_move_left: Button = $AspectRatioContainer/DesignRoot/MoveLeft
+@onready var _btn_move_right: Button = $AspectRatioContainer/DesignRoot/MoveRight
+@onready var _btn_rotate_left: Button = $AspectRatioContainer/DesignRoot/RotLeft
+@onready var _btn_rotate_right: Button = $AspectRatioContainer/DesignRoot/RotRight
+@onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
+@onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
 
 var _connected_graph: Graph
 var _is_swapping_scene := false
@@ -26,10 +34,78 @@ var _map_state_store: MapStateStore = MapStateStore.new()
 
 func _ready() -> void:
 	if _temp_loading_screen != null: _temp_loading_screen.visible = false
+	_wire_button_actions()
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
 	_setup_mini_map()
 	_apply_all_persistent_upgrade_indicators()
+
+
+func _wire_button_actions() -> void:
+	if _btn_move_forward != null and not _btn_move_forward.pressed.is_connected(_on_move_forward_pressed):
+		_btn_move_forward.pressed.connect(_on_move_forward_pressed)
+	if _btn_move_backward != null and not _btn_move_backward.pressed.is_connected(_on_move_backward_pressed):
+		_btn_move_backward.pressed.connect(_on_move_backward_pressed)
+	if _btn_move_left != null and not _btn_move_left.pressed.is_connected(_on_move_left_pressed):
+		_btn_move_left.pressed.connect(_on_move_left_pressed)
+	if _btn_move_right != null and not _btn_move_right.pressed.is_connected(_on_move_right_pressed):
+		_btn_move_right.pressed.connect(_on_move_right_pressed)
+	if _btn_rotate_left != null and not _btn_rotate_left.pressed.is_connected(_on_rotate_left_pressed):
+		_btn_rotate_left.pressed.connect(_on_rotate_left_pressed)
+	if _btn_rotate_right != null and not _btn_rotate_right.pressed.is_connected(_on_rotate_right_pressed):
+		_btn_rotate_right.pressed.connect(_on_rotate_right_pressed)
+	if _btn_attack != null and not _btn_attack.pressed.is_connected(_on_attack_pressed):
+		_btn_attack.pressed.connect(_on_attack_pressed)
+	if _btn_interact != null and not _btn_interact.pressed.is_connected(_on_interact_pressed):
+		_btn_interact.pressed.connect(_on_interact_pressed)
+
+
+func _on_move_forward_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_move_forward()
+
+
+func _on_move_backward_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_move_backward()
+
+
+func _on_move_left_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_move_left()
+
+
+func _on_move_right_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_move_right()
+
+
+func _on_rotate_left_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_rotate_left()
+
+
+func _on_rotate_right_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_rotate_right()
+
+
+func _on_attack_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_attack()
+
+
+func _on_interact_pressed() -> void:
+	if _player_input == null:
+		return
+	_player_input.command_interact()
 
 
 func _process(_delta: float) -> void:

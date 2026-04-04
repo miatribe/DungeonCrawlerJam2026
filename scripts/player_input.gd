@@ -16,21 +16,78 @@ func _unhandled_input(event: InputEvent) -> void:
 	var key_event := event as InputEventKey
 	if not key_event.pressed or key_event.echo: return
 
-	var player := _get_player()
-	if player == null: return
-
-	# Rotation is available on any turn.
-	if key_event.keycode == KEY_E: player.rotate_view(true)
-	if key_event.keycode == KEY_Q: player.rotate_view(false)
-
-	if _input_locked: return
-
 	match key_event.keycode:
-		KEY_W: player.try_move_relative(0)
-		KEY_S: player.try_move_relative(180)
-		KEY_D: player.try_move_relative(90)
-		KEY_A: player.try_move_relative(-90)
-		KEY_R: player.try_interact()
+		KEY_E: command_rotate_right()
+		KEY_Q: command_rotate_left()
+		KEY_W: command_move_forward()
+		KEY_S: command_move_backward()
+		KEY_D: command_move_right()
+		KEY_A: command_move_left()
+		KEY_R: command_interact()
+
+
+func command_rotate_right() -> void:
+	var player := _get_player()
+	if player == null:
+		return
+	player.rotate_view(true)
+
+
+func command_rotate_left() -> void:
+	var player := _get_player()
+	if player == null:
+		return
+	player.rotate_view(false)
+
+
+func command_move_forward() -> void:
+	if _input_locked:
+		return
+	var player := _get_player()
+	if player == null:
+		return
+	player.try_move_relative(0)
+
+
+func command_move_backward() -> void:
+	if _input_locked:
+		return
+	var player := _get_player()
+	if player == null:
+		return
+	player.try_move_relative(180)
+
+
+func command_move_right() -> void:
+	if _input_locked:
+		return
+	var player := _get_player()
+	if player == null:
+		return
+	player.try_move_relative(90)
+
+
+func command_move_left() -> void:
+	if _input_locked:
+		return
+	var player := _get_player()
+	if player == null:
+		return
+	player.try_move_relative(-90)
+
+
+func command_attack() -> void:
+	# In this ruleset, attack resolves by attempting to move into an occupied forward tile.
+	command_move_forward()
+
+
+func command_interact() -> void:
+	if _input_locked:
+		return
+	var player := _get_player()
+	if player == null:
+		return
+	player.try_interact()
 
 
 func _get_player() -> Player:
