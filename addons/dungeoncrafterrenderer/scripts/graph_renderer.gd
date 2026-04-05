@@ -10,7 +10,9 @@ const OPEN_WEST := 8
 
 @export var graph: Graph:
 	set(value):
+		_disconnect_graph_signals()
 		graph = _reload_graph_from_disk(value)
+		_connect_graph_signals()
 		if _should_auto_render():
 			call_deferred("render_graph")
 
@@ -60,6 +62,7 @@ var _floor_darken_shader: Shader = preload("res://addons/dungeoncrafterrenderer/
 var _door_slide_shader: Shader = preload("res://addons/dungeoncrafterrenderer/assets/shaders/door_slide_vertical.gdshader")
 var _instance_rids: Array[RID] = []
 var _instance_positions: Dictionary = {}
+var _instance_rid_by_vertex: Dictionary = {}
 var _mesh_cache: Dictionary[int, RID] = {}
 var _material_cache: Dictionary[String, Material] = {}
 var _texture_alpha_cache: Dictionary[int, bool] = {}
@@ -68,6 +71,10 @@ var _animated_door_materials_by_edge: Dictionary = {}
 var _culling_timer: float = 0.0
 var _last_edge_visual_signature: int = -1
 var _render_refresh_pending: bool = false
+var _last_door_states: Dictionary = {}
+var _last_surface_overrides_signature: int = -1
+var _vertex_override_snapshot: Dictionary = {}
+var _vertex_opening_mask_snapshot: Dictionary = {}
 
 
 func _reload_graph_from_disk(value: Graph) -> Graph:
@@ -88,8 +95,8 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if auto_render_in_runtime and _has_edge_visual_state_changed():
-		_queue_render_refresh()
+	if auto_render_in_runtime:
+		_poll_door_states()
 	_update_door_animations()
 
 	if not enable_runtime_camera_culling:
@@ -108,6 +115,7 @@ func _should_auto_render() -> bool:
 
 
 func _exit_tree() -> void:
+	_disconnect_graph_signals()
 	_clear_render()
 
 
@@ -146,12 +154,22 @@ func render_graph() -> void:
 
 		_instance_rids.append(instance_rid)
 		_instance_positions[instance_rid] = world_pos
+		_instance_rid_by_vertex[vertex.id] = instance_rid
 
 	if enable_runtime_camera_culling:
 		_update_runtime_culling()
 	_update_door_animations()
 
 	_last_edge_visual_signature = visual_signature
+	_last_door_states = _build_door_state_dict()
+	_last_surface_overrides_signature = _compute_non_door_signature()
+	_vertex_override_snapshot.clear()
+	_vertex_opening_mask_snapshot.clear()
+	if graph != null:
+		for vertex in graph.vertices.values():
+			if vertex != null:
+				_vertex_override_snapshot[vertex.id] = vertex.surface_texture_overrides.duplicate()
+				_vertex_opening_mask_snapshot[vertex.id] = _opening_mask_for_vertex(vertex)
 
 
 func _opening_mask_for_vertex(vertex: Vertex) -> int:
@@ -596,6 +614,7 @@ func _clear_render() -> void:
 		if instance_rid.is_valid(): RenderingServer.free_rid(instance_rid)
 	_instance_rids.clear()
 	_instance_positions.clear()
+	_instance_rid_by_vertex.clear()
 	_culling_timer = 0.0
 
 	for mesh_rid in _mesh_cache.values():
@@ -678,6 +697,161 @@ func _compute_graph_visual_signature() -> int:
 
 func _has_edge_visual_state_changed() -> bool:
 	return _compute_graph_visual_signature() != _last_edge_visual_signature
+
+
+func _connect_graph_signals() -> void:
+	if graph == null or Engine.is_editor_hint():
+		return
+	if not graph.vertex_logic_triggered.is_connected(_on_graph_vertex_logic_triggered):
+		graph.vertex_logic_triggered.connect(_on_graph_vertex_logic_triggered)
+
+
+func _disconnect_graph_signals() -> void:
+	if graph == null:
+		return
+	if graph.vertex_logic_triggered.is_connected(_on_graph_vertex_logic_triggered):
+		graph.vertex_logic_triggered.disconnect(_on_graph_vertex_logic_triggered)
+
+
+func _on_graph_vertex_logic_triggered(_vertex_id: int, _logic_id: StringName) -> void:
+	if Engine.is_editor_hint() or not auto_render_in_runtime:
+		return
+	_apply_surface_override_updates()
+
+
+func _apply_surface_override_updates() -> void:
+	if graph == null or _instance_rid_by_vertex.is_empty():
+		return
+	# Collect changed vertices WITHOUT building door data yet (fast path)
+	var changed_vids: Array[int] = []
+	for vid_var in _vertex_override_snapshot:
+		var vid: int = int(vid_var)
+		var vertex: Vertex = graph.vertices.get(vid)
+		if vertex == null:
+			continue
+		if vertex.surface_texture_overrides != _vertex_override_snapshot.get(vid, {}):
+			changed_vids.append(vid)
+	if changed_vids.is_empty():
+		return
+	var door_surface_data_by_vertex := _build_door_surface_data_map()
+	for vid in changed_vids:
+		var vertex: Vertex = graph.vertices.get(vid)
+		if vertex == null:
+			continue
+		var old_mask: int = _vertex_opening_mask_snapshot.get(vid, -1)
+		var new_mask: int = _opening_mask_for_vertex(vertex)
+		var instance_rid: RID = _instance_rid_by_vertex.get(vid, RID())
+		if instance_rid.is_valid():
+			if new_mask != old_mask:
+				var new_mesh_rid := _get_or_create_mesh(new_mask)
+				RenderingServer.instance_set_base(instance_rid, new_mesh_rid)
+			var new_surface_indices := _get_surface_indices_for_opening_mask(new_mask)
+			var door_surface_data: Dictionary = door_surface_data_by_vertex.get(vid, {})
+			_apply_surface_materials(instance_rid, vertex, new_surface_indices, door_surface_data)
+		_vertex_override_snapshot[vid] = vertex.surface_texture_overrides.duplicate()
+		_vertex_opening_mask_snapshot[vid] = new_mask
+
+
+func _build_door_state_dict() -> Dictionary:
+	var result: Dictionary = {}
+	if graph == null:
+		return result
+	for edge in graph.edges.values():
+		if edge != null and edge.type == Edge.EdgeType.DOOR:
+			result[int(edge.id)] = int(edge.door_state)
+	return result
+
+
+func _poll_door_states() -> void:
+	if graph == null:
+		return
+	var changed_edges: Array[Edge] = []
+	var total_door_count := 0
+	for edge_id_var in graph.edges:
+		var edge: Edge = graph.edges[edge_id_var]
+		if edge == null or edge.type != Edge.EdgeType.DOOR:
+			continue
+		total_door_count += 1
+		var edge_id := int(edge.id)
+		if not _last_door_states.has(edge_id):
+			# New door edge appeared — geometry rebuild needed
+			_queue_render_refresh()
+			return
+		if int(edge.door_state) != int(_last_door_states[edge_id]):
+			changed_edges.append(edge)
+	if total_door_count != _last_door_states.size():
+		# A door edge was removed — geometry rebuild needed
+		_queue_render_refresh()
+		return
+	if changed_edges.is_empty():
+		return
+	_apply_door_material_updates_for_changed(changed_edges)
+
+
+func _apply_door_material_updates_for_changed(changed_edges: Array[Edge]) -> void:
+	var door_surface_data_by_vertex := _build_door_surface_data_map()
+	var affected_vertex_ids: Dictionary = {}
+	var affected_edge_ids: Dictionary = {}
+	for edge in changed_edges:
+		affected_vertex_ids[int(edge.vertex_a_id)] = true
+		affected_vertex_ids[int(edge.vertex_b_id)] = true
+		affected_edge_ids[int(edge.id)] = true
+		_last_door_states[int(edge.id)] = int(edge.door_state)
+	# Pre-erase ALL affected edges before refreshing any vertex.
+	# If we erased per-vertex, the second vertex would wipe the first's ShaderMaterial
+	# from _animated_door_materials_by_edge, leaving it untracked and frozen.
+	for edge_id in affected_edge_ids:
+		_animated_door_materials_by_edge.erase(edge_id)
+	for vertex_id in affected_vertex_ids:
+		_refresh_vertex_instance(int(vertex_id), door_surface_data_by_vertex)
+
+
+func _refresh_vertex_instance(vertex_id: int, door_surface_data_by_vertex: Dictionary) -> void:
+	var instance_rid: RID = _instance_rid_by_vertex.get(vertex_id, RID())
+	if not instance_rid.is_valid():
+		return
+	var vertex: Vertex = graph.vertices.get(vertex_id)
+	if vertex == null:
+		return
+	var opening_mask := _opening_mask_for_vertex(vertex)
+	var surface_indices := _get_surface_indices_for_opening_mask(opening_mask)
+	var door_surface_data: Dictionary = door_surface_data_by_vertex.get(vertex_id, {})
+	_apply_surface_materials(instance_rid, vertex, surface_indices, door_surface_data)
+
+
+func _compute_non_door_signature() -> int:
+	# Same as _compute_graph_visual_signature but omits door_state.
+	# Used to detect structural changes (surface overrides, edge types) without
+	# being confused by door open/close state which is handled separately.
+	if graph == null:
+		return 0
+	var signature := 17
+	var vertex_ids: Array = graph.vertices.keys()
+	vertex_ids.sort()
+	for vertex_id_variant in vertex_ids:
+		var vertex_id := int(vertex_id_variant)
+		var vertex: Vertex = graph.vertices.get(vertex_id)
+		if vertex == null:
+			continue
+		signature = signature * 31 + vertex_id
+		signature = signature * 31 + int(vertex.type_tileset_id)
+		var override_surfaces: Array = vertex.surface_texture_overrides.keys()
+		override_surfaces.sort()
+		for surface_variant in override_surfaces:
+			signature = signature * 31 + int(surface_variant)
+			signature = signature * 31 + int(vertex.surface_texture_overrides.get(surface_variant, 0))
+	var edge_ids: Array = graph.edges.keys()
+	edge_ids.sort()
+	for edge_id_variant in edge_ids:
+		var edge_id := int(edge_id_variant)
+		var edge: Edge = graph.edges.get(edge_id)
+		if edge == null:
+			continue
+		signature = signature * 31 + edge_id
+		signature = signature * 31 + int(edge.type)
+		signature = signature * 31 + int(edge.door_id)
+		# Intentionally omit edge.door_state — tracked cheaply via _last_door_states
+	return signature
 
 
 func _queue_render_refresh() -> void:
