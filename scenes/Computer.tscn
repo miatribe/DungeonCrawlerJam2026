@@ -381,9 +381,14 @@ offset_bottom = 0.39996338
 flat = true
 
 [node name="AudioSettingsMenu" parent="AspectRatioContainer/DesignRoot" unique_id=1506297391 instance=ExtResource("1_audio_menu")]
+visible = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.70416665
-anchor_top = 0.6574074
-anchor_right = 0.8609375
-anchor_bottom = 0.93703705
+anchor_left = 0.439
+anchor_top = 0.395
+anchor_right = 0.596
+anchor_bottom = 0.55300003
+offset_left = 0.12011719
+offset_top = 0.3999939
+offset_right = -0.3199463
+offset_bottom = -0.24005127

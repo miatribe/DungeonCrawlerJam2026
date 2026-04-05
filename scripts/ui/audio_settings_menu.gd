@@ -40,4 +40,3 @@ func _update_label(label: Label, linear: float) -> void:
 	if label == null:
 		return
 	label.text = "%d%%" % int(round(linear * 100.0))
-

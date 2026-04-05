@@ -16,8 +16,8 @@ var _sfx_pool: Array[AudioStreamPlayer] = []
 var _sfx_available: Array[AudioStreamPlayer] = []
 var _sfx_queue: Array[AudioStream] = []
 
-var _music_volume: float = 1.0
-var _sfx_volume: float = 1.0
+var _music_volume: float = 0.2
+var _sfx_volume: float = 0.2
 
 var _gameplay_track: AudioStream = null
 var _boss_track: AudioStream = null
@@ -30,7 +30,7 @@ func _ready() -> void:
 	_music_player = AudioStreamPlayer.new()
 	_music_player.name = "MusicPlayer"
 	_music_player.bus = _MUSIC_BUS
-	_music_player.volume_db = 0.0
+	_music_player.volume_db = _to_db(_music_volume)
 	add_child(_music_player)
 	_music_player.finished.connect(_on_music_finished)
 
@@ -38,7 +38,7 @@ func _ready() -> void:
 		var p := AudioStreamPlayer.new()
 		p.name = "SfxPlayer%d" % i
 		p.bus = _SFX_BUS
-		p.volume_db = 0.0
+		p.volume_db = _to_db(_sfx_volume)
 		add_child(p)
 		_sfx_pool.append(p)
 		_sfx_available.append(p)
