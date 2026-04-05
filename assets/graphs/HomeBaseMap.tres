@@ -156,7 +156,6 @@ direction_from_a = 0
 direction_from_b = 1
 type = 1
 door_id = 1
-door_state = 0
 
 [sub_resource type="Resource" id="Resource_lu536"]
 script = ExtResource("2_xngqq")
@@ -307,7 +306,6 @@ entries = Array[ExtResource("8_xngqq")]([SubResource("Resource_m0hkw")])
 [sub_resource type="Resource" id="Resource_17wco"]
 script = ExtResource("8_xngqq")
 logic_id = &"vertex_3_logic_1774869575"
-trigger_type = 1
 required_direction = 3
 one_shot = false
 payload = {
@@ -315,7 +313,6 @@ payload = {
 "door_state_mode": "fixed",
 "edge_id": 80,
 "edge_type": 1,
-"required_direction": 3,
 "type": "set_edge_type"
 }
 
@@ -527,6 +524,9 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_ixvrp"),
 2: SubResource("Resource_wcep4"),
 3: SubResource("Resource_lu536")
+})
+surface_texture_overrides = Dictionary[int, int]({
+5: 4
 })
 
 [sub_resource type="Resource" id="Resource_p16fp"]

@@ -1723,62 +1723,62 @@ vertex_b_id = 211
 direction_from_a = 2
 direction_from_b = 3
 
-[sub_resource type="Resource" id="Resource_8ufy7"]
+[sub_resource type="Resource" id="Resource_qmvfp"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("6_ol3v0")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_t7x27"]
+[sub_resource type="Resource" id="Resource_kmxhh"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("7_fif0h")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_8dep7"]
+[sub_resource type="Resource" id="Resource_u74nv"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("8_5vcqm")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_n2y34"]
+[sub_resource type="Resource" id="Resource_f6b1g"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("9_oycd2")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_ybfm5"]
+[sub_resource type="Resource" id="Resource_1mnte"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("10_sqsjm")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_i4p0u"]
+[sub_resource type="Resource" id="Resource_kp1ye"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("11_sqsjm")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_g8wjc"]
+[sub_resource type="Resource" id="Resource_elk30"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("12_ngx5o")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_guov4"]
+[sub_resource type="Resource" id="Resource_6y54n"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("13_g8bjs")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_nerld"]
+[sub_resource type="Resource" id="Resource_xni4k"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("14_sk3vg")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_p5ups"]
+[sub_resource type="Resource" id="Resource_bl07x"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("15_7qh3s")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_k4wps"]
+[sub_resource type="Resource" id="Resource_qk2cu"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("16_oycd2")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
 
-[sub_resource type="Resource" id="Resource_ffcix"]
+[sub_resource type="Resource" id="Resource_yxxw4"]
 script = ExtResource("3_kfra2")
 texture = ExtResource("17_sqsjm")
 metadata/_custom_type_script = "uid://cyalxxak2ljvx"
@@ -1817,13 +1817,14 @@ payload = {
 script = ExtResource("8_kfra2")
 logic_id = &"vertex_3_logic_1775177264"
 trigger_type = 1
+required_direction = 2
 one_shot = false
 payload = {
 "door_state": 0,
 "door_state_mode": "fixed",
 "edge_id": 2,
 "edge_type": 1,
-"required_direction": -1,
+"required_direction": 2,
 "type": "set_edge_type"
 }
 
@@ -4469,4 +4470,4 @@ vertex_logic = Dictionary[int, ExtResource("6_m7v80")]({
 })
 tilesets = Array[ExtResource("5_2bjeh")]([ExtResource("6_hs4sa")])
 doors = Array[ExtResource("1_uffd4")]([ExtResource("2_f17oi"), ExtResource("3_c6pmw")])
-override_textures = Array[ExtResource("3_kfra2")]([SubResource("Resource_8ufy7"), SubResource("Resource_t7x27"), SubResource("Resource_8dep7"), SubResource("Resource_n2y34"), SubResource("Resource_ybfm5"), SubResource("Resource_i4p0u"), SubResource("Resource_g8wjc"), SubResource("Resource_guov4"), SubResource("Resource_nerld"), SubResource("Resource_p5ups"), SubResource("Resource_k4wps"), SubResource("Resource_ffcix")])
+override_textures = Array[ExtResource("3_kfra2")]([SubResource("Resource_qmvfp"), SubResource("Resource_kmxhh"), SubResource("Resource_u74nv"), SubResource("Resource_f6b1g"), SubResource("Resource_1mnte"), SubResource("Resource_kp1ye"), SubResource("Resource_elk30"), SubResource("Resource_6y54n"), SubResource("Resource_xni4k"), SubResource("Resource_bl07x"), SubResource("Resource_qk2cu"), SubResource("Resource_yxxw4")])
