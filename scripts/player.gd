@@ -2,6 +2,7 @@ extends Node3D
 class_name Player
 
 signal defeated
+signal turn_consumed
 
 const TEXT_LOG_GROUP := "text_log"
 const ENEMY_MANAGER_GROUP := "enemy_manager"
@@ -164,8 +165,12 @@ func _can_take_turn_action() -> bool:
 
 
 func _consume_player_turn() -> void:
-	if turn_manager == null: return
-	if turn_manager.is_player_turn: turn_manager.player_took_turn()
+	if turn_manager == null:
+		turn_consumed.emit()
+		return
+	if turn_manager.is_player_turn:
+		turn_manager.player_took_turn()
+		turn_consumed.emit()
 
 
 func _try_move(direction: Direction.Cardinal) -> bool:

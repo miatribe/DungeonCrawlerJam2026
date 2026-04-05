@@ -168,6 +168,7 @@ func _on_interact_pressed() -> void:
 
 
 func _process(_delta: float) -> void:
+	_ensure_turn_manager_wiring()
 	_ensure_player_defeat_wiring()
 	_sync_mini_map_context()
 	_update_battery_pickup_collection()
@@ -345,6 +346,20 @@ func _connect_to_current_turn_manager() -> void:
 		_connected_turn_manager.PlayerTurnOver.connect(_on_player_turn_over)
 
 
+func _ensure_turn_manager_wiring() -> void:
+	if _is_swapping_scene:
+		return
+	var turn_manager := _get_current_turn_manager()
+	if turn_manager == null:
+		_disconnect_from_current_turn_manager()
+		return
+	if _connected_turn_manager != turn_manager:
+		_connect_to_current_turn_manager()
+		return
+	if not _connected_turn_manager.PlayerTurnOver.is_connected(_on_player_turn_over):
+		_connected_turn_manager.PlayerTurnOver.connect(_on_player_turn_over)
+
+
 func _disconnect_from_current_turn_manager() -> void:
 	if _connected_turn_manager == null:
 		return
@@ -387,6 +402,8 @@ func _connect_to_current_player() -> void:
 	_connected_player = player
 	if not _connected_player.defeated.is_connected(_on_player_defeated):
 		_connected_player.defeated.connect(_on_player_defeated)
+	if not _connected_player.turn_consumed.is_connected(_on_player_turn_consumed):
+		_connected_player.turn_consumed.connect(_on_player_turn_consumed)
 
 
 func _ensure_player_defeat_wiring() -> void:
@@ -411,7 +428,16 @@ func _disconnect_from_current_player() -> void:
 		return
 	if _connected_player.defeated.is_connected(_on_player_defeated):
 		_connected_player.defeated.disconnect(_on_player_defeated)
+	if _connected_player.turn_consumed.is_connected(_on_player_turn_consumed):
+		_connected_player.turn_consumed.disconnect(_on_player_turn_consumed)
 	_connected_player = null
+
+
+func _on_player_turn_consumed() -> void:
+	# TurnManager already drives charge via PlayerTurnOver when present.
+	if _connected_player != null and _connected_player.turn_manager != null:
+		return
+	_advance_laser_upgrade_step()
 
 
 func _on_player_defeated() -> void:
@@ -484,6 +510,7 @@ func _inject_run_state_into_player() -> void:
 	if player != null:
 		player.set_run_state(_map_state_store.run_state)
 		_apply_all_persistent_logic_stat_bonuses(player)
+	_apply_all_persistent_laser_panel_upgrades()
 
 
 func _apply_logic_stat_bonus_once(logic_id: StringName) -> void:
