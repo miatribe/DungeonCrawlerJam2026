@@ -19,6 +19,9 @@ const LASER_PANEL_MAX_STEP := 5
 @export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
 @export var logic_upgrade_indicator_map: Dictionary[StringName, NodePath] = {}
 @export var laser_upgrade_logic_id: StringName = &""
+@export var boss_music_logic_ids: Array[StringName] = [
+	&"vertex_7_logic_1775353017"
+]
 @export var homebase_graph_path: String = "res://assets/graphs/HomeBaseMap.tres"
 @export var homebase_unlock_edge_id: int = 79
 @export_range(0, 5, 1) var laser_upgrade_step: int = 0
@@ -250,6 +253,7 @@ func _on_vertex_logic_triggered(vertex_id: int, logic_id: StringName) -> void:
 	if _is_swapping_scene: return
 	_play_interact_logic_sfx_if_needed(vertex_id, logic_id)
 	_play_door_logic_sfx_if_needed(vertex_id, logic_id)
+	_apply_logic_music_changes(logic_id)
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
 	_apply_logic_heal(logic_id)
@@ -264,6 +268,11 @@ func _on_vertex_logic_triggered(vertex_id: int, logic_id: StringName) -> void:
 		push_warning("Computer: Logic '%s' is mapped, but scene is null." % String(logic_id))
 		return
 	_swap_subviewport_scene_with_loading(target_scene)
+
+
+func _apply_logic_music_changes(logic_id: StringName) -> void:
+	if boss_music_logic_ids.has(logic_id):
+		play_boss_music()
 
 
 func _swap_subviewport_scene_with_loading(scene: PackedScene) -> void:
@@ -504,6 +513,7 @@ func _respawn_player_to_home() -> void:
 		return
 	_is_swapping_scene = true
 	_set_player_movement_enabled(false)
+	play_gameplay_music()
 	_loading_screen_texture_override = death_screen_texture
 	_set_loading_screen_visible(true)
 	if _text_log != null:
@@ -1123,7 +1133,7 @@ func play_gameplay_music() -> void:
 func play_boss_music() -> void:
 	if _music_system == null:
 		return
-	_music_system.play_boss_track(true)
+	_music_system.play_boss_track(false)
 
 
 func set_god_mode_enabled(is_enabled: bool) -> void:
