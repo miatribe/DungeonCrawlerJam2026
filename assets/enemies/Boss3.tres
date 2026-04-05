@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_vlxif")
 sprite = ExtResource("2_vlxif")
-name = "B3"
+name = "Dr Saw-Bones"
 attack = 2
 defense = 5
 hit = 1

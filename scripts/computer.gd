@@ -76,7 +76,6 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
 @onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
 @onready var _btn_menu: Button = get_node_or_null("AspectRatioContainer/DesignRoot/Menu") as Button
-@onready var _btn_restart: Button = get_node_or_null("AspectRatioContainer/DesignRoot/RestartGame") as Button
 @onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
 @onready var _gun_not_ready: CanvasItem = get_node_or_null("AspectRatioContainer/DesignRoot/GunNotReady") as CanvasItem
 
@@ -112,9 +111,6 @@ func _ready() -> void:
 	_apply_all_persistent_laser_panel_upgrades()
 	_update_gun_not_ready_visibility()
 	_update_attack_button_enabled_state()
-	if _btn_restart != null:
-		_btn_restart.visible = false
-		_btn_restart.disabled = true
 	call_deferred("_run_initial_ai_turn_after_load")
 
 
@@ -137,8 +133,6 @@ func _wire_button_actions() -> void:
 		_btn_interact.pressed.connect(_on_interact_pressed)
 	if _btn_menu != null and not _btn_menu.pressed.is_connected(_on_menu_pressed):
 		_btn_menu.pressed.connect(_on_menu_pressed)
-	if _btn_restart != null and not _btn_restart.pressed.is_connected(_on_restart_pressed):
-		_btn_restart.pressed.connect(_on_restart_pressed)
 
 
 func _on_move_forward_pressed() -> void:
@@ -230,12 +224,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_menu_pressed() -> void:
 	_toggle_menu_overlay()
-
-
-func _on_restart_pressed() -> void:
-	if get_tree() == null:
-		return
-	get_tree().reload_current_scene()
 
 
 func _connect_to_current_graph() -> void:
@@ -560,14 +548,11 @@ func _trigger_final_victory() -> void:
 	_set_menu_overlay_open(false)
 	if _btn_menu != null:
 		_btn_menu.disabled = true
-	if _btn_restart != null:
-		_btn_restart.visible = true
-		_btn_restart.disabled = false
 	_loading_screen_texture_override = win_screen_texture
 	_set_loading_screen_visible(true)
 	play_victory_music()
 	if _text_log != null:
-		_text_log.add_message("Mission complete. Press Restart to play again.")
+		_text_log.add_message("Mission complete. Thank you for playing!")
 
 
 func _on_player_turn_over() -> void:

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_pg0ma")
 sprite = ExtResource("2_pg0ma")
-name = "Maid bot"
+name = "Ironing Maiden"
 health = 5
 defense = 1
 hit = 1

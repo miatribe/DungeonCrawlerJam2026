@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_f2mkd")
 sprite = ExtResource("2_f2mkd")
-name = "FinalBoss"
+name = "Infected Mutant Alien Thingy? ( Yes that's it's name)"
 aggro_range = 7
 health = 15
 attack = 6

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_xgt6t")
 sprite = ExtResource("2_paetq")
-name = "Boss1"
+name = "Bobbie the Bot"
 health = 5
 attack = 2
 defense = 2

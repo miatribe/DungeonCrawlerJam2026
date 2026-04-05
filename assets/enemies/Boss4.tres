@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_ok5qq")
 sprite = ExtResource("2_ok5qq")
-name = "B4"
+name = "Fix-O-Arms"
 attack = 4
 hit = 1
 dodge = 2
