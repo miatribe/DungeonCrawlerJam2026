@@ -73,7 +73,8 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 })
 logic_message_map = Dictionary[StringName, String]({
 &"vertex_2_logic_1775360899": "Station compromised. Rogue robots and mutant hostiles have taken every corridor. Grab whatever upgrades you can find and put them down. All of them.",
-&"vertex_58_logic_1775360939": "This door requires full system authorization. Collect all available power upgrades to unlock."
+&"vertex_58_logic_1775360939": "This door requires full system authorization. Collect all available power upgrades to unlock.",
+&"vertex_7_logic_1775395279": "The station has claimed your retreat, and now it demands victory or death."
 })
 logic_heal_map = Dictionary[StringName, int]({
 &"vertex_13_guntheal": 20,
