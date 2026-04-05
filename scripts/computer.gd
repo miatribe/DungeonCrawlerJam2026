@@ -42,6 +42,8 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _player_input: PlayerInput = $PlayerInput
 @onready var _music_system: MusicSystem = %MusicSystem
 @onready var _logic_interact_sfx: RandomSfxPlayer = %LogicInteractSfx
+@onready var _door_open_sfx: RandomSfxPlayer = %DoorOpenSfx
+@onready var _door_close_sfx: RandomSfxPlayer = %DoorCloseSfx
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap
 @onready var _btn_move_forward: Button = $AspectRatioContainer/DesignRoot/MoveFoward
@@ -227,6 +229,7 @@ func _disconnect_from_current_graph() -> void:
 func _on_vertex_logic_triggered(vertex_id: int, logic_id: StringName) -> void:
 	if _is_swapping_scene: return
 	_play_interact_logic_sfx_if_needed(vertex_id, logic_id)
+	_play_door_logic_sfx_if_needed(vertex_id, logic_id)
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
 	_apply_logic_stat_bonus_once(logic_id)
@@ -391,6 +394,33 @@ func _play_interact_logic_sfx_if_needed(vertex_id: int, logic_id: StringName) ->
 		if logic.trigger_type != VertexLogic.TriggerType.ON_INTERACT:
 			continue
 		_logic_interact_sfx.play_random()
+		return
+
+
+func _play_door_logic_sfx_if_needed(vertex_id: int, logic_id: StringName) -> void:
+	if _connected_graph == null:
+		return
+	var entries := _connected_graph.get_vertex_logic(vertex_id)
+	for logic in entries:
+		if logic == null:
+			continue
+		if logic.logic_id != logic_id:
+			continue
+		var payload: Dictionary = logic.payload
+		if String(payload.get("type", "")) != "set_edge_type":
+			continue
+		var edge_id := int(payload.get("edge_id", -1))
+		if edge_id < 0:
+			continue
+		var edge: Edge = _connected_graph.edges.get(edge_id)
+		if edge == null:
+			continue
+		if edge.type == Edge.EdgeType.DOOR and int(edge.door_state) == int(Door.DoorState.OPEN):
+			if _door_open_sfx != null:
+				_door_open_sfx.play_random()
+		else:
+			if _door_close_sfx != null:
+				_door_close_sfx.play_random()
 		return
 
 
