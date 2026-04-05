@@ -23,7 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		KEY_S, KEY_KP_2, KEY_DOWN: command_move_backward()
 		KEY_D, KEY_KP_3: command_move_right()
 		KEY_A, KEY_KP_1: command_move_left()
-		KEY_R, KEY_KP_7: command_interact()
+		KEY_F, KEY_KP_7: command_interact()
 
 
 func command_rotate_right() -> void:

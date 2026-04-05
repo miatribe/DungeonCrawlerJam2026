@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/basic_trash_robot_Yellow.png-f5532b637c776be4
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
