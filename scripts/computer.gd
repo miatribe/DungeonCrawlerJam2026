@@ -22,6 +22,7 @@ const LASER_PANEL_MAX_STEP := 5
 @export_range(0, 5, 1) var laser_upgrade_step: int = 0
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
+@export var god_mode_enabled: bool = false
 @export_range(0.0, 10.0, 0.1) var loading_screen_hold_seconds: float = 2.0
 @export var menu_screen_texture: Texture2D = preload("res://assets/images/Drone_Menu_screen.png")
 @export_range(0.0, 10.0, 0.1) var death_screen_hold_seconds: float = 2.0
@@ -447,6 +448,7 @@ func _connect_to_current_player() -> void:
 	if player == null:
 		return
 	_connected_player = player
+	_connected_player.set_god_mode(god_mode_enabled)
 	if not _connected_player.defeated.is_connected(_on_player_defeated):
 		_connected_player.defeated.connect(_on_player_defeated)
 	if not _connected_player.turn_consumed.is_connected(_on_player_turn_consumed):
@@ -661,6 +663,7 @@ func _inject_run_state_into_player() -> void:
 	var player := _get_current_player()
 	if player != null:
 		player.set_run_state(_map_state_store.run_state)
+		player.set_god_mode(god_mode_enabled)
 		_apply_all_persistent_logic_stat_bonuses(player)
 	_apply_all_persistent_laser_panel_upgrades()
 
@@ -1078,3 +1081,9 @@ func play_boss_music() -> void:
 	if _music_system == null:
 		return
 	_music_system.play_boss_track(true)
+
+
+func set_god_mode_enabled(is_enabled: bool) -> void:
+	god_mode_enabled = is_enabled
+	if _connected_player != null:
+		_connected_player.set_god_mode(god_mode_enabled)

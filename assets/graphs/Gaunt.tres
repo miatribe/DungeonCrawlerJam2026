@@ -1177,7 +1177,7 @@ one_shot = false
 required_flags = Array[StringName]([&"Key1"])
 payload = {
 "required_direction": 0,
-"surface": 4,
+"surface": 5,
 "target_vertex_id": 51,
 "texture_id": 4,
 "type": "set_surface_override"

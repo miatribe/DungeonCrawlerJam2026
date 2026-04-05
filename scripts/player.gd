@@ -30,6 +30,7 @@ var _hit_bonus: int = 0
 var _dodge_bonus: int = 0
 var _max_health_bonus: int = 0
 var _is_defeated := false
+var _is_god_mode := false
 
 @onready var _move_sfx_player: RandomSfxPlayer = get_node_or_null("MoveSfx") as RandomSfxPlayer
 @onready var _attack_sfx_player: RandomSfxPlayer = get_node_or_null("AttackSfx") as RandomSfxPlayer
@@ -256,6 +257,10 @@ func apply_damage(amount: int) -> void:
 		return
 	if _is_defeated:
 		return
+	if _is_god_mode:
+		current_health = maxi(1, current_health - amount)
+		_log_message("You take %d damage. HP: %d/%d" % [amount, current_health, get_effective_max_health()])
+		return
 	current_health = maxi(0, current_health - amount)
 	_log_message("You take %d damage. HP: %d/%d" % [amount, current_health, get_effective_max_health()])
 	if current_health == 0:
@@ -303,6 +308,13 @@ func set_persistent_stat_bonuses(
 
 func get_effective_max_health() -> int:
 	return maxi(1, max_health + _max_health_bonus)
+
+
+func set_god_mode(enabled: bool) -> void:
+	_is_god_mode = enabled
+	if _is_god_mode and current_health <= 0:
+		current_health = 1
+		_is_defeated = false
 
 
 func _log_message(message: String) -> void:

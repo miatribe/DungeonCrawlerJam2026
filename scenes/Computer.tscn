@@ -104,9 +104,11 @@ logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
 }
 })
 logic_upgrade_indicator_map = Dictionary[StringName, NodePath]({
-&"vertex_6_logic_1775186759": NodePath("AspectRatioContainer/DesignRoot/UpgradeIndicator")
+&"vertex_6_logic_1775186759": NodePath("AspectRatioContainer/DesignRoot/UpgradeIndicator"),
+&"vertex_74_Gaunt_battery": NodePath("AspectRatioContainer/DesignRoot/UpgradeIndicator2")
 })
 laser_upgrade_logic_id = &"vertex_131_Get_gun"
+god_mode_enabled = true
 loading_screen_hold_seconds = 1.0
 default_battery_pickup_height = 0.0
 
