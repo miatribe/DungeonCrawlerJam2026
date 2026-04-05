@@ -103,6 +103,24 @@ func try_interact() -> bool:
 	return false
 
 
+func try_interact_or_attack_forward() -> bool:
+	if not _can_take_turn_action():
+		return false
+	var forward := _get_forward_direction()
+	var target_vertex_id := _peek_target_vertex_id(forward)
+	if target_vertex_id != -1:
+		for manager in _get_enemy_managers():
+			if manager.is_vertex_occupied_by_enemy(target_vertex_id):
+				var attacked := _attack_enemy_at_vertex(target_vertex_id, manager, true)
+				if attacked:
+					_consume_player_turn()
+					return true
+	if _interact_current_vertex():
+		_consume_player_turn()
+		return true
+	return false
+
+
 func _on_vertex_entered(vertex_id: int, _previous_vertex_id: int, _via_direction: Direction.Cardinal) -> void:
 	if _navigator.graph == null:
 		return

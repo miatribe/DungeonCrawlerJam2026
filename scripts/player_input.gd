@@ -91,7 +91,7 @@ func command_interact() -> void:
 	var player := _get_player()
 	if player == null:
 		return
-	player.try_interact()
+	player.try_interact_or_attack_forward()
 
 
 func _get_player() -> Player:
