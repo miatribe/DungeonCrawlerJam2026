@@ -72,8 +72,8 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_75_logic_gaunttphome": ExtResource("1_th2p1")
 })
 logic_message_map = Dictionary[StringName, String]({
-&"vertex_1_logic_1775081887": "beep boop",
-&"vertex_6_logic_1775186759": "Battery Upgrade!"
+&"vertex_2_logic_1775360899": "Station compromised. Rogue robots and mutant hostiles have taken every corridor. Grab whatever upgrades you can find and put them down. All of them.",
+&"vertex_58_logic_1775360939": "This door requires full system authorization. Collect all available power upgrades to unlock."
 })
 logic_heal_map = Dictionary[StringName, int]({
 &"vertex_13_guntheal": 20,
