@@ -1728,6 +1728,24 @@ payload = {
 script = ExtResource("6_f52af")
 entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_l1yad")])
 
+[sub_resource type="Resource" id="Resource_w5o7j"]
+script = ExtResource("8_yi07g")
+logic_id = &"vertex_28_Use_HP"
+trigger_type = 1
+required_direction = 2
+payload = {
+"flag_id": &"28Heal",
+"required_direction": 2,
+"surface": 1,
+"target_vertex_id": -1,
+"texture_id": 11,
+"type": "set_surface_override"
+}
+
+[sub_resource type="Resource" id="Resource_5axk7"]
+script = ExtResource("6_f52af")
+entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_w5o7j")])
+
 [sub_resource type="Resource" id="Resource_b7ie7"]
 script = ExtResource("8_yi07g")
 logic_id = &"vertex_129_logic_1775180372"
@@ -1803,24 +1821,6 @@ payload = {
 [sub_resource type="Resource" id="Resource_nud5w"]
 script = ExtResource("6_f52af")
 entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_2i3wq")])
-
-[sub_resource type="Resource" id="Resource_w5o7j"]
-script = ExtResource("8_yi07g")
-logic_id = &"vertex_28_Use_HP"
-trigger_type = 1
-required_direction = 2
-payload = {
-"flag_id": &"28Heal",
-"required_direction": 2,
-"surface": 1,
-"target_vertex_id": -1,
-"texture_id": 11,
-"type": "set_surface_override"
-}
-
-[sub_resource type="Resource" id="Resource_5axk7"]
-script = ExtResource("6_f52af")
-entries = Array[ExtResource("8_yi07g")]([SubResource("Resource_w5o7j")])
 
 [sub_resource type="Resource" id="Resource_584nj"]
 script = ExtResource("7_cuu0d")

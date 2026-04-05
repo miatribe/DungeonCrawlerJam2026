@@ -35,6 +35,10 @@ const LASER_PANEL_MAX_STEP := 5
 		"res://assets/graphs/TestGraph.tres": {
 		&"vertex_id": 131,
 		&"texture": preload("res://assets/images/laser_gun.png"),
+	},
+		"res://assets/graphs/Gaunt.tres": {
+		&"vertex_id": 74,
+		&"texture": preload("res://assets/images/Battery_pack.png"),
 	}
 }
 

@@ -64,6 +64,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6w0s")
 logic_scene_map = Dictionary[StringName, PackedScene]({
+&"Power Upgrade": ExtResource("1_th2p1"),
+&"vertex_0_GaunttpHome": ExtResource("1_th2p1"),
 &"vertex_150_TP_Home": ExtResource("1_th2p1"),
 &"vertex_151_TP_HOME": ExtResource("1_th2p1"),
 &"vertex_1_logic_1775178498": ExtResource("1_th2p1"),
@@ -71,7 +73,8 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_5_logic_1775178932": ExtResource("1_th2p1"),
 &"vertex_60_logic_1775184106": ExtResource("2_aqdi6"),
 &"vertex_61_logic_1775184206": ExtResource("5_2xgbv"),
-&"vertex_62_logic_1774834428": ExtResource("1_th2p1")
+&"vertex_62_logic_1774834428": ExtResource("1_th2p1"),
+&"vertex_75_logic_gaunttphome": ExtResource("1_th2p1")
 })
 logic_message_map = Dictionary[StringName, String]({
 &"vertex_1_logic_1775081887": "beep boop",
@@ -86,6 +89,13 @@ logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
 "name": "Laser Gun"
 },
 &"vertex_6_logic_1775186759": {
+"attack": 1,
+"defense": 1,
+"dodge": 1,
+"hit": 1,
+"name": "Power Upgrade"
+},
+&"vertex_74_Gaunt_battery": {
 "attack": 1,
 "defense": 1,
 "dodge": 1,
