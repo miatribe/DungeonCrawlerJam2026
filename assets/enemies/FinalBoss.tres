@@ -7,6 +7,7 @@
 script = ExtResource("1_f2mkd")
 sprite = ExtResource("2_f2mkd")
 name = "FinalBoss"
+aggro_range = 7
 health = 15
 attack = 6
 defense = 2

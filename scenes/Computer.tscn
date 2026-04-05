@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://mqla7xk304ae" path="res://scenes/Gaunt.tscn" id="5_2xgbv"]
 [ext_resource type="AudioStream" uid="uid://w77xf06s6rc4" path="res://assets/audio/music/robot_doctor_mutant_boss_loop_horror.wav" id="5_p4o76"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
+[ext_resource type="PackedScene" uid="uid://bliu81rtsofvn" path="res://scenes/FinalBoos.tscn" id="6_ighy4"]
 [ext_resource type="AudioStream" uid="uid://mrcj3i7crll1" path="res://assets/audio/music/scarier_retro_futuristic_boss_loop.wav" id="6_mx3s8"]
 [ext_resource type="AudioStream" uid="uid://dj6ylxsk6p6cu" path="res://assets/audio/sfx/activation_button_2_heavy.wav" id="6_ubq4r"]
 [ext_resource type="AudioStream" uid="uid://drqop3lmnlknw" path="res://assets/audio/sfx/laser_activate_1.wav" id="6_v8i34"]
@@ -64,8 +65,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n6w0s")
 logic_scene_map = Dictionary[StringName, PackedScene]({
-&"Power Upgrade": ExtResource("1_th2p1"),
 &"vertex_0_GaunttpHome": ExtResource("1_th2p1"),
+&"vertex_0_logic_1775352721": ExtResource("1_th2p1"),
 &"vertex_150_TP_Home": ExtResource("1_th2p1"),
 &"vertex_151_TP_HOME": ExtResource("1_th2p1"),
 &"vertex_1_logic_1775178498": ExtResource("1_th2p1"),
@@ -73,7 +74,7 @@ logic_scene_map = Dictionary[StringName, PackedScene]({
 &"vertex_5_logic_1775178932": ExtResource("1_th2p1"),
 &"vertex_60_logic_1775184106": ExtResource("2_aqdi6"),
 &"vertex_61_logic_1775184206": ExtResource("5_2xgbv"),
-&"vertex_62_logic_1774834428": ExtResource("1_th2p1"),
+&"vertex_62_logic_1774834428": ExtResource("6_ighy4"),
 &"vertex_75_logic_gaunttphome": ExtResource("1_th2p1")
 })
 logic_message_map = Dictionary[StringName, String]({
@@ -82,9 +83,10 @@ logic_message_map = Dictionary[StringName, String]({
 })
 logic_heal_map = Dictionary[StringName, int]({
 &"vertex_13_guntheal": 20,
-&"vertex_28_Use_HP": 20
+&"vertex_28_Use_HP": 20,
+&"vertex_33_logic_1775353096": 20
 })
-per_map_surface_reset_logic_ids = Array[StringName]([&"vertex_28_Use_HP", &"vertex_13_guntheal", &""])
+per_map_surface_reset_logic_ids = Array[StringName]([&"vertex_28_Use_HP", &"vertex_13_guntheal", &"vertex_33_logic_1775353096", &""])
 logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
 &"vertex_131_Get_gun": {
 "attack": 2,

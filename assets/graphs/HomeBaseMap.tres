@@ -41,14 +41,6 @@ vertex_b_id = 2
 direction_from_a = 2
 direction_from_b = 3
 
-[sub_resource type="Resource" id="Resource_ixvrp"]
-script = ExtResource("2_xngqq")
-id = 3
-vertex_a_id = 4
-vertex_b_id = 2
-direction_from_a = 3
-direction_from_b = 2
-
 [sub_resource type="Resource" id="Resource_xgt1h"]
 script = ExtResource("2_xngqq")
 id = 28
@@ -94,38 +86,6 @@ script = ExtResource("2_xngqq")
 id = 35
 vertex_a_id = 25
 vertex_b_id = 22
-direction_from_a = 3
-direction_from_b = 2
-
-[sub_resource type="Resource" id="Resource_ivte6"]
-script = ExtResource("2_xngqq")
-id = 37
-vertex_a_id = 26
-vertex_b_id = 25
-direction_from_a = 3
-direction_from_b = 2
-
-[sub_resource type="Resource" id="Resource_rfppb"]
-script = ExtResource("2_xngqq")
-id = 39
-vertex_a_id = 27
-vertex_b_id = 4
-direction_from_a = 0
-direction_from_b = 1
-
-[sub_resource type="Resource" id="Resource_s1dam"]
-script = ExtResource("2_xngqq")
-id = 40
-vertex_a_id = 27
-vertex_b_id = 26
-direction_from_a = 1
-direction_from_b = 0
-
-[sub_resource type="Resource" id="Resource_v47yp"]
-script = ExtResource("2_xngqq")
-id = 41
-vertex_a_id = 27
-vertex_b_id = 24
 direction_from_a = 3
 direction_from_b = 2
 
@@ -196,6 +156,7 @@ direction_from_a = 0
 direction_from_b = 1
 type = 1
 door_id = 1
+door_state = 0
 
 [sub_resource type="Resource" id="Resource_t7x27"]
 script = ExtResource("2_xngqq")
@@ -543,7 +504,9 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_18bdu")
 })
 surface_texture_overrides = Dictionary[int, int]({
-0: 12
+0: 12,
+4: 2,
+5: 2
 })
 
 [sub_resource type="Resource" id="Resource_brndg"]
@@ -553,7 +516,6 @@ position = Vector2i(18, 14)
 edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_18bdu"),
 1: SubResource("Resource_rqp2c"),
-2: SubResource("Resource_ixvrp"),
 3: SubResource("Resource_wcep4")
 })
 
@@ -565,15 +527,6 @@ edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_xgt1h"),
 2: SubResource("Resource_wcep4"),
 3: SubResource("Resource_t7x27")
-})
-
-[sub_resource type="Resource" id="Resource_w4840"]
-script = ExtResource("8_1lnfu")
-id = 4
-position = Vector2i(19, 14)
-edges = Dictionary[int, ExtResource("2_xngqq")]({
-1: SubResource("Resource_rfppb"),
-3: SubResource("Resource_ixvrp")
 })
 
 [sub_resource type="Resource" id="Resource_wagrp"]
@@ -603,7 +556,6 @@ position = Vector2i(18, 15)
 edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_rqp2c"),
 1: SubResource("Resource_yn6dj"),
-2: SubResource("Resource_v47yp"),
 3: SubResource("Resource_75bhx")
 })
 
@@ -614,27 +566,7 @@ position = Vector2i(18, 16)
 edges = Dictionary[int, ExtResource("2_xngqq")]({
 0: SubResource("Resource_yn6dj"),
 1: SubResource("Resource_pk35i"),
-2: SubResource("Resource_ivte6"),
 3: SubResource("Resource_20smd")
-})
-
-[sub_resource type="Resource" id="Resource_ybfm5"]
-script = ExtResource("8_1lnfu")
-id = 26
-position = Vector2i(19, 16)
-edges = Dictionary[int, ExtResource("2_xngqq")]({
-0: SubResource("Resource_s1dam"),
-3: SubResource("Resource_ivte6")
-})
-
-[sub_resource type="Resource" id="Resource_i4p0u"]
-script = ExtResource("8_1lnfu")
-id = 27
-position = Vector2i(19, 15)
-edges = Dictionary[int, ExtResource("2_xngqq")]({
-0: SubResource("Resource_rfppb"),
-1: SubResource("Resource_s1dam"),
-3: SubResource("Resource_v47yp")
 })
 
 [sub_resource type="Resource" id="Resource_g8wjc"]
@@ -805,13 +737,10 @@ vertices = Dictionary[int, ExtResource("8_1lnfu")]({
 1: SubResource("Resource_13xcs"),
 2: SubResource("Resource_brndg"),
 3: SubResource("Resource_lwol7"),
-4: SubResource("Resource_w4840"),
 22: SubResource("Resource_wagrp"),
 23: SubResource("Resource_2h8ty"),
 24: SubResource("Resource_1fxr8"),
 25: SubResource("Resource_n2y34"),
-26: SubResource("Resource_ybfm5"),
-27: SubResource("Resource_i4p0u"),
 51: SubResource("Resource_g8wjc"),
 52: SubResource("Resource_guov4"),
 55: SubResource("Resource_nerld"),
@@ -831,17 +760,12 @@ vertices = Dictionary[int, ExtResource("8_1lnfu")]({
 edges = Dictionary[int, ExtResource("2_xngqq")]({
 1: SubResource("Resource_18bdu"),
 2: SubResource("Resource_wcep4"),
-3: SubResource("Resource_ixvrp"),
 28: SubResource("Resource_xgt1h"),
 29: SubResource("Resource_0dkyb"),
 31: SubResource("Resource_rqp2c"),
 32: SubResource("Resource_75bhx"),
 33: SubResource("Resource_yn6dj"),
 35: SubResource("Resource_20smd"),
-37: SubResource("Resource_ivte6"),
-39: SubResource("Resource_rfppb"),
-40: SubResource("Resource_s1dam"),
-41: SubResource("Resource_v47yp"),
 66: SubResource("Resource_pk35i"),
 67: SubResource("Resource_ve550"),
 72: SubResource("Resource_ep4ej"),
