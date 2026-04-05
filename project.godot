@@ -19,6 +19,10 @@ config/icon="uid://g8k3246ovlel"
 
 default_bus_layout="res://audio/default_bus_layout.tres"
 
+[autoload]
+
+AudioManager="*res://scripts/audio/audio_manager.gd"
+
 [display]
 
 window/size/viewport_width=1920

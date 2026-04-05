@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://3hqdxjm15s8q"]
 
 [ext_resource type="Script" uid="uid://dwsbvc766gs17" path="res://scripts/player.gd" id="1_p0vlq"]
-[ext_resource type="Script" uid="uid://c1vhyy1m35anv" path="res://scripts/audio/random_sfx_player.gd" id="2_a6y07"]
 [ext_resource type="AudioStream" uid="uid://y5cdrgw8igjl" path="res://assets/audio/sfx/soft_clank_step_2.wav" id="3_cw2d6"]
 [ext_resource type="AudioStream" uid="uid://cteeuoykqfp5q" path="res://assets/audio/sfx/soft_clank_step_3.wav" id="4_khinc"]
 [ext_resource type="AudioStream" uid="uid://bglagchehsr3u" path="res://assets/audio/sfx/soft_clank_step_4.wav" id="5_bruh7"]
@@ -12,15 +11,9 @@
 
 [node name="Player" type="Node3D" unique_id=608341986 groups=["player"]]
 script = ExtResource("1_p0vlq")
+move_sounds = Array[AudioStream]([ExtResource("3_cw2d6"), ExtResource("4_khinc"), ExtResource("5_bruh7"), ExtResource("6_6eyey"), ExtResource("7_d3wef")])
+attack_sounds = Array[AudioStream]([ExtResource("8_fv310"), ExtResource("9_kx7g3")])
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1750751389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
 fov = 65.0
-
-[node name="MoveSfx" type="Node" parent="." unique_id=123997420]
-script = ExtResource("2_a6y07")
-sounds = Array[AudioStream]([ExtResource("3_cw2d6"), ExtResource("4_khinc"), ExtResource("5_bruh7"), ExtResource("6_6eyey"), ExtResource("7_d3wef")])
-
-[node name="AttackSfx" type="Node" parent="." unique_id=2083499117]
-script = ExtResource("2_a6y07")
-sounds = Array[AudioStream]([ExtResource("8_fv310"), ExtResource("9_kx7g3")])

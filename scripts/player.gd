@@ -32,8 +32,8 @@ var _max_health_bonus: int = 0
 var _is_defeated := false
 var _is_god_mode := false
 
-@onready var _move_sfx_player: RandomSfxPlayer = get_node_or_null("MoveSfx") as RandomSfxPlayer
-@onready var _attack_sfx_player: RandomSfxPlayer = get_node_or_null("AttackSfx") as RandomSfxPlayer
+@export var move_sounds: Array[AudioStream] = []
+@export var attack_sounds: Array[AudioStream] = []
 
 
 func set_run_state(state: DungeonRunState) -> void:
@@ -86,8 +86,8 @@ func try_move_relative(relative_degrees: int) -> bool:
 		return false
 
 	if _try_move(move_direction):
-		if _navigator.current_vertex_id != previous_vertex_id and _move_sfx_player != null:
-			_move_sfx_player.play_random()
+		if _navigator.current_vertex_id != previous_vertex_id:
+			AudioManager.play_sfx_random(move_sounds)
 		_consume_player_turn()
 		return true
 
@@ -232,9 +232,7 @@ func _attack_enemy_at_vertex(vertex_id: int, manager: EnemyManager, play_attack_
 
 
 func play_attack_sfx_random() -> void:
-	if _attack_sfx_player == null:
-		return
-	_attack_sfx_player.play_random()
+	AudioManager.play_sfx_random(attack_sounds)
 
 
 func _get_enemy_managers() -> Array[EnemyManager]:

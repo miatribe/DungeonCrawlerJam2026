@@ -1,23 +1,16 @@
 [gd_scene format=3 uid="uid://w1ygq5vs881p"]
 
-[ext_resource type="Script" uid="uid://cnuj08bpgjdyh" path="res://scripts/audio/music_system.gd" id="1_kg0vu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/AudioSettingsMenu.tscn" id="1_audio_menu"]
 [ext_resource type="Script" uid="uid://dwhnncpiykop1" path="res://scripts/computer.gd" id="1_n6w0s"]
 [ext_resource type="PackedScene" uid="uid://bd3n3heqh4kcs" path="res://scenes/HomeBase.tscn" id="1_th2p1"]
-[ext_resource type="Script" uid="uid://c1vhyy1m35anv" path="res://scripts/audio/random_sfx_player.gd" id="1_u0h4h"]
 [ext_resource type="PackedScene" uid="uid://csnks0v3ohdgy" path="res://scenes/ui/TextLog.tscn" id="1_xihgh"]
 [ext_resource type="PackedScene" uid="uid://d11qt3e0tak8v" path="res://scenes/MapOne.tscn" id="2_aqdi6"]
 [ext_resource type="Script" uid="uid://doaer4rn0oxb2" path="res://scripts/player_input.gd" id="2_ux8a7"]
 [ext_resource type="PackedScene" uid="uid://b4m8f44170jkh" path="res://scenes/Maze.tscn" id="3_c1chd"]
 [ext_resource type="PackedScene" uid="uid://mqla7xk304ae" path="res://scenes/Gaunt.tscn" id="5_2xgbv"]
-[ext_resource type="AudioStream" uid="uid://w77xf06s6rc4" path="res://assets/audio/music/robot_doctor_mutant_boss_loop_horror.wav" id="5_p4o76"]
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 [ext_resource type="PackedScene" uid="uid://bliu81rtsofvn" path="res://scenes/FinalBoos.tscn" id="6_ighy4"]
-[ext_resource type="AudioStream" uid="uid://mrcj3i7crll1" path="res://assets/audio/music/scarier_retro_futuristic_boss_loop.wav" id="6_mx3s8"]
-[ext_resource type="AudioStream" uid="uid://dj6ylxsk6p6cu" path="res://assets/audio/sfx/activation_button_2_heavy.wav" id="6_ubq4r"]
-[ext_resource type="AudioStream" uid="uid://drqop3lmnlknw" path="res://assets/audio/sfx/laser_activate_1.wav" id="6_v8i34"]
-[ext_resource type="AudioStream" uid="uid://b8p1otf6t4o0r" path="res://assets/audio/music/space_station_victory_loop.wav" id="6_victory"]
 [ext_resource type="Texture2D" uid="uid://cftrgeswdyl7p" path="res://assets/images/teleport_screen.png" id="7_65h6p"]
-[ext_resource type="AudioStream" uid="uid://leui3yxn2s1e" path="res://assets/audio/sfx/laser_deactivate_1.wav" id="8_8a0w5"]
 [ext_resource type="Script" uid="uid://xodj8sv8ccd8" path="res://scripts/ui/upgrade_indicator.gd" id="9_ipp67"]
 [ext_resource type="Texture2D" uid="uid://d08oatdpxe3tq" path="res://assets/images/Battery_panel_Off.png" id="9_xvgcs"]
 [ext_resource type="Script" uid="uid://t4f5o2d8knah" path="res://scripts/ui/player_hp_bar.gd" id="13_eywps"]
@@ -123,28 +116,6 @@ default_battery_pickup_height = 0.0
 [node name="PlayerInput" type="Node" parent="." unique_id=1777251988]
 unique_name_in_owner = true
 script = ExtResource("2_ux8a7")
-
-[node name="MusicSystem" type="Node" parent="." unique_id=2017642205]
-unique_name_in_owner = true
-script = ExtResource("1_kg0vu")
-gameplay_track = ExtResource("5_p4o76")
-boss_track = ExtResource("6_mx3s8")
-victory_track = ExtResource("6_victory")
-
-[node name="LogicInteractSfx" type="Node" parent="." unique_id=1114982064]
-unique_name_in_owner = true
-script = ExtResource("1_u0h4h")
-sounds = Array[AudioStream]([ExtResource("6_ubq4r")])
-
-[node name="DoorOpenSfx" type="Node" parent="." unique_id=1643362270]
-unique_name_in_owner = true
-script = ExtResource("1_u0h4h")
-sounds = Array[AudioStream]([ExtResource("6_v8i34")])
-
-[node name="DoorCloseSfx" type="Node" parent="." unique_id=1426516313]
-unique_name_in_owner = true
-script = ExtResource("1_u0h4h")
-sounds = Array[AudioStream]([ExtResource("8_8a0w5")])
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=196972501]
 layout_mode = 1
@@ -408,3 +379,11 @@ offset_top = 0.5199585
 offset_right = -0.4810791
 offset_bottom = 0.39996338
 flat = true
+
+[node name="AudioSettingsMenu" parent="AspectRatioContainer/DesignRoot" unique_id=1506297391 instance=ExtResource("1_audio_menu")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70416665
+anchor_top = 0.6574074
+anchor_right = 0.8609375
+anchor_bottom = 0.93703705

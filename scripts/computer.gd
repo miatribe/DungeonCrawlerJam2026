@@ -36,8 +36,13 @@ const LASER_PANEL_MAX_STEP := 5
 @export var death_screen_texture: Texture2D = preload("res://assets/images/Drone_deathscreen.png")
 @export var win_screen_texture: Texture2D = preload("res://assets/images/WIN_screen.png")
 @export var respawn_home_scene: PackedScene = preload("res://scenes/HomeBase.tscn")
+@export var gameplay_track: AudioStream = preload("res://assets/audio/music/robot_doctor_mutant_boss_loop_horror.wav")
+@export var boss_track: AudioStream = preload("res://assets/audio/music/scarier_retro_futuristic_boss_loop.wav")
+@export var victory_track: AudioStream = preload("res://assets/audio/music/space_station_victory_loop.wav")
+@export var logic_interact_sound: AudioStream = preload("res://assets/audio/sfx/activation_button_2_heavy.wav")
+@export var door_open_sound: AudioStream = preload("res://assets/audio/sfx/laser_activate_1.wav")
+@export var door_close_sound: AudioStream = preload("res://assets/audio/sfx/laser_deactivate_1.wav")
 @export var death_sting_sfx: AudioStream = preload("res://assets/audio/sfx/you_died_sting.wav")
-@export var sfx_bus: StringName = &"SFX"
 @export var battery_pickup_map: Dictionary[String, Dictionary] = {
 	"res://assets/graphs/Maze.tres": {
 		&"vertex_id": 6,
@@ -61,10 +66,6 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _subviewport: SubViewport = $AspectRatioContainer/DesignRoot/SubViewportContainer/SubViewport
 @onready var _temp_loading_screen: TextureRect = %LoadingScreen
 @onready var _player_input: PlayerInput = $PlayerInput
-@onready var _music_system: MusicSystem = %MusicSystem
-@onready var _logic_interact_sfx: RandomSfxPlayer = %LogicInteractSfx
-@onready var _door_open_sfx: RandomSfxPlayer = %DoorOpenSfx
-@onready var _door_close_sfx: RandomSfxPlayer = %DoorCloseSfx
 @onready var _text_log: TextLog = %TextLog
 @onready var _mini_map: MiniMap = %MiniMap
 @onready var _btn_move_forward: Button = $AspectRatioContainer/DesignRoot/MoveFoward
@@ -76,6 +77,7 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
 @onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
 @onready var _btn_menu: Button = get_node_or_null("AspectRatioContainer/DesignRoot/Menu") as Button
+@onready var _audio_settings_menu: CanvasItem = get_node_or_null("AspectRatioContainer/DesignRoot/AudioSettingsMenu") as CanvasItem
 @onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
 @onready var _gun_not_ready: CanvasItem = get_node_or_null("AspectRatioContainer/DesignRoot/GunNotReady") as CanvasItem
 
@@ -90,7 +92,6 @@ var _loading_screen_texture_override: Texture2D
 var _connected_player: Player
 var _connected_enemy_manager: EnemyManager
 var _base_surface_overrides_by_graph: Dictionary[String, Dictionary] = {}
-var _ui_sfx_player: AudioStreamPlayer
 var _is_win_screen_active := false
 var _has_seen_final_boss_enemy_alive := false
 var _has_triggered_final_victory := false
@@ -100,7 +101,8 @@ func _ready() -> void:
 	if _temp_loading_screen != null:
 		_default_loading_screen_texture = _temp_loading_screen.texture
 		_temp_loading_screen.visible = false
-	_create_ui_sfx_player_if_missing()
+	AudioManager.setup_music_tracks(gameplay_track, boss_track, victory_track)
+	AudioManager.play_gameplay_track()
 	_wire_button_actions()
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
@@ -111,6 +113,8 @@ func _ready() -> void:
 	_apply_all_persistent_laser_panel_upgrades()
 	_update_gun_not_ready_visibility()
 	_update_attack_button_enabled_state()
+	if _audio_settings_menu != null:
+		_audio_settings_menu.visible = false
 	call_deferred("_run_initial_ai_turn_after_load")
 
 
@@ -351,6 +355,8 @@ func _set_menu_overlay_open(is_open: bool) -> void:
 	if _is_menu_open == is_open:
 		return
 	_is_menu_open = is_open
+	if _audio_settings_menu != null:
+		_audio_settings_menu.visible = is_open
 	if _temp_loading_screen != null:
 		if is_open:
 			if menu_screen_texture != null:
@@ -550,6 +556,8 @@ func _trigger_final_victory() -> void:
 		_btn_menu.disabled = true
 	_loading_screen_texture_override = win_screen_texture
 	_set_loading_screen_visible(true)
+	if _audio_settings_menu != null:
+		_audio_settings_menu.visible = false
 	play_victory_music()
 	if _text_log != null:
 		_text_log.add_message("Mission complete. Thank you for playing!")
@@ -565,8 +573,6 @@ func _set_player_movement_enabled(is_enabled: bool) -> void:
 
 
 func _play_interact_logic_sfx_if_needed(vertex_id: int, logic_id: StringName) -> void:
-	if _logic_interact_sfx == null:
-		return
 	if _connected_graph == null:
 		return
 	var entries := _connected_graph.get_vertex_logic(vertex_id)
@@ -577,7 +583,7 @@ func _play_interact_logic_sfx_if_needed(vertex_id: int, logic_id: StringName) ->
 			continue
 		if logic.trigger_type != VertexLogic.TriggerType.ON_INTERACT:
 			continue
-		_logic_interact_sfx.play_random()
+		AudioManager.play_sfx(logic_interact_sound)
 		return
 
 
@@ -600,11 +606,9 @@ func _play_door_logic_sfx_if_needed(vertex_id: int, logic_id: StringName) -> voi
 		if edge == null:
 			continue
 		if edge.type == Edge.EdgeType.DOOR and int(edge.door_state) == int(Door.DoorState.OPEN):
-			if _door_open_sfx != null:
-				_door_open_sfx.play_random()
+			AudioManager.play_sfx(door_open_sound)
 		else:
-			if _door_close_sfx != null:
-				_door_close_sfx.play_random()
+			AudioManager.play_sfx(door_close_sound)
 		return
 
 
@@ -1283,40 +1287,19 @@ func _clear_battery_pickup_sprite() -> void:
 
 
 func play_gameplay_music() -> void:
-	if _music_system == null:
-		return
-	_music_system.play_gameplay_track(false)
+	AudioManager.play_gameplay_track()
 
 
 func play_boss_music() -> void:
-	if _music_system == null:
-		return
-	_music_system.play_boss_track(false)
+	AudioManager.play_boss_track()
 
 
 func play_victory_music() -> void:
-	if _music_system == null:
-		return
-	_music_system.play_victory_track(false)
-
-
-func _create_ui_sfx_player_if_missing() -> void:
-	if _ui_sfx_player != null:
-		return
-	_ui_sfx_player = AudioStreamPlayer.new()
-	_ui_sfx_player.name = "UiSfxPlayer"
-	add_child(_ui_sfx_player)
-	_ui_sfx_player.bus = sfx_bus
+	AudioManager.play_victory_track()
 
 
 func _play_death_sting_sfx() -> void:
-	if death_sting_sfx == null:
-		return
-	_create_ui_sfx_player_if_missing()
-	if _ui_sfx_player == null:
-		return
-	_ui_sfx_player.stream = death_sting_sfx
-	_ui_sfx_player.play()
+	AudioManager.play_sfx(death_sting_sfx)
 
 
 func set_god_mode_enabled(is_enabled: bool) -> void:
