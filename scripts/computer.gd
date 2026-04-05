@@ -19,6 +19,8 @@ const LASER_PANEL_MAX_STEP := 5
 @export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
 @export var logic_upgrade_indicator_map: Dictionary[StringName, NodePath] = {}
 @export var laser_upgrade_logic_id: StringName = &""
+@export var homebase_graph_path: String = "res://assets/graphs/HomeBaseMap.tres"
+@export var homebase_unlock_edge_id: int = 79
 @export_range(0, 5, 1) var laser_upgrade_step: int = 0
 @export var minimap_unlock_logic_ids: Array[StringName] = []
 @export var minimap_unlocked_by_default: bool = true
@@ -222,6 +224,7 @@ func _connect_to_current_graph() -> void:
 		push_warning("Computer: GraphRenderer has no Graph assigned.")
 		return
 	_connected_graph = graph_renderer.graph
+	_update_homebase_unlock_state()
 	_capture_graph_base_surface_overrides_if_missing()
 	_reset_per_map_heal_logic_triggers()
 	var did_reset_surface_overrides := _reset_per_map_surface_overrides_for_logic_ids()
@@ -665,6 +668,7 @@ func _inject_run_state_into_player() -> void:
 		player.set_run_state(_map_state_store.run_state)
 		player.set_god_mode(god_mode_enabled)
 		_apply_all_persistent_logic_stat_bonuses(player)
+	_update_homebase_unlock_state()
 	_apply_all_persistent_laser_panel_upgrades()
 
 
@@ -679,10 +683,49 @@ func _apply_logic_stat_bonus_once(logic_id: StringName) -> void:
 	if run_state.has_flag(flag_id):
 		return
 	run_state.set_flag(flag_id, true)
+	_update_homebase_unlock_state()
 	var player := _get_current_player()
 	_log_stat_bonus_gain(player, bonus_config, logic_id)
 	if player != null:
 		_apply_all_persistent_logic_stat_bonuses(player)
+
+
+func _has_all_stat_bonuses_unlocked() -> bool:
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return false
+	if logic_stat_bonus_map.is_empty():
+		return false
+	for key in logic_stat_bonus_map.keys():
+		var logic_id := key as StringName
+		if not run_state.has_flag(_get_stat_bonus_flag_id(logic_id)):
+			return false
+	return true
+
+
+func _update_homebase_unlock_state() -> void:
+	if not _has_all_stat_bonuses_unlocked():
+		return
+	if homebase_graph_path.is_empty() or homebase_unlock_edge_id < 0:
+		return
+	_map_state_store.set_edge_state_for_map(
+		homebase_graph_path,
+		homebase_unlock_edge_id,
+		int(Edge.EdgeType.DOOR),
+		int(Door.DoorState.OPEN)
+	)
+	if _connected_graph == null:
+		return
+	if _connected_graph.resource_path != homebase_graph_path:
+		return
+	var edge: Edge = _connected_graph.edges.get(homebase_unlock_edge_id)
+	if edge == null:
+		return
+	edge.type = Edge.EdgeType.DOOR
+	edge.door_state = Door.DoorState.OPEN
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer != null:
+		graph_renderer.render_graph()
 
 
 func _apply_all_persistent_logic_stat_bonuses(player: Player) -> void:
