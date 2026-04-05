@@ -10,6 +10,9 @@ const LASER_PANEL_MAX_STEP := 5
 	&"vertex_62_logic_1774834428": preload("res://scenes/MapOne.tscn")
 }
 @export var logic_message_map: Dictionary[StringName, String] = {}
+@export var logic_heal_map: Dictionary[StringName, int] = {
+	&"vertex_28_Use_HP": 20
+}
 @export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
 @export var logic_upgrade_indicator_map: Dictionary[StringName, NodePath] = {}
 @export var laser_upgrade_logic_id: StringName = &""
@@ -210,6 +213,7 @@ func _connect_to_current_graph() -> void:
 		push_warning("Computer: GraphRenderer has no Graph assigned.")
 		return
 	_connected_graph = graph_renderer.graph
+	_reset_per_map_heal_logic_triggers()
 	if not _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.connect(_on_vertex_logic_triggered)
 	_connect_to_current_turn_manager()
@@ -232,6 +236,7 @@ func _on_vertex_logic_triggered(vertex_id: int, logic_id: StringName) -> void:
 	_play_door_logic_sfx_if_needed(vertex_id, logic_id)
 	if logic_message_map.has(logic_id) and _text_log != null:
 		_text_log.add_message(logic_message_map[logic_id])
+	_apply_logic_heal(logic_id)
 	_apply_logic_stat_bonus_once(logic_id)
 	_apply_logic_upgrade_indicator_once(logic_id)
 	_apply_logic_laser_panel_upgrade_once(logic_id)
@@ -526,6 +531,37 @@ func _run_initial_ai_turn_for_current_scene() -> void:
 func _save_current_map_state() -> void:
 	if _connected_graph != null:
 		_map_state_store.save_map_state(_connected_graph)
+
+
+func _reset_per_map_heal_logic_triggers() -> void:
+	if _connected_graph == null:
+		return
+	if logic_heal_map.is_empty():
+		return
+	var run_state := _map_state_store.run_state
+	if run_state == null:
+		return
+	for key in logic_heal_map.keys():
+		var logic_id := key as StringName
+		run_state.triggered_logic.erase(logic_id)
+
+
+func _apply_logic_heal(logic_id: StringName) -> void:
+	if not logic_heal_map.has(logic_id):
+		return
+	var heal_amount := int(logic_heal_map.get(logic_id, 0))
+	if heal_amount == 0:
+		return
+	var player := _get_current_player()
+	if player == null:
+		return
+	var old_hp := player.current_health
+	var max_hp := player.get_effective_max_health()
+	player.current_health = clampi(player.current_health + heal_amount, 0, max_hp)
+	if _text_log != null and player.current_health != old_hp:
+		var delta := player.current_health - old_hp
+		if delta > 0:
+			_text_log.add_message("You heal %d HP. HP: %d/%d" % [delta, player.current_health, max_hp])
 
 
 func _restore_current_map_state() -> void:
