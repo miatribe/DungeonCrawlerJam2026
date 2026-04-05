@@ -13,6 +13,9 @@ const LASER_PANEL_MAX_STEP := 5
 @export var logic_heal_map: Dictionary[StringName, int] = {
 	&"vertex_28_Use_HP": 20
 }
+@export var per_map_surface_reset_logic_ids: Array[StringName] = [
+	&"vertex_28_Use_HP"
+]
 @export var logic_stat_bonus_map: Dictionary[StringName, Dictionary] = {}
 @export var logic_upgrade_indicator_map: Dictionary[StringName, NodePath] = {}
 @export var laser_upgrade_logic_id: StringName = &""
@@ -70,6 +73,7 @@ var _battery_pickup_sprite: Sprite3D
 var _default_loading_screen_texture: Texture2D
 var _loading_screen_texture_override: Texture2D
 var _connected_player: Player
+var _base_surface_overrides_by_graph: Dictionary[String, Dictionary] = {}
 
 
 func _ready() -> void:
@@ -213,7 +217,11 @@ func _connect_to_current_graph() -> void:
 		push_warning("Computer: GraphRenderer has no Graph assigned.")
 		return
 	_connected_graph = graph_renderer.graph
+	_capture_graph_base_surface_overrides_if_missing()
 	_reset_per_map_heal_logic_triggers()
+	var did_reset_surface_overrides := _reset_per_map_surface_overrides_for_logic_ids()
+	if did_reset_surface_overrides:
+		graph_renderer.render_graph()
 	if not _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.connect(_on_vertex_logic_triggered)
 	_connect_to_current_turn_manager()
@@ -562,6 +570,80 @@ func _apply_logic_heal(logic_id: StringName) -> void:
 		var delta := player.current_health - old_hp
 		if delta > 0:
 			_text_log.add_message("You heal %d HP. HP: %d/%d" % [delta, player.current_health, max_hp])
+
+
+func _reset_per_map_surface_overrides_for_logic_ids() -> bool:
+	if _connected_graph == null:
+		return false
+	if per_map_surface_reset_logic_ids.is_empty():
+		return false
+	var graph_state_key := _get_connected_graph_state_key()
+	var baseline_by_vertex: Dictionary = {}
+	if not graph_state_key.is_empty() and _base_surface_overrides_by_graph.has(graph_state_key):
+		baseline_by_vertex = _base_surface_overrides_by_graph.get(graph_state_key, {})
+
+	var did_change := false
+	for vertex_id in _connected_graph.vertex_logic.keys():
+		var entries := _connected_graph.get_vertex_logic(int(vertex_id))
+		for logic in entries:
+			if logic == null:
+				continue
+			if not per_map_surface_reset_logic_ids.has(logic.logic_id):
+				continue
+			var payload: Dictionary = logic.payload
+			if String(payload.get("type", "")) != "set_surface_override":
+				continue
+
+			var target_vertex_id := int(payload.get("target_vertex_id", -1))
+			if target_vertex_id < 0:
+				target_vertex_id = int(vertex_id)
+			var target_vertex: Vertex = _connected_graph.vertices.get(target_vertex_id)
+			if target_vertex == null:
+				continue
+
+			var surface_int := int(payload.get("surface", int(Direction.Surface.NORTH)))
+			var writable_overrides := target_vertex.surface_texture_overrides.duplicate(true)
+			var baseline_overrides: Dictionary = baseline_by_vertex.get(target_vertex_id, {})
+			if baseline_overrides.has(surface_int):
+				var baseline_value: int = int(baseline_overrides.get(surface_int, 0))
+				if not writable_overrides.has(surface_int) or int(writable_overrides.get(surface_int, -1)) != baseline_value:
+					writable_overrides[surface_int] = baseline_value
+					target_vertex.surface_texture_overrides = writable_overrides
+					did_change = true
+			elif writable_overrides.has(surface_int):
+				writable_overrides.erase(surface_int)
+				target_vertex.surface_texture_overrides = writable_overrides
+				did_change = true
+
+	return did_change
+
+
+func _capture_graph_base_surface_overrides_if_missing() -> void:
+	if _connected_graph == null:
+		return
+	var graph_state_key := _get_connected_graph_state_key()
+	if graph_state_key.is_empty():
+		return
+	if _base_surface_overrides_by_graph.has(graph_state_key):
+		return
+
+	var baseline_by_vertex: Dictionary[int, Dictionary] = {}
+	for vertex_id in _connected_graph.vertices:
+		var vertex: Vertex = _connected_graph.vertices.get(vertex_id)
+		if vertex == null:
+			continue
+		if vertex.surface_texture_overrides.size() > 0:
+			baseline_by_vertex[vertex_id] = vertex.surface_texture_overrides.duplicate(true)
+	_base_surface_overrides_by_graph[graph_state_key] = baseline_by_vertex
+
+
+func _get_connected_graph_state_key() -> String:
+	if _connected_graph == null:
+		return ""
+	var map_key := _connected_graph.resource_path
+	if map_key.is_empty():
+		map_key = "runtime_%d" % _connected_graph.get_instance_id()
+	return map_key
 
 
 func _restore_current_map_state() -> void:
