@@ -7,7 +7,7 @@
 script = ExtResource("1_pg0ma")
 sprite = ExtResource("2_pg0ma")
 name = "Ironing Maiden"
-health = 5
+health = 7
 defense = 1
 hit = 1
 metadata/_custom_type_script = "uid://hs8lniq4yfva"
