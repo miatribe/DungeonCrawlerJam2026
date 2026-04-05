@@ -3,6 +3,7 @@ class_name MusicSystem
 
 @export var gameplay_track: AudioStream
 @export var boss_track: AudioStream
+@export var victory_track: AudioStream
 @export var autoplay_gameplay_track: bool = true
 @export var player_path: NodePath
 @export var music_bus: StringName = &"Music"
@@ -31,6 +32,10 @@ func play_gameplay_track(restart_if_same: bool = false) -> bool:
 
 func play_boss_track(restart_if_same: bool = true) -> bool:
 	return _play_track(boss_track, restart_if_same)
+
+
+func play_victory_track(restart_if_same: bool = false) -> bool:
+	return _play_track(victory_track, restart_if_same)
 
 
 func stop_music() -> void:

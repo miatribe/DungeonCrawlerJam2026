@@ -22,6 +22,8 @@ const LASER_PANEL_MAX_STEP := 5
 @export var boss_music_logic_ids: Array[StringName] = [
 	&"vertex_7_logic_1775353017"
 ]
+@export var final_boss_scene_path: String = "res://scenes/FinalBoos.tscn"
+@export var final_boss_graph_path: String = "res://assets/graphs/Boooos.tres"
 @export var homebase_graph_path: String = "res://assets/graphs/HomeBaseMap.tres"
 @export var homebase_unlock_edge_id: int = 79
 @export_range(0, 5, 1) var laser_upgrade_step: int = 0
@@ -32,7 +34,10 @@ const LASER_PANEL_MAX_STEP := 5
 @export var menu_screen_texture: Texture2D = preload("res://assets/images/Drone_Menu_screen.png")
 @export_range(0.0, 10.0, 0.1) var death_screen_hold_seconds: float = 2.0
 @export var death_screen_texture: Texture2D = preload("res://assets/images/Drone_deathscreen.png")
+@export var win_screen_texture: Texture2D = preload("res://assets/images/WIN_screen.png")
 @export var respawn_home_scene: PackedScene = preload("res://scenes/HomeBase.tscn")
+@export var death_sting_sfx: AudioStream = preload("res://assets/audio/sfx/you_died_sting.wav")
+@export var sfx_bus: StringName = &"SFX"
 @export var battery_pickup_map: Dictionary[String, Dictionary] = {
 	"res://assets/graphs/Maze.tres": {
 		&"vertex_id": 6,
@@ -71,6 +76,7 @@ const LASER_PANEL_MAX_STEP := 5
 @onready var _btn_attack: Button = $AspectRatioContainer/DesignRoot/Attack
 @onready var _btn_interact: Button = $AspectRatioContainer/DesignRoot/Interact
 @onready var _btn_menu: Button = get_node_or_null("AspectRatioContainer/DesignRoot/Menu") as Button
+@onready var _btn_restart: Button = get_node_or_null("AspectRatioContainer/DesignRoot/RestartGame") as Button
 @onready var _laser_gun_upgrade_panel: LaserGunUpgradePanel = $AspectRatioContainer/DesignRoot/LaserGunUpgradePanel
 @onready var _gun_not_ready: CanvasItem = get_node_or_null("AspectRatioContainer/DesignRoot/GunNotReady") as CanvasItem
 
@@ -83,13 +89,19 @@ var _battery_pickup_sprite: Sprite3D
 var _default_loading_screen_texture: Texture2D
 var _loading_screen_texture_override: Texture2D
 var _connected_player: Player
+var _connected_enemy_manager: EnemyManager
 var _base_surface_overrides_by_graph: Dictionary[String, Dictionary] = {}
+var _ui_sfx_player: AudioStreamPlayer
+var _is_win_screen_active := false
+var _has_seen_final_boss_enemy_alive := false
+var _has_triggered_final_victory := false
 
 
 func _ready() -> void:
 	if _temp_loading_screen != null:
 		_default_loading_screen_texture = _temp_loading_screen.texture
 		_temp_loading_screen.visible = false
+	_create_ui_sfx_player_if_missing()
 	_wire_button_actions()
 	_inject_run_state_into_player()
 	_connect_to_current_graph()
@@ -100,6 +112,9 @@ func _ready() -> void:
 	_apply_all_persistent_laser_panel_upgrades()
 	_update_gun_not_ready_visibility()
 	_update_attack_button_enabled_state()
+	if _btn_restart != null:
+		_btn_restart.visible = false
+		_btn_restart.disabled = true
 	call_deferred("_run_initial_ai_turn_after_load")
 
 
@@ -122,6 +137,8 @@ func _wire_button_actions() -> void:
 		_btn_interact.pressed.connect(_on_interact_pressed)
 	if _btn_menu != null and not _btn_menu.pressed.is_connected(_on_menu_pressed):
 		_btn_menu.pressed.connect(_on_menu_pressed)
+	if _btn_restart != null and not _btn_restart.pressed.is_connected(_on_restart_pressed):
+		_btn_restart.pressed.connect(_on_restart_pressed)
 
 
 func _on_move_forward_pressed() -> void:
@@ -189,6 +206,7 @@ func _on_interact_pressed() -> void:
 func _process(_delta: float) -> void:
 	_ensure_turn_manager_wiring()
 	_ensure_player_defeat_wiring()
+	_ensure_enemy_manager_wiring()
 	_sync_mini_map_context()
 	_update_battery_pickup_collection()
 
@@ -212,6 +230,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_menu_pressed() -> void:
 	_toggle_menu_overlay()
+
+
+func _on_restart_pressed() -> void:
+	if get_tree() == null:
+		return
+	get_tree().reload_current_scene()
 
 
 func _connect_to_current_graph() -> void:
@@ -244,6 +268,7 @@ func _disconnect_from_current_graph() -> void:
 	if _connected_graph.vertex_logic_triggered.is_connected(_on_vertex_logic_triggered):
 		_connected_graph.vertex_logic_triggered.disconnect(_on_vertex_logic_triggered)
 	_connected_graph = null
+	_disconnect_from_current_enemy_manager()
 	_disconnect_from_current_turn_manager()
 	_disconnect_from_current_player()
 	_clear_battery_pickup_sprite()
@@ -316,7 +341,7 @@ func _swap_subviewport_scene(scene: PackedScene) -> void:
 
 func _set_loading_screen_visible(new_is_visible: bool) -> void:
 	if _temp_loading_screen != null:
-		if not _is_menu_open:
+		if not _is_menu_open or _is_win_screen_active:
 			if _loading_screen_texture_override != null:
 				_temp_loading_screen.texture = _loading_screen_texture_override
 			elif _default_loading_screen_texture != null:
@@ -327,10 +352,14 @@ func _set_loading_screen_visible(new_is_visible: bool) -> void:
 func _toggle_menu_overlay() -> void:
 	if _is_swapping_scene:
 		return
+	if _is_win_screen_active:
+		return
 	_set_menu_overlay_open(not _is_menu_open)
 
 
 func _set_menu_overlay_open(is_open: bool) -> void:
+	if _is_win_screen_active and is_open:
+		return
 	if _is_menu_open == is_open:
 		return
 	_is_menu_open = is_open
@@ -351,6 +380,8 @@ func _can_accept_player_commands() -> bool:
 		return false
 	if _is_swapping_scene:
 		return false
+	if _is_win_screen_active:
+		return false
 	return true
 
 
@@ -366,6 +397,16 @@ func _get_current_turn_manager() -> TurnManager:
 	for child in graph_renderer.get_children():
 		if child is TurnManager:
 			return child as TurnManager
+	return null
+
+
+func _get_current_enemy_manager() -> EnemyManager:
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null:
+		return null
+	for child in graph_renderer.get_children():
+		if child is EnemyManager:
+			return child as EnemyManager
 	return null
 
 
@@ -399,6 +440,134 @@ func _disconnect_from_current_turn_manager() -> void:
 	if _connected_turn_manager.PlayerTurnOver.is_connected(_on_player_turn_over):
 		_connected_turn_manager.PlayerTurnOver.disconnect(_on_player_turn_over)
 	_connected_turn_manager = null
+
+
+func _connect_to_current_enemy_manager() -> void:
+	_disconnect_from_current_enemy_manager()
+	var enemy_manager := _get_current_enemy_manager()
+	if enemy_manager == null:
+		return
+	_connected_enemy_manager = enemy_manager
+	if not _connected_enemy_manager.child_entered_tree.is_connected(_on_enemy_manager_child_entered_tree):
+		_connected_enemy_manager.child_entered_tree.connect(_on_enemy_manager_child_entered_tree)
+	if not _connected_enemy_manager.child_exiting_tree.is_connected(_on_enemy_manager_child_exiting_tree):
+		_connected_enemy_manager.child_exiting_tree.connect(_on_enemy_manager_child_exiting_tree)
+	for child in _connected_enemy_manager.get_children():
+		_wire_enemy_death_signal(child)
+	_check_final_boss_victory_condition()
+
+
+func _ensure_enemy_manager_wiring() -> void:
+	if _is_swapping_scene:
+		return
+	var enemy_manager := _get_current_enemy_manager()
+	if enemy_manager == null:
+		_disconnect_from_current_enemy_manager()
+		return
+	if _connected_enemy_manager != enemy_manager:
+		_connect_to_current_enemy_manager()
+		return
+	if not _connected_enemy_manager.child_entered_tree.is_connected(_on_enemy_manager_child_entered_tree):
+		_connected_enemy_manager.child_entered_tree.connect(_on_enemy_manager_child_entered_tree)
+	if not _connected_enemy_manager.child_exiting_tree.is_connected(_on_enemy_manager_child_exiting_tree):
+		_connected_enemy_manager.child_exiting_tree.connect(_on_enemy_manager_child_exiting_tree)
+
+
+func _disconnect_from_current_enemy_manager() -> void:
+	if _connected_enemy_manager == null:
+		return
+	if _connected_enemy_manager.child_entered_tree.is_connected(_on_enemy_manager_child_entered_tree):
+		_connected_enemy_manager.child_entered_tree.disconnect(_on_enemy_manager_child_entered_tree)
+	if _connected_enemy_manager.child_exiting_tree.is_connected(_on_enemy_manager_child_exiting_tree):
+		_connected_enemy_manager.child_exiting_tree.disconnect(_on_enemy_manager_child_exiting_tree)
+	for child in _connected_enemy_manager.get_children():
+		_unwire_enemy_death_signal(child)
+	_connected_enemy_manager = null
+	_has_seen_final_boss_enemy_alive = false
+
+
+func _on_enemy_manager_child_entered_tree(node: Node) -> void:
+	_wire_enemy_death_signal(node)
+	_check_final_boss_victory_condition()
+
+
+func _on_enemy_manager_child_exiting_tree(node: Node) -> void:
+	if node is Enemy:
+		call_deferred("_check_final_boss_victory_condition")
+
+
+func _wire_enemy_death_signal(node: Node) -> void:
+	if not (node is Enemy):
+		return
+	var enemy := node as Enemy
+	if not enemy.enemy_died.is_connected(_on_enemy_died):
+		enemy.enemy_died.connect(_on_enemy_died)
+
+
+func _unwire_enemy_death_signal(node: Node) -> void:
+	if not (node is Enemy):
+		return
+	var enemy := node as Enemy
+	if enemy.enemy_died.is_connected(_on_enemy_died):
+		enemy.enemy_died.disconnect(_on_enemy_died)
+
+
+func _on_enemy_died() -> void:
+	call_deferred("_check_final_boss_victory_condition")
+
+
+func _check_final_boss_victory_condition() -> void:
+	if _has_triggered_final_victory:
+		return
+	if not _is_current_map_final_boss():
+		return
+	var enemy_manager := _get_current_enemy_manager()
+	if enemy_manager == null:
+		return
+	var alive_count := 0
+	for child in enemy_manager.get_children():
+		if child is Enemy and is_instance_valid(child):
+			alive_count += 1
+	if alive_count > 0:
+		_has_seen_final_boss_enemy_alive = true
+		return
+	if not _has_seen_final_boss_enemy_alive:
+		return
+	_trigger_final_victory()
+
+
+func _is_current_map_final_boss() -> bool:
+	if final_boss_scene_path.is_empty() and final_boss_graph_path.is_empty():
+		return false
+	if _connected_graph != null and not final_boss_graph_path.is_empty():
+		if _connected_graph.resource_path == final_boss_graph_path:
+			return true
+	var graph_renderer := _get_current_graph_renderer()
+	if graph_renderer == null:
+		return false
+	if not final_boss_scene_path.is_empty() and graph_renderer.scene_file_path == final_boss_scene_path:
+		return true
+	# Fallback for cases where scene_file_path is empty at runtime.
+	if not final_boss_scene_path.is_empty() and graph_renderer.name == "FinalBoos":
+		return true
+	return false
+
+
+func _trigger_final_victory() -> void:
+	_has_triggered_final_victory = true
+	_is_win_screen_active = true
+	_set_player_movement_enabled(false)
+	_set_menu_overlay_open(false)
+	if _btn_menu != null:
+		_btn_menu.disabled = true
+	if _btn_restart != null:
+		_btn_restart.visible = true
+		_btn_restart.disabled = false
+	_loading_screen_texture_override = win_screen_texture
+	_set_loading_screen_visible(true)
+	play_victory_music()
+	if _text_log != null:
+		_text_log.add_message("Mission complete. Press Restart to play again.")
 
 
 func _on_player_turn_over() -> void:
@@ -513,6 +682,7 @@ func _respawn_player_to_home() -> void:
 		return
 	_is_swapping_scene = true
 	_set_player_movement_enabled(false)
+	_play_death_sting_sfx()
 	play_gameplay_music()
 	_loading_screen_texture_override = death_screen_texture
 	_set_loading_screen_visible(true)
@@ -539,6 +709,8 @@ func _respawn_player_to_home() -> void:
 	_set_loading_screen_visible(false)
 	_set_player_movement_enabled(true)
 	_is_swapping_scene = false
+	if _btn_menu != null:
+		_btn_menu.disabled = false
 
 
 func _run_initial_ai_turn_after_load() -> void:
@@ -553,6 +725,7 @@ func _run_initial_ai_turn_for_current_scene() -> void:
 	if turn_manager == null:
 		return
 	turn_manager.run_initial_ai_turn()
+	_check_final_boss_victory_condition()
 
 
 func _save_current_map_state() -> void:
@@ -1134,6 +1307,31 @@ func play_boss_music() -> void:
 	if _music_system == null:
 		return
 	_music_system.play_boss_track(false)
+
+
+func play_victory_music() -> void:
+	if _music_system == null:
+		return
+	_music_system.play_victory_track(false)
+
+
+func _create_ui_sfx_player_if_missing() -> void:
+	if _ui_sfx_player != null:
+		return
+	_ui_sfx_player = AudioStreamPlayer.new()
+	_ui_sfx_player.name = "UiSfxPlayer"
+	add_child(_ui_sfx_player)
+	_ui_sfx_player.bus = sfx_bus
+
+
+func _play_death_sting_sfx() -> void:
+	if death_sting_sfx == null:
+		return
+	_create_ui_sfx_player_if_missing()
+	if _ui_sfx_player == null:
+		return
+	_ui_sfx_player.stream = death_sting_sfx
+	_ui_sfx_player.play()
 
 
 func set_god_mode_enabled(is_enabled: bool) -> void:

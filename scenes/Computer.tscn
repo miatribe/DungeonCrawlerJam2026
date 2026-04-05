@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/MiniMap.tscn" id="6_4rg2b"]
 [ext_resource type="PackedScene" uid="uid://bliu81rtsofvn" path="res://scenes/FinalBoos.tscn" id="6_ighy4"]
 [ext_resource type="AudioStream" uid="uid://mrcj3i7crll1" path="res://assets/audio/music/scarier_retro_futuristic_boss_loop.wav" id="6_mx3s8"]
+[ext_resource type="AudioStream" uid="uid://o7i6us2fj0k2" path="res://assets/audio/music/space_station_victory_loop.wav" id="6_victory"]
 [ext_resource type="AudioStream" uid="uid://dj6ylxsk6p6cu" path="res://assets/audio/sfx/activation_button_2_heavy.wav" id="6_ubq4r"]
 [ext_resource type="AudioStream" uid="uid://drqop3lmnlknw" path="res://assets/audio/sfx/laser_activate_1.wav" id="6_v8i34"]
 [ext_resource type="Texture2D" uid="uid://cftrgeswdyl7p" path="res://assets/images/teleport_screen.png" id="7_65h6p"]
@@ -128,6 +129,7 @@ unique_name_in_owner = true
 script = ExtResource("1_kg0vu")
 gameplay_track = ExtResource("5_p4o76")
 boss_track = ExtResource("6_mx3s8")
+victory_track = ExtResource("6_victory")
 
 [node name="LogicInteractSfx" type="Node" parent="." unique_id=1114982064]
 unique_name_in_owner = true
@@ -406,3 +408,17 @@ offset_top = 0.5199585
 offset_right = -0.4810791
 offset_bottom = 0.39996338
 flat = true
+
+[node name="RestartGame" type="Button" parent="AspectRatioContainer/DesignRoot" unique_id=948512774]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33
+anchor_top = 0.72
+anchor_right = 0.39
+anchor_bottom = 0.80
+offset_left = -0.5
+offset_top = 0.0
+offset_right = -0.5
+offset_bottom = 0.0
+text = "Restart"
+visible = false

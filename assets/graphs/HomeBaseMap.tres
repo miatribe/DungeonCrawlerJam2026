@@ -156,6 +156,7 @@ direction_from_a = 0
 direction_from_b = 1
 type = 1
 door_id = 1
+door_state = 0
 
 [sub_resource type="Resource" id="Resource_lu536"]
 script = ExtResource("2_xngqq")
