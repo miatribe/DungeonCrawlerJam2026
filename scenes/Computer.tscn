@@ -80,6 +80,11 @@ logic_message_map = Dictionary[StringName, String]({
 &"vertex_1_logic_1775081887": "beep boop",
 &"vertex_6_logic_1775186759": "Battery Upgrade!"
 })
+logic_heal_map = Dictionary[StringName, int]({
+&"vertex_13_guntheal": 20,
+&"vertex_28_Use_HP": 20
+})
+per_map_surface_reset_logic_ids = Array[StringName]([&"vertex_28_Use_HP", &"vertex_13_guntheal", &""])
 logic_stat_bonus_map = Dictionary[StringName, Dictionary]({
 &"vertex_131_Get_gun": {
 "attack": 2,
@@ -108,7 +113,6 @@ logic_upgrade_indicator_map = Dictionary[StringName, NodePath]({
 &"vertex_74_Gaunt_battery": NodePath("AspectRatioContainer/DesignRoot/UpgradeIndicator2")
 })
 laser_upgrade_logic_id = &"vertex_131_Get_gun"
-god_mode_enabled = true
 loading_screen_hold_seconds = 1.0
 default_battery_pickup_height = 0.0
 
