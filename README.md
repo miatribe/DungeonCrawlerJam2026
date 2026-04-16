@@ -3,5 +3,4 @@ https://miatribe.itch.io/drone-something-sometihng
 
 This one got a bit sloppy (AI)
 
-<img width="297" height="240" alt="image" src="https://github.com/user-attachments/assets/0cce298c-23f5-463c-bf37-9ab3b78933ed" />
-
+<img width="315" height="250" alt="image" src="https://github.com/user-attachments/assets/45e59c4a-3e61-401d-94fc-520b1801afe7" />
